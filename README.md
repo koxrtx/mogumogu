@@ -89,9 +89,9 @@
 # 画面推移図
 
 ## ユーザー画面
-[ユーザー画面遷移図_Figmaで見る] https://www.figma.com/design/UcmyXUN82WLSQkmkqvZ8d1/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9Cweb%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&t=T8RHx1dkfPj76QyI-1
+[ユーザー画面遷移図_Figmaで見る] (https://www.figma.com/design/UcmyXUN82WLSQkmkqvZ8d1/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9Cweb%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&t=T8RHx1dkfPj76QyI-1)
 
 ## 管理者画面
-[管理者画面遷移図_Figmaで見る] https://www.figma.com/design/JX23keM41NV0rij0IurKm6/%E5%8D%92%E5%88%B6%E7%AE%A1%E7%90%86%E8%80%85%E7%94%BB%E9%9D%A2?node-id=0-1&t=Sb1qts1EYNQPjTpo-1
+[管理者画面遷移図_Figmaで見る] (https://www.figma.com/design/JX23keM41NV0rij0IurKm6/%E5%8D%92%E5%88%B6%E7%AE%A1%E7%90%86%E8%80%85%E7%94%BB%E9%9D%A2?node-id=0-1&t=Sb1qts1EYNQPjTpo-1)
 
 # **License**
