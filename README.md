@@ -84,7 +84,8 @@
 - 外部連携: Google Maps API
 - 画像処理: 自動リサイズ・圧縮・サムネイル生成
 
-# **ER図**
+# ER図
+![ER図](assets/images/er_diagram.png)
 
 # 画面推移図
 
