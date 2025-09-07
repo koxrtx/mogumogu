@@ -80,12 +80,12 @@
 - バックエンド: Ruby on Rails
 - データベース: PostgreSQL
 - インフラ: Docker
-- 認証:
+- 認証:Devise・LINE認証・Google認証（追加実装予定）
 - 外部連携: Google Maps API
 - 画像処理: 自動リサイズ・圧縮・サムネイル生成
 
 # ER図
-![ER図](assets/images/er_diagram.png)
+![ER図](app/assets/images/er_diagram.png)
 
 # 画面推移図
 
