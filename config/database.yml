@@ -19,3 +19,7 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+
+cable:
+  <<: *default
+  database: myapp_cable_production
