@@ -1,0 +1,17 @@
+doctype html
+html lang="ja"
+  head
+    meta charset="utf-8"
+    title MyApp Home
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  body class="bg-sky-200 min-h-screen flex flex-col items-center justify-center"
+
+    h1 class="text-4xl font-bold text-blue-600 mb-4"
+      | もぐもぐマップ
+
+    p class="text-gray-700 mb-6"
+      | Slim + Tailwind で作ったホーム画面です 🚀
+
+    a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow"
+      | Click Me
