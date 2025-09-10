@@ -9,6 +9,7 @@ class SpotUpdateRequest < ApplicationRecord
   validates :spot_id, presence: true
   validates :checkbox, presence: true
   validates :status, presence: true
+  validates :photo_delete_reason, presence: true
 
   # enum 定義
   enum checkbox: { spot_update: 0, image_delete: 1, closure: 2 }
