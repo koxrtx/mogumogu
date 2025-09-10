@@ -1,0 +1,20 @@
+ja:
+  enum:
+    spot_statuses:
+      open: "営業中"
+      closed: "閉店"
+    spot_update_request_checkboxes:
+      spot_update: "店舗情報修正"
+      image_delete: "写真削除"
+      closure: "閉店依頼"
+    spot_update_request_statuses:
+      pending: "保留"
+      approved: "承認済み"
+      rejected: "却下"
+    user_roles:
+      user: "一般ユーザー"
+      admin: "管理者"
+    inquiry_statuses:
+      pending: "保留"
+      in_progress: "対応中"
+      completed: "完了"
