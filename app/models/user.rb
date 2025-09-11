@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :encrypted_password, presence: true
 
   # enumの定義（roleが0: user, 1: adminの場合）
-  enum :role { user: 0, admin: 1 }
+  enum :role, { user: 0, admin: 1 }
 end

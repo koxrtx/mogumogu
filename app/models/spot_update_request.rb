@@ -7,8 +7,8 @@ class SpotUpdateRequest < ApplicationRecord
   has_many :spot_update_request_images, dependent: :destroy
 
   # enum 定義
-  enum :checkbox { spot_update: 0, image_delete: 1, closure: 2 }
-  enum :status { pending: 0, approved: 1, rejected: 2 }
+  enum :checkbox, { spot_update: 0, image_delete: 1, closure: 2 }
+  enum :status, { pending: 0, approved: 1, rejected: 2 }
 
   # ユーザー作成時バリデーション
   with_options if: :user_submission? do
