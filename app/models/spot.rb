@@ -7,7 +7,7 @@ class Spot < ApplicationRecord
   has_many :spot_update_requests, dependent: :destroy
 
   # 閉店フラグ
-  enum :status { open: 0, closed: 1 }
+  enum status: { open: 0, closed: 1 }
 
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true
