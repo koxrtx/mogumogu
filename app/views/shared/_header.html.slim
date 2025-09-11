@@ -1,0 +1,19 @@
+header.bg-sky-400.text-white.py-4
+  .container.mx-auto.text-center
+    / 左側：タブメニュー ログイン機能実装後分岐かくこと
+    nav.flex.items-center.space-x-4
+        = link_to 'お店の投稿', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to '現在地から探す', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to '使い方', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to '利用規約', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to 'プライバシーポリシー', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to 'お問い合わせ', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to 'ユーザー登録','#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+
+    / 中央：サイト名（太文字）
+    / 今後サイト名は画像対応するかも
+    .absolute.left-1/2.transform.-translate-x-1/2
+      = link_to root_path, class: 'text-[#3A3333] text-2xl font-bold font-cursive' do
+        | もぐもぐマップ
+
+    / 右側：将来的にユーザーアイコンなどを配置可
