@@ -1,19 +1,14 @@
-/ ヘッダー部分の部分テンプレート
-header.bg-[#4FC7E5].shadow
-  .container.mx-auto.flex.items-center.justify-between.px-4.py-2
-    / 左側：タブメニュー
+header.bg-sky-400.text-white.py-4
+  .container.mx-auto.text-center
+    / 左側：タブメニュー ログイン機能実装後分岐かくこと
     nav.flex.items-center.space-x-4
-      - if user_signed_in?
-        = link_to 'ログイン', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        = link_to 'ユーザー登録', new_user_registration_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-      - else
-        = link_to 'お店の投稿', new_shop_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to 'お店の投稿', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         = link_to '現在地から探す', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         = link_to '使い方', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         = link_to '利用規約', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         = link_to 'プライバシーポリシー', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         = link_to 'お問い合わせ', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to 'ユーザー登録','#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
 
     / 中央：サイト名（太文字）
     / 今後サイト名は画像対応するかも

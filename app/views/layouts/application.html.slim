@@ -17,10 +17,10 @@ html
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
 
-  body
+  body.flex.flex-col.min-h-screen.bg-sky-200
     = render "shared/header"
 
-    main
+    main.flex-1.flex.items-center.justify-center
       = yield
 
     = render "shared/footer"
