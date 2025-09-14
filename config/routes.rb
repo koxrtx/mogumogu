@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   # ホーム画面
   root "home#index"
+  # 利用規約画面
+  get "/terms", to: "pages#terms"
 end
