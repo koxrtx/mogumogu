@@ -1,9 +1,9 @@
 -# エラーメッセージ表示用部分テンプレート
 - if resource.errors.any?
-  #error_explanation[data-turbo-cache="false"]
-    h2
+  #error_explanation.w-full.break-words[data-turbo-cache="false"]
+    h2.text-red-500.text-base.mb-2.text-center
       = I18n.t("errors.messages.not_saved", count: resource.errors.count, resource: resource.class.model_name.human.downcase)
-    ul
+    ul.text-red-500.text-base.text-center
       - resource.errors.full_messages.each do |message|
-        li
-          = message
+        li= message
+
