@@ -1,23 +1,18 @@
 -# ログイン画面
-h2 Log in
+div.min-h-screen.bg-sky-200.flex.flex-col.items-center.justify-start
+  h2.text-3xl.font-bold.text-gray-700.text-center.mt-8.mb-8
+    | ログイン
 
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full max-w-md bg-sky-200 p-6 rounded flex flex-col space-y-4" }) do |f|
+    = f.email_field :email, placeholder: "メール", autofocus: true, autocomplete: "email", class: input_classes
+    = f.password_field :password, placeholder: "パスワード", autocomplete: "current-password", class: input_classes
 
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "current-password"
+    /- - if devise_mapping.rememberable?
+      - .field
+        - = f.check_box :remember_me
+        - = f.label :remember_me
 
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
+    .actions
+      = f.submit "ログイン", class: button_classes
 
-  .actions
-    = f.submit "Log in"
-
-= render "devise/shared/links"
+  -#= render "devise/shared/links"

@@ -21,9 +21,9 @@ html
     = render "shared/header"
 
     -# Devise のフラッシュメッセージ表示部分 notice は成功系、alert は失敗系のメッセージ
-    p.notice
+    p.notice.text-rose-600.text-center.
       = notice
-    p.alert
+    p.alert.text-sky-600.text-center
       = alert
 
     main.flex-1.flex.items-center.justify-center
