@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # ユーザーが削除されても店舗情報や修正依頼は消えない
   has_many :spots, dependent: :nullify
   has_many :spot_update_requests, dependent: :nullify
+  has_many :agreements
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true

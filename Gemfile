@@ -19,6 +19,7 @@ gem "cssbundling-rails"
 
 # Slim導入
 gem 'slim-rails'
+gem "propshaft"
 
 # ユーザー認証用Devise
 gem 'devise', '4.9.4'

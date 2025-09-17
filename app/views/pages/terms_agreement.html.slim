@@ -1,0 +1,13 @@
+div.min-h-screen.bg-sky-200.flex.flex-col.items-center.justify-start
+  h1.text-3xl.font-bold.text-gray-700.text-center.mt-8.mb-8
+    | 利用規約への同意
+
+  p.mb-4
+    | ユーザー登録には利用規約への同意が必要です。
+  .w-96.terms-box.border.border-blue-300.rounded.bg-blue-300.p-4.bg-light.mb-4.flex.justify-center.items-center
+      = link_to '利用規約はこちら', terms_path, target: '_blank', rel: 'noopener'
+  = form_with url: new_user_registration_path, method: :get do |f|
+    .form-check.flex.items-center.justify-center.mb-4
+      = f.check_box :agreed, id: 'agreement_check'
+      = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check'
+    = f.submit 'ユーザー登録画面へ', class: button_classes, id: 'register_button'

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_17_055136) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_17_125252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "agreements", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "terms_version"
+    t.datetime "agreed_at"
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_agreements_on_user_id"
+  end
 
   create_table "facility_tags", force: :cascade do |t|
     t.string "content", null: false
@@ -103,6 +113,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_17_055136) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "agreements", "users"
   add_foreign_key "spot_facilities", "facility_tags"
   add_foreign_key "spot_facilities", "spots"
   add_foreign_key "spot_images", "spots"
