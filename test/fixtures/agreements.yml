@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  terms_version: MyString
+  agreed_at: 2025-09-17 21:52:52
+  ip_address: MyString
+
+two:
+  user: two
+  terms_version: MyString
+  agreed_at: 2025-09-17 21:52:52
+  ip_address: MyString
