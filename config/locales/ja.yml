@@ -1,3 +1,15 @@
 ja:
-  users:
-    title: "ユーザー登録"
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+  pages:
+    terms:
+      title: "利用規約"
+    terms_agreement:
+      title: "利用規約への同意"
+      submit_button: "ユーザー登録画面"
