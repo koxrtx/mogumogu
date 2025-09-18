@@ -1,8 +1,6 @@
 -# ログイン画面
-div.min-h-screen.bg-sky-200.flex.flex-col.items-center.justify-start
-  h2.text-3xl.font-bold.text-gray-700.text-center.mt-8.mb-8
-    | ログイン
-
+div class=page_classes
+  h1 class=page_title ログイン
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full max-w-md bg-sky-200 p-6 rounded flex flex-col space-y-4" }) do |f|
     = f.email_field :email, placeholder: "メール", autofocus: true, autocomplete: "email", class: input_classes
     = f.password_field :password, placeholder: "パスワード", autocomplete: "current-password", class: input_classes
