@@ -1,4 +1,12 @@
 ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
   pages:
     terms:
       title: "利用規約"
