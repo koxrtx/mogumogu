@@ -2,11 +2,9 @@
   h1.text-2xl.font-bold.mb-6.text-center 利用規約
 
   / === 第1条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第1条（定義）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第1条（定義）" do
       p 本規約で使用される用語の定義は以下の通りとします。
-      ol.list-decimal.pl-6
+      ol class=terms_ol
         li 「本サービス」：私が個人で開発・提供する『もぐもぐマップ』アプリ及びウェブサービス
         li 「本ウェブサイト」：提供者が、本サービスを提供するウェブサイト
         li 「ユーザー」：本サービスを利用する全ての個人
@@ -15,50 +13,38 @@
         li 「本情報」：基本情報及び投稿情報の総称
 
   / === 第2条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第2条（サービス内容）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第2条（サービス内容）" do
       p 本サービスは、乳幼児〜小学生くらいの子どもを持つ親が、外食時に子ども向け設備情報を確認・投稿できるお店検索・共有サービスです。
-      ol.list-decimal.pl-6
+      ol class=terms_ol
         li 子ども向け設備（椅子、座敷、ベビー食器、ベビーカー可否、離乳食持ち込み可など）を確認可能
         li 投稿情報に写真を添付可能
         li 投稿情報は他ユーザーと共有でき、SNSへの投稿も可能
 
   / === 第3条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第3条（本規約の適用）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第3条（本規約の適用）" do
+      ol class=terms_ol
         li ユーザーは本規約に同意した場合に限り本サービスを利用できます。
         li 本規約の一部が無効と判断されても、その他の規定は有効とします。
 
   / === 第4条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第4条（規約の変更）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第4条（規約の変更）" do
       ol.list-decimal.pl-6
         li 本サービス提供者は、本規約を随時変更でき、変更後の規約はウェブサイトに掲載された時点で効力を生じます。
         li ユーザーは変更後の規約に同意できない場合、サービス利用を停止するものとします。
 
   / === 第5条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第5条（利用料金）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第5条（利用料金）" do
       p 本サービスの利用は無料です。ただし、通信料などはユーザーの負担となります。
 
   / === 第6条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第6条（サービスの変更・停止・終了）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第6条（サービスの変更・停止・終了）" do
+      ol class=terms_ol
         li 本サービスは予告なく変更、一時停止、終了することがあります。
         li 本サービス提供者は、サービス停止等による損害について一切責任を負いません。
 
   / === 第7条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第7条（免責事項）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第7条（免責事項）" do
+      ol class=terms_ol
         li ユーザーは自己責任で本サービスを利用するものとします。
         li 本サービス提供者は、投稿情報の正確性、最新性、有用性、安全性について保証しません。
         li サーバや通信障害、災害等による損害についても責任を負いません。
@@ -66,19 +52,15 @@
         li 本サービス提供者が責任を負う場合でも、故意または重過失がない限り賠償額は1万円を上限とします。
 
   / === 第8条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第8条（知的財産権）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第8条（知的財産権）" do
+      ol class=terms_ol
         li 本サービスに関する全ての知的財産権は、本サービス提供者に帰属します。
         li ユーザーは投稿情報の著作権を保持しますが、本サービス提供者は、無償・非独占的に利用できる権利を有します。
 
 
   / === 第9条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第9条（禁止行為）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第9条（禁止行為）" do
+      ol class=terms_ol
         li ユーザーは以下の行為を行ってはなりません。
         li 著作権・商標権等を侵害する行為
         li 他ユーザーや第三者に迷惑・損害を与える行為
@@ -90,60 +72,44 @@
         li 本サービス提供者が不適切と判断する行為
 
   / === 第10条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第10条（投稿情報の利用）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第10条（投稿情報の利用）" do
+      ol class=terms_ol
         li ユーザーは投稿情報の著作権を保持しますが、当社はサービス改善・統計分析・第三者提供のために利用できます。
         li 本サービス提供者は投稿情報が法令や規約違反の場合、通知なく削除や利用制限ができます。
 
   / === 第11条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第11条（個人情報の取扱い）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第11条（個人情報の取扱い）" do
+      ol class=terms_ol
         li 本サービス提供者は、取得した個人情報をプライバシーポリシーに基づき適切に管理します。
         li 法令に基づく場合や事業譲渡時に個人情報を第三者に提供することがあります。
 
   / === 第12条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第12条（違反時の対応）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第12条（違反時の対応）" do
+      ol class=terms_ol
         p  本サービス提供者は、規約違反ユーザーに対し、以下の措置を取る場合があります。
         p ・行為停止要求
         p ・アクセス禁止・利用停止
         p ・法的措置
 
   / === 第13条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第13条（サービス廃止）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第13条（サービス廃止）" do
       p 本サービス提供者は、サービス全体を廃止する場合、廃止予定日の1か月前までに通知します。
 
   / === 第14条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第14条（連絡方法）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第14条（連絡方法）" do
       p 本サービス提供者は、登録メールアドレス等への連絡をもって通知とみなします。
 
   / === 第15条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第15条（権利義務の譲渡）
-    .terms-article-body.bg-[#C7E5FF]
-      ol.list-decimal.pl-6
+  = terms_article "第15条（権利義務の譲渡）" do
+      ol class=terms_ol
         li ユーザーは事前承諾なしに権利義務を第三者に譲渡できません。
         li 本サービス提供者は、サービス提供業務の一部を第三者に委託可能です。
 
 
   / === 第16条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第16条（反社会的勢力の排除）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第16条（反社会的勢力の排除）" do
       p 本サービス提供者は、反社会的勢力の利用を禁止し、違反者には通知なしで対応します。
 
   / === 第17条 ===
-  .terms-article.mb-6
-    h2.text-xl.font-semibold.mb-2 第17条（準拠法・管轄）
-    .terms-article-body.bg-[#C7E5FF]
+  = terms_article "第17条（準拠法・管轄）" do
       p 本規約は日本法に従い解釈され、紛争は本サービス提供者の所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。
