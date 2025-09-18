@@ -1,5 +1,41 @@
 ja:
   devise:
+    # 共通設定（フォーム）
+    forms:
+      placeholders:
+        name: "名前"
+        email: "メール"
+        password: "パスワード"
+        password_confirmation: "パスワード認証"
+      buttons:
+        register: "登録"
+        login: "ログイン"
+
+    # 各ページのi18n化
+    registrations:
+      new:
+        title: "ユーザー登録"
+        placeholders:
+          password: "パスワード(6文字以上)"
+      edit:
+        title: "アカウント編集"
+      destroyed: "アカウントを削除しました。ご利用ありがとうございました。"
+      signed_up: "登録が完了しました。"
+      signed_up_but_inactive: "登録は完了しましたが、アカウントがまだ有効化されていません。"
+      signed_up_but_locked: "登録は完了しましたが、アカウントがロックされています。"
+      signed_up_but_unconfirmed: "確認リンク付きのメールを送信しました。メールを確認してアカウントを有効化してください。"
+      update_needs_confirmation: "アカウント情報を更新しましたが、新しいメールアドレスを確認する必要があります。メールを確認してください。"
+      updated: "アカウント情報を更新しました。"
+      updated_but_not_signed_in: "パスワードを変更したため、再度サインインしてください。"
+
+    sessions:
+      new:
+        title: "ログイン"
+      signed_in: "サインインしました。"
+      signed_out: "サインアウトしました。"
+      already_signed_out: "すでにサインアウト済みです。"
+
+    # フラッシュ・エラー
     confirmations:
       confirmed: "メールアドレスの確認が完了しました。"
       send_instructions: "数分以内にメールアドレス確認用のメールが届きます。"
@@ -25,19 +61,6 @@ ja:
         subject: "メールアドレスが変更されました"
       password_change:
         subject: "パスワードが変更されました"
-    registrations:
-      destroyed: "アカウントを削除しました。ご利用ありがとうございました。"
-      signed_up: "登録が完了しました。"
-      signed_up_but_inactive: "登録は完了しましたが、アカウントがまだ有効化されていません。"
-      signed_up_but_locked: "登録は完了しましたが、アカウントがロックされています。"
-      signed_up_but_unconfirmed: "確認リンク付きのメールを送信しました。メールを確認してアカウントを有効化してください。"
-      update_needs_confirmation: "アカウント情報を更新しましたが、新しいメールアドレスを確認する必要があります。メールを確認してください。"
-      updated: "アカウント情報を更新しました。"
-      updated_but_not_signed_in: "パスワードを変更したため、再度サインインしてください。"
-    sessions:
-      signed_in: "サインインしました。"
-      signed_out: "サインアウトしました。"
-      already_signed_out: "すでにサインアウト済みです。"
     unlocks:
       send_instructions: "数分以内にアカウントロック解除用のメールが届きます。"
       send_paranoid_instructions: "アカウントが存在する場合、解除用メールが届きます。"
@@ -57,14 +80,3 @@ ja:
       blank: "を入力してください"
       too_short: "は%{count}文字以上で入力してください"
       confirmation: "は%{attribute}と一致していません"
-
-
-  activerecord:
-    models:
-      user: "ユーザー"
-    attributes:
-      user:
-        name: "名前"
-        email: "メール"
-        password: "パスワード"
-        password_confirmation: "確認用パスワード"

@@ -1,5 +1,5 @@
 div class=page_classes
-  h1 class=page_title 利用規約への同意
+  h1 class=page_title = t("pages.terms_agreement.title")
 
   p.mb-4
     | ユーザー登録には利用規約への同意が必要です。
@@ -9,4 +9,4 @@ div class=page_classes
     .form-check.flex.items-center.justify-center.mb-4
       = f.check_box :agreed, id: 'agreement_check'
       = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check'
-    = f.submit 'ユーザー登録画面へ', class: button_classes, id: 'register_button'
+    = f.submit t("pages.terms_agreement.submit_button"), class: button_classes, id: 'register_button'

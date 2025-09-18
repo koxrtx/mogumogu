@@ -1,9 +1,9 @@
 -# ログイン画面
 div class=page_classes
-  h1 class=page_title ログイン
+  h1 class=page_title = t("devise.sessions.new.title")
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full max-w-md bg-sky-200 p-6 rounded flex flex-col space-y-4" }) do |f|
-    = f.email_field :email, placeholder: "メール", autofocus: true, autocomplete: "email", class: input_classes
-    = f.password_field :password, placeholder: "パスワード", autocomplete: "current-password", class: input_classes
+    = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
+    = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: input_classes
 
     /- - if devise_mapping.rememberable?
       - .field
@@ -11,6 +11,6 @@ div class=page_classes
         - = f.label :remember_me
 
     .actions
-      = f.submit "ログイン", class: button_classes
+      = f.submit t("devise.forms.buttons.login"), class: button_classes
 
   -#= render "devise/shared/links"
