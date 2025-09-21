@@ -1,12 +1,14 @@
 div class=page_classes
-  h1 class=page_title = t("pages.terms_agreement.title")
+  .w-full.max-w-md.mx-auto
+    h1 class=page_title = t("pages.terms_agreement.title")
 
-  p.mb-4
-    | ユーザー登録には利用規約への同意が必要です。
-  .w-96.terms-box.border.border-blue-300.rounded.bg-blue-300.p-4.bg-light.mb-4.flex.justify-center.items-center
+    p.mb-4
+      | ユーザー登録には利用規約への同意が必要です。
+    .w-full.max-w-md.terms-box.border.border-blue-300.rounded.bg-blue-300.p-4.mb-4.flex.justify-center.items-center
       = link_to '利用規約はこちら', terms_path, target: '_blank', rel: 'noopener'
-  = form_with url: new_user_registration_path, method: :get do |f|
-    .form-check.flex.items-center.justify-center.mb-4
-      = f.check_box :agreed, id: 'agreement_check'
-      = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check'
-    = f.submit t("pages.terms_agreement.submit_button"), class: button_classes, id: 'register_button'
+
+    = form_with url: new_user_registration_path, method: :get do |f|
+      .form-check.flex.items-center.justify-center.mb-4
+        = f.check_box :agreed, id: 'agreement_check'
+        = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check'
+      = f.submit t("pages.terms_agreement.submit_button"), class: button_classes, id: 'register_button'
