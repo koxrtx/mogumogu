@@ -2,9 +2,8 @@
 div class=page_classes
   h1 class=page_title = t("devise.registrations.new.title")
 
-  .mx-auto.w-full.max-w-md
-    .min-h-12.mb-2
-      = render "devise/shared/error_messages", resource: resource
+  .w-full.max-w-md.mx-auto.flex.flex-col
+    = render "devise/shared/error_messages", resource: resource
 
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
       = f.text_field :name, autofocus: true, placeholder: t("devise.forms.placeholders.name"), class: input_classes
