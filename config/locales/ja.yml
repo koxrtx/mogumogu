@@ -14,3 +14,6 @@ ja:
     terms_agreement:
       title: "利用規約への同意"
       submit_button: "ユーザー登録画面"
+  spots:
+    new:
+      title: "お店の投稿"
