@@ -4,13 +4,14 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @spot = Spot.find(params[:id])
   end
 
   def create
     @spot = current_user.spots.build(spot_params)
 
     if @spot.save
-      redirect_to @spot, notice: 'お店の情報を投稿しました'
+      redirect_to @spot
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,6 +29,12 @@ class SpotsController < ApplicationController
   private
 
   def spot_params
-    
+    params.require(:spot).permit(
+      :name, :address, :tel, :opening_hours, :other_facility_comment,
+      :latitude, :longitude, :status,
+      # 子ども向け設備のパラメータ
+      :child_chair, :tatami_seat, :child_tableware, :bring_baby_food,
+      :stroller_ok, :child_menu, :parking, :other_facility
+    )
   end
 end
