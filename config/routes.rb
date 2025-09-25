@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  get "up" => "rails/health#show", as: :rails_health_check
+  # get "spots/index"
+  # get "spots/show"
+  # get "spots/create"
+  # get "spots/edit"
+  # get "spots/update"
+  # get "spots/destroy"
+  # get "up" => "rails/health#show", as: :rails_health_check
+
+  resources :spots
 
   # Devise用ルーティング
   devise_for :users, controllers: {

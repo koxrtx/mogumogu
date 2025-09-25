@@ -1,0 +1,55 @@
+div.page_classes
+  h1 class=page_title = t("spots.new.title")
+
+  = form_for @spot do |f|
+    / 店舗情報 + 子ども向け設備フォーム枠をまとめる
+    div.max-w-2xl.mx-auto.border.border-gray-300.rounded-xl.p-6.bg-sky-50.space-y-6
+
+      / 店舗情報
+      .space-y-4
+        .flex.space-x-4
+          .flex-1
+            = f.text_field :name, placeholder: "お店の名前", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
+          .flex-1
+            = f.telephone_field :tel, placeholder: "電話番号", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+        = f.text_field :address, placeholder: "住所", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
+
+        .flex.space-x-4.items-center
+          .flex-1
+            button.bg-cyan-600.text-white.px-4.py-2.rounded-lg.hover:bg-cyan-700.focus:outline-none type="button" 現在地から入力
+          .flex-1
+            = f.text_field :opening_hours, placeholder: "営業時間 ( 例：10:00〜20:00 )", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+      / 子ども向け設備
+      div
+        span.text-xl.font-bold.mb-4 子ども向け設備
+        .grid.grid-cols-2.gap-x-8.gap-y-2
+          label.flex.items-center
+            = f.check_box :child_chair
+            span.ml-2 子供椅子・ベビーチェア
+          label.flex.items-center
+            = f.check_box :tatami_seat
+            span.ml-2 座敷席
+          label.flex.items-center
+            = f.check_box :child_tableware
+            span.ml-2 子供用食器
+          label.flex.items-center
+            = f.check_box :bring_baby_food
+            span.ml-2 離乳食持ち込み可
+          label.flex.items-center
+            = f.check_box :stroller_ok
+            span.ml-2 ベビーカー入店可
+          label.flex.items-center
+            = f.check_box :child_menu
+            span.ml-2 子供用メニューあり
+          label.flex.items-center
+            = f.check_box :parking
+            span.ml-2 その他
+          label.flex.items-center
+            = f.check_box :other_facility
+            span.ml-2 駐車場あり
+        = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2" , rows: 1
+
+      / 投稿ボタン
+      = f.submit "投稿する", class: "bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 font-semibold w-full"

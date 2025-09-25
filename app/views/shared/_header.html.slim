@@ -12,14 +12,14 @@ header.bg-sky-400.text-white.py-4.h-16
         - if current_user.present?
           li.nav__item
             = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+          li.nav__item
+            = link_to 'お店の投稿', new_spot_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         - else
           li.nav__item
             = link_to 'ログイン', new_user_session_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
           li.nav__item
             = link_to 'ユーザー登録', terms_agreement_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
 
-        li.nav__item
-          = link_to 'お店の投稿', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         li.nav__item
           = link_to '現在地から探す', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
         li.nav__item
