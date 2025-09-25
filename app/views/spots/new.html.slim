@@ -1,6 +1,13 @@
 div.page_classes
   h1 class=page_title = t("spots.new.title")
 
+  - if @spot.errors.present?
+    .bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.mb-4
+      h4.font-bold #{@spot.errors.count}件のエラーがあります:
+      ul
+        - @spot.errors.full_messages.each do |message|
+          li= message
+
   = form_for @spot do |f|
     / 店舗情報 + 子ども向け設備フォーム枠をまとめる
     div.max-w-2xl.mx-auto.border.border-gray-300.rounded-xl.p-6.bg-sky-50.space-y-6
@@ -9,46 +16,46 @@ div.page_classes
       .space-y-4
         .flex.space-x-4
           .flex-1
-            = f.text_field :name, placeholder: "お店の名前", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
+            = f.text_field :name, placeholder: t('spot.forms.name'), class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
           .flex-1
-            = f.telephone_field :tel, placeholder: "電話番号", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            = f.telephone_field :tel, placeholder: t('spot.forms.tel'), class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
 
-        = f.text_field :address, placeholder: "住所", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
+        = f.text_field :address, placeholder: t('spot.forms.address'), class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
 
         .flex.space-x-4.items-center
           .flex-1
             button.bg-cyan-600.text-white.px-4.py-2.rounded-lg.hover:bg-cyan-700.focus:outline-none type="button" 現在地から入力
           .flex-1
-            = f.text_field :opening_hours, placeholder: "営業時間 ( 例：10:00〜20:00 )", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            = f.text_field :opening_hours, placeholder: t('spot.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
 
       / 子ども向け設備
       div
-        span.text-xl.font-bold.mb-4 子ども向け設備
+        span.text-xl.font-bold.mb-4 = t('spots.form.child_facilities')
         .grid.grid-cols-2.gap-x-8.gap-y-2
           label.flex.items-center
             = f.check_box :child_chair
-            span.ml-2 子供椅子・ベビーチェア
+            span.ml-2 = t('spots.form.child_chair')
           label.flex.items-center
             = f.check_box :tatami_seat
-            span.ml-2 座敷席
+            span.ml-2 = t('spots.form.tatami_seat')
           label.flex.items-center
             = f.check_box :child_tableware
-            span.ml-2 子供用食器
+            span.ml-2 = t('spots.form.child_tableware')
           label.flex.items-center
             = f.check_box :bring_baby_food
-            span.ml-2 離乳食持ち込み可
+            span.ml-2 = t('spots.form.bring_baby_food')
           label.flex.items-center
             = f.check_box :stroller_ok
-            span.ml-2 ベビーカー入店可
+            span.ml-2 = t('spots.form.stroller_ok')
           label.flex.items-center
             = f.check_box :child_menu
-            span.ml-2 子供用メニューあり
+            span.ml-2 = t('spots.form.child_menu')
           label.flex.items-center
             = f.check_box :parking
-            span.ml-2 その他
+            span.ml-2 = t('spots.form.parking')
           label.flex.items-center
             = f.check_box :other_facility
-            span.ml-2 駐車場あり
+            span.ml-2 = t('spots.form.other_facility')
         = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2" , rows: 1
 
       / 投稿ボタン

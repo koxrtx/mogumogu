@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get "spots/destroy"
   # get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :spots
+  resources :spots, only: [:new, :create, :show]
 
   # Devise用ルーティング
   devise_for :users, controllers: {
