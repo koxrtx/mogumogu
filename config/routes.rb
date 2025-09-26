@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "maps/search", to: "maps#search", as: :search_map
   # get "spots/index"
   # get "spots/show"
   # get "spots/create"
