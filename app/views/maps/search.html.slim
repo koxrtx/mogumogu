@@ -1,2 +1,8 @@
-h1 Maps#search
-p Find me in app/views/maps/search.html.slim
+div class=page_classes
+  h1 class=page_title = t("maps.search.title")
+  
+  #map style="height: 400px; width: 100%;"
+
+  / Google Maps APIの読み込み（callbackでinitMapを呼ぶ）
+  - content_for :head do
+    script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&callback=initMap" async defer

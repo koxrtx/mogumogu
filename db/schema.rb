@@ -93,7 +93,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_22_032845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
-    t.string "opening_hours"
     t.boolean "child_chair", default: false
     t.boolean "tatami_seat", default: false
     t.boolean "child_tableware", default: false
