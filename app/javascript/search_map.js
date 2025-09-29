@@ -1,19 +1,17 @@
 let map, infoWindow;
-console.log("はじまるよ")
+console.log("search_map.js読み込み")
 
+document.addEventListener('turbo:load',async function(){
 
-function initMap() {
-  console.log('initMap開始');
-  console.log('google:', typeof google);
+  const { Map } = await google.maps.importLibrary("maps");
 
-if (typeof google === 'undefined'){
+  if (typeof google === 'undefined'){
   // GoogleMAP APIが読み込まれているか
     console.log('Google Maps APIが読み込まれていません');
     return;
+}
 
-  }
-
-  // URLパラメーターから位置情報を取得
+// URLパラメーターから位置情報を取得
   // デフォルトは東京駅
   const urlParams = new URLSearchParams(window.location.search);
   const lat = parseFloat(urlParams.get('lat')) || 35.68114;
@@ -31,6 +29,5 @@ if (typeof google === 'undefined'){
   infoWindow.setContent("現在地");
   infoWindow.open(map);
   map.setCenter(currentPosition);
-}
 
-window.initMap = initMap;
+})

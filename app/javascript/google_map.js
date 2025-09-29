@@ -1,10 +1,12 @@
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
+// 公式の現在地取得と地図表示のソースコード
+// 公式はコールバック方式だけど動かなかったので
+// イベントリスナー方式に変更したら動いた
 let map, infoWindow;
+console.log("🚀 google_map.jsが読み込まれました");
 
-function initMap() {
+// await 待つ
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps");
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 35.68114, lng: 139.767061 },
     zoom: 15,
@@ -52,4 +54,4 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-initMap();
+window.addEventListener('load', initMap);

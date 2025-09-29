@@ -1,3 +1,7 @@
+// ホームページの「現在地から探す」ボタン処理
+// ボタン押したら画面遷移して現在地取得する
+console.log("location.js読み込み")
+
 document.addEventListener('turbo:load', function(){
 console.log("発火2");
 
@@ -16,8 +20,11 @@ console.log("発火2");
             lng: position.coords.longitude,
           };
 
+          // 画面遷移処理
           window.location.href = `/maps/search?lat=${pos.lat}&lng=${pos.lng}`;
         },
+
+        // エラー処理
         () => {
           alert("位置情報の取得に失敗しました。ブラウザの設定を確認してください。");
         },
