@@ -22,3 +22,6 @@ ja:
       title: "お店の投稿"
     show:
       title: "お店の情報"
+  maps:
+    search:
+      title: "現在地検索結果"

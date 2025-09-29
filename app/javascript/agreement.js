@@ -1,11 +1,11 @@
 document.addEventListener('turbo:load', function() {
-  console.log('turbo:load発火'); // ← デバッグ用
+  //console.log('turbo:load発火'); // ← デバッグ用
   
   const agreementCheck = document.getElementById('agreement_check');
   const registerButton = document.getElementById('register_button');
   
-  console.log('agreementCheck:', agreementCheck);
-  console.log('registerButton:', registerButton);
+  // console.log('agreementCheck:', agreementCheck);
+  // console.log('registerButton:', registerButton);
   
   if (agreementCheck && registerButton) {
     // 初期状態：ボタンを無効化
@@ -18,6 +18,6 @@ document.addEventListener('turbo:load', function() {
       console.log('ボタンdisabled設定:', registerButton.disabled);
     });
   } else {
-    console.log('要素が見つかりません');
+    // console.log('要素が見つかりません');
   }
 });

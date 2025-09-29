@@ -1,6 +1,9 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
-import "./controllers"
-import "./agreement"
-import "./script"
-
+import "./controllers/index.js"
+import "./agreement.js"
+import "./script.js"
+import "./location.js"
+import "./search_map.js"
+import "./address_search.js"
+// import "./google_map.js"
