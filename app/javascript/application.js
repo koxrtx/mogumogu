@@ -5,5 +5,5 @@ import "./agreement.js"
 import "./script.js"
 import "./location.js"
 import "./search_map.js"
-
+import "./address_search.js"
 // import "./google_map.js"

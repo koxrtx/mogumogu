@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_22_032845) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_29_035815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -101,6 +101,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_22_032845) do
     t.boolean "child_menu", default: false
     t.boolean "parking", default: false
     t.boolean "other_facility", default: false
+    t.string "opening_hours"
     t.index ["address"], name: "index_spots_on_address"
     t.index ["user_id"], name: "index_spots_on_user_id"
   end
