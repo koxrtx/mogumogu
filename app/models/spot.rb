@@ -1,4 +1,8 @@
 class Spot < ApplicationRecord
+  # 住所から緯度経度取得する
+  geocoded_by :address
+  after_validation :address_be_geocode
+
   # 店舗情報が消えたら設備情報や写真・修正依頼も消える楔形
   belongs_to :user
   has_many :spot_facilities, dependent: :destroy
@@ -12,4 +16,23 @@ class Spot < ApplicationRecord
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true
   validates :address, presence: true
+
+  private
+
+  # 住所登録したときの例外エラー
+  def address_be_geocode
+    results = Geocoder.search(address)
+    if results.present?
+      self.latitude = results.first.latitude
+      self.longitude = results.first.longitude
+    else
+      errors.add(:address, "は地図で見つかりませんでした。入力を確認してください")
+    end
+  
+  # 例外処理
+  rescue => e
+    Rails.logger.error("Geocodeing failed: #{e.message}")
+    errors.add(:address, "の位置情報取得に失敗しました。時間をおいて再度お試しください")
+  end
+
 end

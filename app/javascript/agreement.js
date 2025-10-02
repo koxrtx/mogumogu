@@ -1,5 +1,5 @@
 document.addEventListener('turbo:load', function() {
-  //console.log('turbo:load発火'); // ← デバッグ用
+  //console.log('turbo:load発火'); 
   
   const agreementCheck = document.getElementById('agreement_check');
   const registerButton = document.getElementById('register_button');
