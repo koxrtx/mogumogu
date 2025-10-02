@@ -11,6 +11,7 @@ class SpotsController < ApplicationController
     @spot = current_user.spots.build(spot_params)
 
     if @spot.save
+      flash[:thanks] = true
       redirect_to @spot
     else
       render :new, status: :unprocessable_entity

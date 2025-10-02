@@ -9,7 +9,6 @@ export function buildFacilityInfo(spot) {
   if (spot.child_menu) info.push("子供メニューあり");
   if (spot.parking) info.push("駐車場あり");
   if (spot.other_facility) info.push("その他設備あり");
-  if (spot.other_facility_comment) info.push(spot.other_facility_comment);
 
   return info.length > 0 ? info.join(" / ") : "施設情報なし";
 }
