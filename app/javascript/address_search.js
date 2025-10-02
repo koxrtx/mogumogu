@@ -2,10 +2,10 @@ document.addEventListener('turbo:load', function(){
   console.log("Turbo:load 発火");
 
   const locationButton = document.getElementById("current-address-btn");
-  console.log("ボタン要素:", locationButton); 
 
   if (!locationButton) return;
 
+  // ボタンを押した時の処理
   locationButton.addEventListener("click", () => {
     console.log("ボタンクリック検知");
 
@@ -26,7 +26,7 @@ document.addEventListener('turbo:load', function(){
             if (status === "OK" && results[0]) {
               const address = results[0].formatted_address;
               console.log("取得した住所:", address);
-              
+
               document.getElementById("address-input").value = address;
             } else {
               alert("住所の取得に失敗しました");
