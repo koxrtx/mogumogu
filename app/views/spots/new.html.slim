@@ -24,7 +24,7 @@ div.page_classes
 
         .flex.space-x-4.items-center
           .flex-1
-            button#current-address-btn.flex.bg-cyan-600.text-white.px-4.py-2.rounded-lg.hover:bg-cyan-700.focus:outline-none
+            button#current-address-btn.flex.bg-cyan-600.text-white.px-4.py-2.rounded-lg.hover:bg-cyan-700.focus:outline-none type="button"
               | 現在地から入力
               - content_for :head do
                 script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" async defer
