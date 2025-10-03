@@ -3,10 +3,12 @@ class SpotsController < ApplicationController
     @spot = Spot.new
   end
 
+  # 詳細
   def show
     @spot = Spot.find(params[:id])
   end
 
+  # 投稿
   def create
     @spot = current_user.spots.build(spot_params)
 

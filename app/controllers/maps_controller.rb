@@ -9,5 +9,11 @@ class MapsController < ApplicationController
         :stroller_ok, :child_menu, :parking, :other_facility
       ]
     )
+    # 近い順に10件表示
+    if params[:lat].present? && params[:lng].present?
+      @spots_near = Spot.near([params[:lat], params[:lng]], 5, units: :km).limit(10)
+    else
+      @spots_near = []
+    end
   end
 end

@@ -34,21 +34,37 @@ div.page_classes
       span.text-xl.font-bold.mb-4 = t('spot.forms.child_facilities')
       .grid.grid-cols-2.gap-x-8.gap-y-2.mt-2
         - if @spot.child_chair
-          p ✅ = t('spot.forms.child_chair')
+          p
+            | ✅ 
+            = t('spot.forms.child_chair')
         - if @spot.tatami_seat
-          p ✅ = t('spot.forms.tatami_seat')
+          p
+            | ✅ 
+            = t('spot.forms.tatami_seat')
         - if @spot.child_tableware
-          p ✅ = t('spot.forms.child_tableware')
+          p
+            | ✅ 
+            = t('spot.forms.child_tableware')
         - if @spot.bring_baby_food
-          p ✅ = t('spot.forms.bring_baby_food')
+          p
+            | ✅ 
+            = t('spot.forms.bring_baby_food')
         - if @spot.stroller_ok
-          p ✅ = t('spot.forms.stroller_ok')
+          p
+            | ✅ 
+            = t('spot.forms.stroller_ok')
         - if @spot.child_menu
-          p ✅ = t('spot.forms.child_menu')
+          p
+            | ✅ 
+            = t('spot.forms.child_menu')
         - if @spot.parking
-          p ✅ = t('spot.forms.parking')
+          p
+            | ✅ 
+            = t('spot.forms.parking')
         - if @spot.other_facility
-          p ✅ = t('spot.forms.other_facility')
+          p
+            | ✅ 
+            = t('spot.forms.other_facility')
 
       - if @spot.other_facility_comment.present?
         .mt-2

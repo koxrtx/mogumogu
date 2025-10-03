@@ -1,6 +1,5 @@
 ja:
   spot:
-    # 共通設定（フォーム）
     forms:
       name: "お店の名前"
       address: "住所"
@@ -13,8 +12,8 @@ ja:
       bring_baby_food: "離乳食持ち込み可"
       stroller_ok: "ベビーカー入店可"
       child_menu: "子供用メニューあり"
-      parking: "その他"
-      other_facility: "駐車場あり"
+      parking: "駐車場あり"
+      other_facility: "その他設備あり"
       other_facility_comment: "その他設備の詳細を入力"
     buttons:
       submit: "投稿する"
