@@ -3,13 +3,9 @@ import { buildFacilityInfo} from "./facility_info";
 let map, infoWindow;
 
 document.addEventListener('turbo:load',async function(){
-  console.log('=== デバッグ開始 ===');
-  console.log('spots変数チェック:', typeof spots, spots);
 
   // もしspotsが未定義なら、別の方法で取得を試す
   if (typeof spots === 'undefined') {
-    console.log('spots変数が定義されていません！');
-    console.log('window.spots:', typeof window.spots, window.spots);
     return; // ここで処理を止める
   }
 
