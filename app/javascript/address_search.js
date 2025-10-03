@@ -1,3 +1,4 @@
+// 現在地から住所反映ボタン押した時
 document.addEventListener('turbo:load', function(){
   console.log("Turbo:load 発火");
 

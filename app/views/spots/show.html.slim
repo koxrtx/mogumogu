@@ -2,12 +2,13 @@ div.page_classes
   h1 class=page_title = t("spots.new.title")
 
   / 吹き出しメッセージ
-  .flex.justify-center.mb-8
-    .relative.bg-yellow-100.border.border-yellow-300.rounded-2xl.p-4.shadow-md.max-w-md
-      h5.text-lg.font-semibold.mb-2 投稿ありがとうございました！🎉
-      p あなたの投稿が他のママパパの役に立ちます✨
-      / 吹き出しの三角
-      .absolute.left-6.-bottom-3.w-0.h-0.border-l-8.border-r-8.border-t-8.border-l-transparent.border-r-transparent.border-t-yellow-300
+  - if flash[:thanks]
+    .flex.justify-center.mb-8
+      .relative.bg-yellow-100.border.border-yellow-300.rounded-2xl.p-4.shadow-md.max-w-md
+        h5.text-lg.font-semibold.mb-2 投稿ありがとうございました！🎉
+        p あなたの投稿が他のママパパの役に立ちます✨
+        / 吹き出しの三角
+        .absolute.left-6.-bottom-3.w-0.h-0.border-l-8.border-r-8.border-t-8.border-l-transparent.border-r-transparent.border-t-yellow-300
 
   / 店舗情報枠
   .max-w-2xl.mx-auto.border.border-gray-300.rounded-xl.p-6.bg-sky-50.space-y-6
@@ -33,21 +34,37 @@ div.page_classes
       span.text-xl.font-bold.mb-4 = t('spot.forms.child_facilities')
       .grid.grid-cols-2.gap-x-8.gap-y-2.mt-2
         - if @spot.child_chair
-          p ✅ = t('spot.forms.child_chair')
+          p
+            | ✅ 
+            = t('spot.forms.child_chair')
         - if @spot.tatami_seat
-          p ✅ = t('spot.forms.tatami_seat')
+          p
+            | ✅ 
+            = t('spot.forms.tatami_seat')
         - if @spot.child_tableware
-          p ✅ = t('spot.forms.child_tableware')
+          p
+            | ✅ 
+            = t('spot.forms.child_tableware')
         - if @spot.bring_baby_food
-          p ✅ = t('spot.forms.bring_baby_food')
+          p
+            | ✅ 
+            = t('spot.forms.bring_baby_food')
         - if @spot.stroller_ok
-          p ✅ = t('spot.forms.stroller_ok')
+          p
+            | ✅ 
+            = t('spot.forms.stroller_ok')
         - if @spot.child_menu
-          p ✅ = t('spot.forms.child_menu')
+          p
+            | ✅ 
+            = t('spot.forms.child_menu')
         - if @spot.parking
-          p ✅ = t('spot.forms.parking')
+          p
+            | ✅ 
+            = t('spot.forms.parking')
         - if @spot.other_facility
-          p ✅ = t('spot.forms.other_facility')
+          p
+            | ✅ 
+            = t('spot.forms.other_facility')
 
       - if @spot.other_facility_comment.present?
         .mt-2
