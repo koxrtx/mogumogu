@@ -15,7 +15,7 @@ class Spot < ApplicationRecord
 
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true
-  validates :address, presence: true, uniquenss: ( massage: "この住所はすでに登録されています")
+validates :address, presence: true, uniqueness: { message: "この住所はすでに登録されています" }
 
   private
 
