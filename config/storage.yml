@@ -7,12 +7,19 @@ local:
   root: <%= Rails.root.join("storage") %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket-<%= Rails.env %>
+amazon:
+  service: S3
+  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+  region: us-east-1
+  bucket: your_own_bucket-<%= Rails.env %>
+  # その他設定
+  http_open_timeout: 5
+  http_read_timeout: 30
+  retry_limit: 3
+  upload:
+    server_side_encryption: "AES256" # S3で暗号化
+    cache_control: "private, max-age=<%= 1.day.to_i %>" # キャッシュ設定
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

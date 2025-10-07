@@ -61,5 +61,16 @@ div.page_classes
             span.ml-2 = t('spot.forms.other_facility')
         = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2" , rows: 1
 
+      / 写真のアップロード
+      div
+        span.text-xl.font-bold.mb-2 子ども用メニュー写真（最大3枚）
+        .field.m-4
+          label.cursor-pointer.bg-gray-200.px-4.py-2.rounded.hover:bg-gray-300
+            | 写真を選択
+            = f.file_field :images, multiple: true, direct_upload: true, accept: "image/*", style: "display: none;"
+
+          -@spot.images.each do |image|
+            = image_tag url_for(image.variant(resize_to_limit: [200, 200]))
+
       / 投稿ボタン
       = f.submit t('spot.buttons.submit'), class: "bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 font-semibold w-full"
