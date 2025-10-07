@@ -66,7 +66,7 @@ div.page_classes
         span.text-xl.font-bold.mb-2 子ども用メニュー写真（最大3枚）
         .field.m-4
           = f.label :images, "写真を選択", class: "cursor-pointer bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
-          = f.file_field :images, multiple: true, direct_upload: true, accept: "image/*", style: "display: none;"
+          = f.file_field :images, multiple: true, direct_upload: true, accept: "image/*", style: "display: none;", onchange: "previewImage(this, 'previewContainer')"
 
         / プレビュー枠
         #previewContainer.flex.space-x-4.mt-2
