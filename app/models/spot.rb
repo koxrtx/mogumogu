@@ -11,8 +11,8 @@ class Spot < ApplicationRecord
 
   # ファイルをレコードに添付する
   has_many_attached :images do |attachable|
-    # 一覧画面用_preprocessed: true でサムネイルを先に作成しておく
-    attachable.variant :thumb, resize_to_limit: [200, 200], preprocessed: true
+    # 一覧画面用
+    attachable.variant :thumb, resize_to_limit: [200, 200]
     # 詳細画面用＿スマホ想定なので600で設定
     attachable.variant :detail, resize_to_limit: [600,600]
   end

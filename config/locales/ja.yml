@@ -11,6 +11,7 @@ ja:
       spot:
         name: "お店の名前"
         address: "住所"
+        images: "写真"
   pages:
     terms:
       title: "利用規約"
