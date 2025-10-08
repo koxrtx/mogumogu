@@ -22,8 +22,11 @@ gem 'slim-rails'
 
 # Active Storage
 gem "image_processing", ">= 1.2"
-gem "aws-sdk-s3", require: false
 gem "mini_magick", "~> 4.11"
+
+# Cloudinary使用するためのgem
+gem "cloudinary"
+gem "activestorage-cloudinary-service"
 
 # ジオコーディング
 gem "geocoder"

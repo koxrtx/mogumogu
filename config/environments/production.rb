@@ -22,7 +22,7 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # ActiveStorage 本番環境ではファイルをAmazon S3に保存
-  config.active_storage.service = :amazon
+  config.active_storage.service = :cloudinary
   Rails.application.routes.default_url_options[:host] = "https://mogumogumap.onrender.com"
 
   config.after_initialize do
