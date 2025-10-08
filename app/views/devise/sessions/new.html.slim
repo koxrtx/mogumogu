@@ -9,6 +9,12 @@ div class=page_classes
 
       .actions
         = f.submit t("devise.forms.buttons.login"), class: button_classes
+
+        / ユーザー登録へのリンク
+        p.text-center.mt-4
+          | アカウントをお持ちでない方
+          br.mt-4
+          = link_to "ユーザー登録", terms_agreement_path, class: "block w-full bg-sky-700 text-white py-2 rounded hover:bg-sky-600 transition"
     /- - if devise_mapping.rememberable?
       - .field
         - = f.check_box :remember_me
