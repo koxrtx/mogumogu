@@ -1,7 +1,13 @@
 class ChangeSpotImageToActiveStorage < ActiveRecord::Migration[8.0]
   def change
-    remove_reference :spot_update_request_images, :spot_image, foreign_key: true
-
-    add_reference :spot_update_request_images, :spot_image, foreign_key: { to_table: :active_storage_attachments }
+    # 外部キー制約の安全な削除
+    if foreign_key_exists?(:spot_update_request_images, :spot_images)
+      remove_foreign_key :spot_update_request_images, :spot_images
+    end
+    
+    # カラムの安全な削除
+    if column_exists?(:spot_update_request_images, :spot_image_id)
+      remove_column :spot_update_request_images, :spot_image_id
+    end
   end
 end
