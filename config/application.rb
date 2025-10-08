@@ -15,7 +15,9 @@ module Myapp
 
     config.i18n.default_locale = :ja  # 追加
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}").to_s]  # 追加
-    config.assets.paths << Rails.root.join("app/assets/stylesheets") # 消す
+
+    # Active Storage用の設定
+    config.active_storage.variant_processor = :mini_magick
 
   end
 end

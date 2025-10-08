@@ -23,7 +23,11 @@ Rails.application.configure do
 
   # ActiveStorage 本番環境ではファイルをAmazon S3に保存
   config.active_storage.service = :amazon
+  Rails.application.routes.default_url_options[:host] = "https://mogumogumap.onrender.com"
 
+  config.after_initialize do
+    ActiveStorage::Current.url_options = Rails.application.routes.default_url_options
+  end
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
 
