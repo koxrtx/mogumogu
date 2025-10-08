@@ -1,4 +1,4 @@
-// 現在地から住所反映ボタン押した時
+// 現在地から住所反映ボタンおした
 document.addEventListener('turbo:load', function(){
   console.log("Turbo:load 発火");
 
@@ -28,7 +28,26 @@ document.addEventListener('turbo:load', function(){
               const address = results[0].formatted_address;
               console.log("取得した住所:", address);
 
-              document.getElementById("address-input").value = address;
+              const addressInput = document.getElementById("address-input");
+              console.log("住所入力欄の要素:", addressInput);
+              
+              // ここが追加部分！
+              if (addressInput) {
+                console.log("✅ addressInputが存在します");
+                
+                // 値を設定
+                addressInput.value = address;
+                console.log("設定後の値:", addressInput.value);
+                
+                // フォームに変更を認識させる
+                addressInput.dispatchEvent(new Event('input', { bubbles: true }));
+                addressInput.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                console.log("イベント発火完了");
+              } else {
+                console.log("❌ addressInputが見つかりません");
+              }
+              
             } else {
               alert("住所の取得に失敗しました");
             }

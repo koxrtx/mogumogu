@@ -7,15 +7,25 @@ class Spot < ApplicationRecord
   belongs_to :user
   has_many :spot_facilities, dependent: :destroy
   has_many :facility_tags, through: :spot_facilities
-  has_many :spot_images, dependent: :destroy
   has_many :spot_update_requests, dependent: :destroy
+
+  # ファイルをレコードに添付する
+  has_many_attached :images do |attachable|
+    # 一覧画面用
+    attachable.variant :thumb, resize_to_limit: [200, 200]
+    # 詳細画面用＿スマホ想定なので600で設定
+    attachable.variant :detail, resize_to_limit: [600,600]
+  end
+
+  # 写真枚数制限
+  validate :images_count_limit
 
   # 閉店フラグ
   enum :status, { open: 0, closed: 1 }
 
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true
-validates :address, presence: true, uniqueness: { message: "この住所はすでに登録されています" }
+  validates :address, presence: true, uniqueness: { message: "この住所はすでに登録されています" }
 
   private
 
@@ -33,6 +43,13 @@ validates :address, presence: true, uniqueness: { message: "この住所はす�
   rescue => e
     Rails.logger.error("Geocodeing failed: #{e.message}")
     errors.add(:address, "の位置情報取得に失敗しました。時間をおいて再度お試しください")
+  end
+
+  # 写真制限
+  def images_count_limit
+    if images.attached? && images.count > 3
+      errors.add(:images, "は3枚までしかアップロードできません")
+    end
   end
 
 end

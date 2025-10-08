@@ -1,7 +1,7 @@
 div class=page_classes
   h1 class=page_title = t("maps.search.title")
   
-  #map style="height: 400px; width: 100%;"
+  #map style="height: 400px; width: 100%;" class="mb-6"
 
   / spotsデータをJavaScript変数として定義
   script
@@ -17,3 +17,6 @@ div class=page_classes
       = link_to spot_path(spot), class: "block border-2 border-sky-700 rounded-xl p-4 bg-sky-100 mb-4 hover:bg-sky-200 hover:shadow-lg cursor-pointer transition" do
         h2.text-sm.font-bold = spot.name
         p.text-sm.text-gray-600 = spot.address
+
+        - if spot.images.attached?
+          = image_tag spot.images.first.variant(:thumb), class: "mt-2 rounded-lg w-full h-32 object-cover"
