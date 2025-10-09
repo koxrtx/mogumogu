@@ -449,12 +449,12 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kamal
-  mini_magick (~> 4.11)
   pg (~> 1.6)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2, >= 8.0.2.1)
   rubocop-rails-omakase
+  ruby-vips (~> 2.2)
   selenium-webdriver
   slim-rails
   solid_cable
