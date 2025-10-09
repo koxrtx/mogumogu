@@ -22,7 +22,7 @@ gem 'slim-rails'
 
 # Active Storage
 gem "image_processing", ">= 1.2"
-gem "mini_magick", "~> 4.11"
+gem "ruby-vips", "~> 2.2"
 
 # Cloudinary使用するためのgem
 gem "cloudinary"

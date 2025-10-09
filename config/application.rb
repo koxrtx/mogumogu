@@ -17,7 +17,7 @@ module Myapp
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}").to_s]  # 追加
 
     # Active Storage用の設定
-    config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variant_processor = :vips
 
   end
 end
