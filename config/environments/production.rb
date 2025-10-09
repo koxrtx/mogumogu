@@ -21,7 +21,7 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # ActiveStorage 本番環境ではファイルをAmazon S3に保存
+  # ActiveStorage 本番環境ではCloudinaryを使用
   config.active_storage.service = :cloudinary
   Rails.application.routes.default_url_options[:host] = "https://mogumogumap.onrender.com"
 
