@@ -6,16 +6,18 @@ echo "🚀 Starting Render build process..."
 echo "📦 Installing gems..."
 bundle install
 
-# Rails 8 Solid Queue対応: スキーマファイルからテーブル作成
-echo "🔧 Setting up Solid Queue tables..."
+# Rails 8 Solid Queue対応: マイグレーションベースのアプローチ
+echo "🔧 Setting up Solid Queue..."
 if [ -f "db/queue_schema.rb" ]; then
-  bundle exec rails db:schema:load SCHEMA=db/queue_schema.rb
+  echo "📋 Solid Queue schema found, using migration approach..."
+  # Solid Queueのマイグレーションを実行
+  bundle exec rails solid_queue:install:migrations
 else
-  echo "⚠️  queue_schema.rb not found, using install command..."
+  echo "⚠️  Installing Solid Queue..."
   bundle exec rails solid_queue:install
 fi
 
-# データベースマイグレーション
+# データベースマイグレーション（Solid Queueも含む）
 echo "🗃️  Running database migrations..."
 bundle exec rails db:migrate
 
