@@ -7,30 +7,51 @@ default: &default
   password: password
 
 development:
-  <<: *default
-  database: myapp_development
-
-development_queue:
-  <<: *default
-  database: myapp_development_queue
-
-test:
-  <<: *default
-  database: myapp_test
-
-production:
-  primary:
+  primary: &primary_development
     <<: *default
-    url: <%= ENV["DATABASE_URL"] || "postgresql://postgres:password@db:5432/myapp_production" %>
+    database: myapp_development
   
   cache:
+    <<: *primary_development
+    database: myapp_development_cache
+    migrations_paths: db/cache_migrate
+
+  queue:
+    <<: *primary_development
+    database: myapp_development_queue
+    migrations_paths: db/queue_migrate
+
+  cable:
+    <<: *primary_development
+    database: myapp_development_cable
+    migrations_paths: db/cable_migrate
+
+test:
+  primary: &primary_test
     <<: *default
-    url: <%= ENV["DATABASE_URL"] || "postgresql://postgres:password@db:5432/myapp_production_cache" %>
+    database: myapp_test
   
   queue:
+    <<: *primary_test
+    database: myapp_test_queue
+    migrations_paths: db/queue_migrate
+
+production:
+  primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"] || "postgresql://postgres:password@db:5432/myapp_production_queue" %>
-  
+    url: <%= ENV['DATABASE_URL'] %>
+
+  cache:
+    <<: *primary_production
+    database: myapp_production_cache
+    migrations_paths: db/cache_migrate
+
+  queue:
+    <<: *primary_production
+    database: myapp_production_queue
+    migrations_paths: db/queue_migrate
+
   cable:
-    <<: *default
-    url: <%= ENV["DATABASE_URL"] || "postgresql://postgres:password@db:5432/myapp_production_cable" %>
+    <<: *primary_production
+    database: myapp_production_cable
+    migrations_paths: db/cable_migrate
