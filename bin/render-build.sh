@@ -1,3 +1,4 @@
+# exit on error
 set -o errexit
 
 echo "🚀 Starting Render build process..."
@@ -6,16 +7,9 @@ echo "🚀 Starting Render build process..."
 echo "📦 Installing gems..."
 bundle install
 
-# Rails 8 Solid Queue対応: マイグレーションベースのアプローチ
+# Rails 8 Solid Queue対応: 正しいコマンドを使用
 echo "🔧 Setting up Solid Queue..."
-if [ -f "db/queue_schema.rb" ]; then
-  echo "📋 Solid Queue schema found, using migration approach..."
-  # Solid Queueのマイグレーションを実行
-  bundle exec rails solid_queue:install:migrations
-else
-  echo "⚠️  Installing Solid Queue..."
-  bundle exec rails solid_queue:install
-fi
+bundle exec rails solid_queue:install
 
 # データベースマイグレーション（Solid Queueも含む）
 echo "🗃️  Running database migrations..."
