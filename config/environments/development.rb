@@ -38,7 +38,7 @@ Rails.application.configure do
   end
 
   # Active Job のバックエンドとして Solid Queue を使う
-  config.active_job.queue_adapter = :solid_queue
+  config.active_job.queue_adapter = :inline
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
