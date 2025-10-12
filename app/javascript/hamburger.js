@@ -1,11 +1,11 @@
 console.log("hamburger.js読み込み完了");
 
 document.addEventListener("turbo:load", function() {
-  console.log("turbo:load - ハンバーガーメニュー初期化開始");
+  //console.log("turbo:load - ハンバーガーメニュー初期化開始");
   
   const hamburger = document.querySelector(".hamburger");
   const nav = document.querySelector(".nav");
-  
+
   if (!hamburger || !nav) {
     console.log("ハンバーガーメニュー要素が見つかりません");
     return;
@@ -19,18 +19,18 @@ document.addEventListener("turbo:load", function() {
   // ハンバーガーメニューのクリックイベント
   function handleHamburgerClick() {
     console.log("ハンバーガーメニューがクリックされました");
-    
+
     hamburger.classList.toggle("active");
     nav.classList.toggle("active");
-    
+
     // アクセシビリティ対応
     const isOpen = hamburger.classList.contains("active");
     hamburger.setAttribute("aria-expanded", isOpen);
     nav.setAttribute("aria-hidden", !isOpen);
-    
+
     console.log("メニュー状態:", isOpen ? "開く" : "閉じる");
   }
-  
+
   hamburger.addEventListener("click", handleHamburgerClick);
   
   // メニューの外側をクリックした時の処理

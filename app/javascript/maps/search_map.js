@@ -3,11 +3,17 @@ import { buildFacilityInfo} from "./facility_info";
 let map, infoWindow;
 
 document.addEventListener('turbo:load',async function(){
-
-  // マップ要素の存在確認を最初に行う
+  console.log("読み込まれてる");
+  // マップ要素の確認を最初に行う
   const mapElement = document.getElementById("map");
   if (!mapElement) {
     console.log("マップ要素が存在しないため、処理をスキップ");
+    return;
+  }
+
+    if (typeof google === 'undefined'){
+  // GoogleMAP APIが読み込まれているか
+    console.log('Google Maps APIが読み込まれていません');
     return;
   }
 
@@ -19,11 +25,6 @@ document.addEventListener('turbo:load',async function(){
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  if (typeof google === 'undefined'){
-  // GoogleMAP APIが読み込まれているか
-    console.log('Google Maps APIが読み込まれていません');
-    return;
-  }
 
   // URLパラメーターから位置情報を取得
   // デフォルトは東京駅
@@ -31,12 +32,16 @@ document.addEventListener('turbo:load',async function(){
   const lat = parseFloat(urlParams.get('lat')) || 35.68114;
   const lng = parseFloat(urlParams.get('lng')) || 139.767061;
 
+  // mapId が未定義の場合は null に
+  const mapIdValue = typeof mapId !== 'undefined' ? mapId : null;
+
   
   map = new google.maps.Map(mapElement, {
     center: { lat: lat, lng: lng },
     zoom: 15,
-    mapId: mapId
+    mapId: mapIdValue
   });
+  
   infoWindow = new google.maps.InfoWindow();
 
   const currentPosition = { lat: lat, lng: lng };
@@ -72,4 +77,3 @@ document.addEventListener('turbo:load',async function(){
     });
   }
 })
-
