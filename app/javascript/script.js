@@ -1,4 +1,8 @@
-document.addEventListener('turbo:load', function() {
+  console.log('turbo:load発火2');
+  
+  document.addEventListener('turbo:load', function() {
+  console.log('turbo:load発火2'); 
+
   const hamburger = document.querySelector('.hamburger');
   const nav = document.querySelector('.nav');
 

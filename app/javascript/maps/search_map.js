@@ -4,6 +4,13 @@ let map, infoWindow;
 
 document.addEventListener('turbo:load',async function(){
 
+  // マップ要素の存在確認を最初に行う
+  const mapElement = document.getElementById("map");
+  if (!mapElement) {
+    console.log("マップ要素が存在しないため、処理をスキップ");
+    return;
+  }
+
   // もしspotsが未定義なら、別の方法で取得を試す
   if (typeof spots === 'undefined') {
     return; // ここで処理を止める
@@ -16,15 +23,16 @@ document.addEventListener('turbo:load',async function(){
   // GoogleMAP APIが読み込まれているか
     console.log('Google Maps APIが読み込まれていません');
     return;
-}
+  }
 
-// URLパラメーターから位置情報を取得
+  // URLパラメーターから位置情報を取得
   // デフォルトは東京駅
   const urlParams = new URLSearchParams(window.location.search);
   const lat = parseFloat(urlParams.get('lat')) || 35.68114;
   const lng = parseFloat(urlParams.get('lng')) || 139.767061;
 
-  map = new google.maps.Map(document.getElementById("map"), {
+  
+  map = new google.maps.Map(mapElement, {
     center: { lat: lat, lng: lng },
     zoom: 15,
     mapId: mapId
@@ -46,7 +54,8 @@ document.addEventListener('turbo:load',async function(){
 
       console.log('spots:', spots)
 
-      const marker = new google.maps.marker.AdvancedMarkerElement ({
+      
+      const marker = new AdvancedMarkerElement({
         position: { lat: Number(spot.latitude), lng: Number(spot.longitude) },
         map: map,
         title: spot.name
@@ -63,3 +72,4 @@ document.addEventListener('turbo:load',async function(){
     });
   }
 })
+

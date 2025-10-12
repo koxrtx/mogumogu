@@ -2,10 +2,12 @@
 import "@hotwired/turbo-rails"
 import "./controllers/index.js"
 import "./agreement.js"
-import "./script.js"
+// import "./script.js"
 import "./location.js"
 import "./maps/search_map.js"
 import "./address_search.js"
 import "./images_preview.js"
+import "./hamburger.js"
+
 
 // import "./google_map.js"
