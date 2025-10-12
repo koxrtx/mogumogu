@@ -3,6 +3,10 @@ div class=page_classes
   
   #map style="height: 400px; width: 100%;" class="mb-6"
 
+  / spotsデータをJavaScript変数として定義
+  script
+    | const mapId = "#{ENV['GOOGLE_MAP_ID']}";
+    | const spots = #{@spots_json.html_safe};
 
   / Google Maps APIの読み込み（async defer で非同期）
   - content_for :head do
