@@ -8,7 +8,7 @@ module ImageProcessable
     return nil unless images_collection.attached?
 
     first_image = images_collection.first
-    return nil unless first_image&.attached?
+    return nil unless first_image&.blob&.key.present?
 
     if first_image.blob.key.present?
       dimensions = image_dimensions(size)
