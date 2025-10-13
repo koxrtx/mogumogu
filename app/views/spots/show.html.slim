@@ -75,8 +75,11 @@ div.page_classes
       div.flex.justify-center.mt-4
         -if @spot.images.attached?
           - @spot.images.each do |image|
-            - detail_url = url_for(image.variant(:detail))
-            img src=detail_url class="w-32 h-32 object-cover cursor-pointer m-4" onclick="openModal('#{detail_url}')" alt="#{@spot.name}の画像" loading="lazy"
+            - thumbnail_url = display_image_url(@spot, size: :thumb)
+            - detail_url = display_image_url(@spot, size: :detail)
+
+            - if thumbnail_url.present? && detail_url.present?
+              img src=thumbnail_url class="w-32 h-32 object-cover cursor-pointer m-4" onclick="openModal('#{detail_url}')" alt="#{@spot.name}の画像" loading="lazy"
 
         / モーダル部分
         #modal.hidden.fixed.inset-0.bg-black.bg-opacity-50.flex.items-center.justify-center
