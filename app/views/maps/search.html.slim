@@ -18,6 +18,6 @@ div class=page_classes
         h2.text-sm.font-bold = spot.name
         p.text-sm.text-gray-600 = spot.address
 
-        - thumbnail_url = spot.display_image_url(size: :thumb, image_attribute: :images)
+        - thumbnail_url = display_image_url(spot, size: :thumb, image_attribute: :images)
         - if thumbnail_url.present?
           = image_tag thumbnail_url, class: "mt-2 rounded-lg w-full h-32 object-cover", alt: "#{spot.name}のサムネイル", loading: "lazy"
