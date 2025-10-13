@@ -19,5 +19,16 @@ module Myapp
     # Active Storage用の設定
     config.active_storage.variant_processor = :vips
 
+    config.after_initialize do
+      # 品質オプションをサポートしていない場合の対処
+      ActiveStorage::Variant.class_eval do
+        private
+
+        def process_options(options)
+        # qualityオプションを除外
+        options.except(:quality)
+        end
+      end
+    end
   end
 end

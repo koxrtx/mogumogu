@@ -1,4 +1,7 @@
 class Spot < ApplicationRecord
+  # 画像のバリアント処理
+  include  ImageProcessable
+
   # 住所から緯度経度取得する
   geocoded_by :address
   after_validation :address_be_geocode
@@ -17,6 +20,9 @@ class Spot < ApplicationRecord
     attachable.variant :detail, resize_to_limit: [600,600]
   end
 
+  # ファイル添付時に自動でファイル名を正規化
+  before_save :normalize_image_filenames, if: -> { images.attached? }
+
   # 写真枚数制限
   validate :images_count_limit
 
@@ -29,6 +35,50 @@ class Spot < ApplicationRecord
 
   private
 
+  def normalize_image_filenames
+    images.each do |image|
+      original_filename = image.blob.filename.to_s
+      
+      # 問題のあるファイル名かチェック
+      if problematic_filename?(original_filename)
+        safe_filename = sanitize_filename(original_filename)
+        
+        # ファイル名を更新
+        image.blob.update!(filename: safe_filename)
+        Rails.logger.info "ファイル名を正規化しました: #{original_filename} → #{safe_filename}"
+      end
+    end
+  end
+
+  def sanitize_filename(filename)
+  extension = File.extname(filename)
+  name_without_ext = File.basename(filename, extension)
+  
+  # 特殊文字を安全な文字に変換
+  safe_name = name_without_ext
+                .gsub(/[^\w\-_]/, '_')  # 英数字、ハイフン、アンダースコア以外を_に変換
+                .gsub(/_+/, '_')        # 連続する_を1つに
+                .gsub(/^_+|_+$/, '')    # 先頭と末尾の_を除去
+  
+  # 空になった場合のフォールバック
+  safe_name = 'image' if safe_name.blank?
+  
+  # タイムスタンプを追加して一意性を確保
+  timestamp = Time.current.strftime('%Y%m%d_%H%M%S')
+  "#{safe_name}_#{timestamp}#{extension}"
+end
+
+def problematic_filename?(filename)
+  return false if filename.blank?
+  
+  # 特殊文字をチェック
+  filename.match?(/[^\w\-_.]/) ||
+  filename.include?(' ') ||
+  filename.include?('(') ||
+  filename.include?(')') ||
+  filename.include?('%')
+end
+
   # 住所登録したときの例外エラー
   def address_be_geocode
     results = Geocoder.search(address)
@@ -38,7 +88,7 @@ class Spot < ApplicationRecord
     else
       errors.add(:address, "は地図で見つかりませんでした。入力を確認してください")
     end
-  
+
   # 例外処理
   rescue => e
     Rails.logger.error("Geocodeing failed: #{e.message}")
