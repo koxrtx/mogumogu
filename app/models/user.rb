@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # Devise が自動でバリデーションするので不要
   # validates :encrypted_password, presence: true
   # OAuth認証の重複防止
-  validates :uid, uniqueness: { scope: :provider }, if: -> { provider.presemt? }
+  validates :uid, uniqueness: { scope: :provider }, if: -> { provider.present? }
 
   # enumの定義（roleが0: user, 1: adminの場合）
   enum :role, { user: 0, admin: 1 }
