@@ -21,17 +21,44 @@ class User < ApplicationRecord
   # enumの定義（roleが0: user, 1: adminの場合）
   enum :role, { user: 0, admin: 1 }
 
-  # OmniAuthからユーザーを作成取得する
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.name = auth.info.name
-      user.provider = auth.provider
-      user.uid = auth.uid
+  def self.from_omniauth(auth, current_user = nil)
+    # ログイン済みユーザーがLINE連携を追加する場合
+    return link_line_account(auth, current_user) if current_user && !current_user.line_connected?
 
-      # パスワードを自動生成
+    # 既存のLINEユーザーでログインまたは新規ユーザー作成
+    sign_in_or_create_user_from_line(auth)
+  end
+
+  # 既存ユーザーにLINE連携を追加
+  def self.link_line_account(auth, current_user)
+    # 他のユーザーが既にこのLINEアカウントを使用していないかチェック
+    return nil if exists?(provider: auth.provider, uid: auth.uid)
+
+    success = current_user.update(
+      provider: auth.provider,
+      uid: auth.uid,
+      line_notify: true
+    )
+
+    success ? current_user : nil
+  end
+
+  # LINEログインまたは新規ユーザー作成
+  def self.sign_in_or_create_user_from_line(auth)
+    find_or_create_by(
+      provider: auth.provider,
+      uid: auth.uid
+    ) do |user|
+      user.email = auth.info.email || "#{auth.uid}@line.example.com"
+      user.name = auth.info.name || "LINE User"
       user.password = Devise.friendly_token[0, 20]
+      user.line_notify = true
     end
+  end
+
+  # LINE連携チェックメソッド
+  def line_connected?
+    uid.present? && provider == 'line'
   end
 
   # OAuth認証ユーザーか
@@ -42,5 +69,10 @@ class User < ApplicationRecord
   # LINEユーザーか
   def line_user?
     provider == 'line'
+  end
+
+  # LINE通知が有効か
+  def line_notify_enabled?
+    line_connected? && line_notify?
   end
 end

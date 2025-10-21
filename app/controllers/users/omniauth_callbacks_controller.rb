@@ -1,30 +1,35 @@
-# frozen_string_literal: true
+module Users
+  class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    skip_before_action :verify_authenticity_token, only: :line
 
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+    def line
+      @user = User.from_omniauth(request.env['omniauth.auth'], current_user)
 
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
+      notify_line_already_linked and return if current_user && @user.nil?
 
-  # More info at:
-  # https://github.com/heartcombo/devise#omniauth
+      if @user.persisted?
+        complete_line_login
+      else
+        fail_line_login
+      end
+    end
 
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
+    private
 
-  # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
+    def notify_line_already_linked
+      redirect_to user_setting_path
+      set_flash_message(:alert, :failure, kind: 'LINE', reason: '他アカウントでLINE連携済みです')
+    end
 
-  # protected
+    def complete_line_login
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'LINE')
+    end
 
-  # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
+    def fail_line_login
+      session['devise.line_data'] = request.env['omniauth.auth'].except(:extra)
+      redirect_to new_user_registration_url
+      set_flash_message(:alert, :failure, kind: 'LINE', reason: 'LINE連携に失敗しました')
+    end
+  end
 end
