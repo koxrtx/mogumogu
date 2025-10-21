@@ -34,6 +34,12 @@ gem "geocoder"
 
 # ユーザー認証用Devise
 gem 'devise', '4.9.4'
+# LINEログイン
+gem 'omniauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-rails_csrf_protection'
+# 環境変数の管理 (LINE_CHANNEL_ID, SECRET etc.)は開発環境で記載
+
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"

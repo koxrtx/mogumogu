@@ -16,7 +16,7 @@ class SpotsController < ApplicationController
       flash[:thanks] = true
       redirect_to @spot
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
