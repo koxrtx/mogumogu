@@ -5,6 +5,14 @@ div class=page_classes
   .w-full.max-w-md.mx-auto.flex.flex-col
     = render "devise/shared/error_messages", resource: resource
 
+    -# LINEログイン
+    .mb-6
+      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex items-center justify-center w-full py-3 px-4 rounded-lg transition duration-200 font-bold shadow-lg transform hover:scale-105", style: "background: linear-gradient(135deg, #00B900 0%, #00C300 100%); color: white;" do
+        -# LINEロゴ
+        .text-xl.mr-3 💬
+        | LINEで新規登録
+
+
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
       = f.text_field :name, autofocus: true, placeholder: t("devise.forms.placeholders.name"), class: input_classes
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), class: input_classes
