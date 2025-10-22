@@ -19,6 +19,15 @@ module Myapp
     # Active Storage用の設定
     config.active_storage.variant_processor = :vips
 
+    # Zeitwerkからlibディレクトリを除外（カスタムOmniAuthストラテジー用）
+    config.autoload_paths -= %W(#{config.root}/lib)
+    
+    # または、特定のomniauth部分のみ除外
+    # Rails.autoloaders.main.ignore(Rails.root.join('lib', 'omniauth'))
+    
+    # 本番環境での早期読み込み
+    config.eager_load_paths += %W(#{config.root}/lib) if Rails.env.production?
+
     config.after_initialize do
       # 品質オプションをサポートしていない場合の対処
       ActiveStorage::Variant.class_eval do
