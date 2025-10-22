@@ -24,6 +24,11 @@ module Myapp
     
     # または、特定のomniauth部分のみ除外
     # Rails.autoloaders.main.ignore(Rails.root.join('lib', 'omniauth'))
+    config.to_prepare do
+      # Zeitwerkの干渉を完全に回避
+      strategy_file = Rails.root.join('lib', 'omniauth', 'strategies', 'line.rb')
+      load strategy_file if File.exist?(strategy_file)
+    end
     
     # 本番環境での早期読み込み
     config.eager_load_paths += %W(#{config.root}/lib) if Rails.env.production?
