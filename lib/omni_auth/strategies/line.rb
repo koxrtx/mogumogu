@@ -1,6 +1,6 @@
 require 'omniauth-oauth2'
 
-module Omniauth
+module OmniAuth
   module Strategies
     class Line < OmniAuth::Strategies::OAuth2
       # プロバイダー名
