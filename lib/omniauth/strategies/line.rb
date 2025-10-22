@@ -1,10 +1,10 @@
 require 'omniauth-oauth2'
 
-module OmniAuth
+module Omniauth
   module Strategies
     class Line < OmniAuth::Strategies::OAuth2
       # プロバイダー名
-      option :name, :line
+      option :name, 'line'
 
       # IDトークン, プロフィール情報, メールアドレスの取得権限を含める
       option :scope, 'openid profile email'
