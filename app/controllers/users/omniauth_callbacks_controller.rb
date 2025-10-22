@@ -1,8 +1,17 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+
+    Rails.logger.info "===OmniauthCallbacksController 読み込み完了==="
+
     skip_before_action :verify_authenticity_token, only: :line
 
+
+    # 認証処理
     def line
+
+      puts "=== line コールバック実行 ==="
+      puts "Auth info: #{request.env['omniauth.auth']}"
+    
       @user = User.from_omniauth(request.env['omniauth.auth'], current_user)
 
       notify_line_already_linked and return if current_user && @user.nil?
