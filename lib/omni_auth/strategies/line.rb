@@ -34,6 +34,7 @@ module OmniAuth
         }
       end
 
+      # LINEから返ってきたIDトークンを検証してユーザー情報を取得
       def raw_info
         @raw_info ||= verify_id_token
       end
