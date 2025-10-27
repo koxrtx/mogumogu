@@ -36,8 +36,7 @@ class User < ApplicationRecord
 
     success = current_user.update(
       provider: auth.provider,
-      uid: auth.uid,
-      line_notify: true
+      uid: auth.uid
     )
 
     success ? current_user : nil
@@ -52,7 +51,6 @@ class User < ApplicationRecord
       user.email = auth.info.email || "#{auth.uid}@line.example.com"
       user.name = auth.info.name || "LINE User"
       user.password = Devise.friendly_token[0, 20]
-      user.line_notify = true
     end
   end
 
@@ -73,6 +71,6 @@ class User < ApplicationRecord
 
   # LINE通知が有効か
   def line_notify_enabled?
-    line_connected? && line_notify?
+    line_connected?
   end
 end
