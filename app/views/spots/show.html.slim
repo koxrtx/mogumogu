@@ -75,7 +75,7 @@ div.page_classes
       div.flex.justify-center.mt-4
         - display_all_image_urls(@spot, size: :detail).each do |detail_url|
           - if detail_url.present?
-            img src=detail_url class="w-32 h-32 object-cover m-4" alt="#{@spot.name}の画像" loading="lazy"
+            img src=detail_url class="w-32 h-32 object-cover m-4 cursor-pointer hover:opacity-80 transition-opacity" alt="#{@spot.name}の画像" loading="lazy" onclick="openModal('#{detail_url}')"
 
         / モーダル部分
         #modal.hidden.fixed.inset-0.bg-black.bg-opacity-50.flex.items-center.justify-center

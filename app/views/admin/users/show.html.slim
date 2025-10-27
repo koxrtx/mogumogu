@@ -1,2 +1,6 @@
-h1 Admin::Users#show
-p Find me in app/views/admin/users/show.html.slim
+.admin-users
+  h1.text-2xl.font-bold.mb-4.text-center ユーザー詳細
+  / 戻るボタン
+  div.flex.justify-center.gap-2.mb-4
+    = link_to "一覧に戻る", admin_users_path, class: "bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+    = link_to "管理者ホームに戻る", admin_root_path, class: "bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600"

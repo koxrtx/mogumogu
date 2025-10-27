@@ -23,9 +23,6 @@ Rails.application.routes.draw do
 
   # 管理者画面
   namespace :admin do
-    get "spots/index"
-    get "spots/show"
-    get "spots/destroy"
     root to: "dashboard#index"
     # ユーザー管理
     resources :users, only: [:index, :show, :destroy] do
