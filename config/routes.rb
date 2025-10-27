@@ -20,4 +20,21 @@ Rails.application.routes.draw do
 
   # お店の情報投稿
   resources :spots, only: [:new, :create, :show]
+
+  # 管理者画面
+  namespace :admin do
+    get "spots/index"
+    get "spots/show"
+    get "spots/destroy"
+    root to: "dashboard#index"
+    # ユーザー管理
+    resources :users, only: [:index, :show, :destroy] do
+      # 個別のリソースに対するルート
+      member do
+        patch :update_role
+      end
+    end
+    resources :spots, only: [:index, :show, :destroy]
+    resources :inquiries, only: [:index, :show, :destroy]
+  end
 end
