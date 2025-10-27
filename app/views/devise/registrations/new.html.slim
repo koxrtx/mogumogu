@@ -5,13 +5,20 @@ div class=page_classes
   .w-full.max-w-md.mx-auto.flex.flex-col
     = render "devise/shared/error_messages", resource: resource
 
-    -# LINEログイン
-    .mb-6
-      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex items-center justify-center w-full py-3 px-4 rounded-lg transition duration-200 font-bold shadow-lg transform hover:scale-105", style: "background: linear-gradient(135deg, #00B900 0%, #00C300 100%); color: white;" do
-        -# LINEロゴ
-        .text-xl.mr-3 💬
-        | LINEで新規登録
+    / LINEログイン
+    .line-login-btn.flex.justify-center
+      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, style: "display:inline-block;" do
+        img src=asset_path("btn_login_base.png") alt="LINEでログイン" id="line-login-img"
 
+    script
+      | document.addEventListener("turbo:load", () => {
+      |   const img = document.getElementById('line-login-img');
+      |   if (!img) return;
+      |   img.addEventListener('mouseover', () => { img.src = "#{asset_path('btn_login_hover.png')}" });
+      |   img.addEventListener('mouseout', () => { img.src = "#{asset_path('btn_login_base.png')}" });
+      |   img.addEventListener('mousedown', () => { img.src = "#{asset_path('btn_login_press.png')}" });
+      |   img.addEventListener('mouseup', () => { img.src = "#{asset_path('btn_login_base.png')}" });
+      | });
 
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
       = f.text_field :name, autofocus: true, placeholder: t("devise.forms.placeholders.name"), class: input_classes
