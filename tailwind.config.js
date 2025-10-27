@@ -10,6 +10,6 @@ module.exports = {
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: false, // DaisyUIのテーマ機能をオフ
+    themes: ["light"],
   },
 }

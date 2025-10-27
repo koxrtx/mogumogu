@@ -3,6 +3,11 @@ div class=page_classes
   h1 class=page_title = t("devise.sessions.new.title")
 
   .w-full.max-w-md
+    / LINEログイン
+    = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex items-center justify-center w-full py-3 px-4 rounded-lg transition duration-200 font-bold shadow-lg transform hover:scale-105", style: "background: linear-gradient(135deg, #00B900 0%, #00C300 100%); color: white;" do
+      .text-xl.mr-3 💬
+      | LINEでログイン
+
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
       = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: input_classes
