@@ -1,14 +1,5 @@
-div.page_classes
-  h1 class=page_title = t("spots.new.title")
-
-  / 吹き出しメッセージ
-  - if flash[:thanks]
-    .flex.justify-center.mb-8
-      .relative.bg-yellow-100.border.border-yellow-300.rounded-2xl.p-4.shadow-md.max-w-md
-        h5.text-lg.font-semibold.mb-2 投稿ありがとうございました！🎉
-        p あなたの投稿が他のママパパの役に立ちます✨
-        / 吹き出しの三角
-        .absolute.left-6.-bottom-3.w-0.h-0.border-l-8.border-r-8.border-t-8.border-l-transparent.border-r-transparent.border-t-yellow-300
+.admin-users
+  h1.text-2xl.font-bold.mb-4.text-center 店舗詳細
 
   / 店舗情報枠
   .max-w-2xl.mx-auto.border.border-gray-300.rounded-xl.p-6.bg-sky-50.space-y-6
@@ -91,7 +82,8 @@ div.page_classes
           |   document.getElementById('modal').classList.add('hidden');
           | }
 
-    / 戻る or 編集ボタン
-    .mt-6.flex.space-x-4.justify-center
-      = link_to t('spot.buttons.new_spot'), new_spot_path, class: "flex-1 bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 text-center"
-      = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
+
+  / 戻るボタン
+  .mt-6.flex.space-x-4.justify-center.mb-8
+    = link_to "一覧に戻る", admin_spots_path, class: "bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+    = link_to "管理者ホームに戻る", admin_root_path, class: "bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600"

@@ -1,0 +1,31 @@
+.admin-users
+  h1.text-2xl.font-bold.mb-4.text-center 店舗管理
+
+  / 検索フォーム
+  = form_with url: admin_spots_path, method: :get, local: true, class: "flex items-center gap-2 mb-4 justify-center" do |f|
+    = f.text_field :search, placeholder: "名前または住所で検索", value: params[:search], class: "border rounded px-2 py-1 w-64"
+    = f.submit "検索", class: "bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+
+  / 戻るボタン
+  div.flex.justify-center.gap-2.mb-4
+    = link_to "一覧に戻る", admin_spots_path, class: "bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+    = link_to "管理者ホームに戻る", admin_root_path, class: "bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600"
+
+  / 店舗一覧テーブル
+  div.flex.justify-center
+    table.spots-table.w-full.max-w-4xl.border-collapse.border.border-gray-300.mx-auto
+      thead.bg-gray-100
+        tr
+          th.border.border-gray-300.px-3.py-2 ID
+          th.border.border-gray-300.px-3.py-2 店舗名
+          th.border.border-gray-300.px-3.py-2 住所
+          th.border.border-gray-300.px-3.py-2 アクション
+      tbody
+        - @spots.each do |spot|
+          tr.hover:bg-gray-50
+            td.border.border-gray-300.px-3.py-2 = spot.id
+            td.border.border-gray-300.px-3.py-2 = spot.name
+            td.border.border-gray-300.px-3.py-2 = spot.address
+            td.border.border-gray-300.px-3.py-2.flex.gap-2
+              = link_to "詳細", admin_spot_path(spot), class: "bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+              = link_to "削除", admin_spot_path(spot), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
