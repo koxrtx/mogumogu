@@ -70,7 +70,8 @@ document.addEventListener('turbo:load',async function(){
         content: `<div>
                     <strong>${spot.name}</strong><br>
                     ${spot.address}<br>
-                    ${buildFacilityInfo(spot)}
+                    ${buildFacilityInfo(spot)}<br>
+                    <a href="/spots/${spot.id}" style="color: red;">店舗の詳細はこちら</a>
                   </div>`
       });
       marker.addListener("click", () => infoWindowPost.open(map, marker));
