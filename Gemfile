@@ -17,8 +17,6 @@ gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 
-# vite追加実装
-gem 'vite_rails'
 gem "tailwindcss-rails"
 # Slim導入
 gem 'slim-rails'
