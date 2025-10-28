@@ -1,11 +1,11 @@
 div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.pt-10
 
-  = button_to "#", method: :get, class: "flex items-center justify-center w-64 px-8 py-4 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700" do
+  = button_to "#", method: :get, class: "flex items-center justify-center w-64 px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-lg" do
     | このアプリの使い方
 
-  button#current-location-btn.flex.items-center.justify-center.w-64.px-8.py-4.rounded-lg.shadow-lg.text-gray-700.font-bold.border-2.border-green-400.hover:bg-green-300 style="background-image: url('#{asset_path('map-pattern.png')}'); background-size: cover; background-position: center;"
+  button#current-location-btn.flex.items-center.justify-center.w-64.px-8.py-4.rounded-lg.shadow-lg.font-bold.border-2.border-green-500.hover:bg-green-100.bg-white.text-gray-800 style="background-image: url('#{asset_path('map-pattern.png')}'); background-size: cover; background-position: center;"
     | 現在地から探す
 
   - if current_user.present?
-    = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-64 px-8 py-4 bg-sky-500 text-white font-bold rounded-lg hover:bg-sky-600" do
+    = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-64 px-8 py-4 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 shadow-lg" do
       | お店の投稿

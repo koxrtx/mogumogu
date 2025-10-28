@@ -31,9 +31,9 @@ ja:
     sessions:
       new:
         title: "ログイン"
-      signed_in: "サインインしました。"
-      signed_out: "サインアウトしました。"
-      already_signed_out: "すでにサインアウト済みです。"
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウト済みです。"
 
     # フラッシュ・エラー
     confirmations:
