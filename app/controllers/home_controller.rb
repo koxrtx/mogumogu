@@ -22,9 +22,14 @@ class HomeController < ApplicationController
 
   def search
     # パラメータの検証・サニタイズ
-    query = params[:q]&.strip
-    latitude = params[:latitude]&.to_f  # 位置情報も受け取るように追加
+    query = params.dig(:q, :name_or_address_cont).to_s.strip
+    latitude = params[:latitude]&.to_f
     longitude = params[:longitude]&.to_f
+
+
+    Rails.logger.info "Search params: #{params.inspect}"
+    Rails.logger.info "Extracted query: #{query}"
+
 
     if query.blank?
       render json: []
@@ -33,7 +38,7 @@ class HomeController < ApplicationController
 
     # データベースからデータを取得
     spots = Spot.select(:id, :name, :address, :latitude, :longitude)
-                .where("name ILIKE ?", "%#{query}%")
+                .where("name ILIKE ? OR address ILIKE ?", "%#{query}%", "%#{query}%")
                 .limit(10)
                 .order(:name)
 
@@ -46,11 +51,18 @@ class HomeController < ApplicationController
 
     # データを整形してJSONで返す
     results = spots.map do |spot|
-      result = {
-        label: "#{spot.name} - #{spot.address}",
-        value: spot.name,
-        id: spot.id
-      }
+    label = if spot.name.include?(query)
+      spot.name
+    elsif spot.address.include?(query)
+      spot.address
+    else
+      "#{spot.name} - #{spot.address}"
+    end
+
+    result = {
+      label: label,
+      value: label
+    }
 
     # 距離情報を追加
       if latitude.present? && longitude.present? && spot.latitude.present?

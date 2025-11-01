@@ -2,11 +2,25 @@ div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.p
 
   / 飲食店検索エリア
   div.flex.flex-col.items-center.space-y-6
-    / 検索フォーム
-    = search_form_for @q, url: spots_path, method: :get do |f|
-      .flex.items-center.w-full.max-w-lg.space-x-2
-        = f.search_field :name_cont, placeholder: "店舗名、住所、電話番号", class: "flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent shadow-sm text-gray-700", data: { autocomplete_target: "input" }
-        = f.submit "検索", class: "px-6 py-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 shadow-lg transition-colors duration-200"
+    / オートコンプリート機能の追加
+    .relative.w-full.max-w-lg(
+      data-controller="autocomplete"
+      data-autocomplete-url-value="/search"
+      data-autocomplete-query-param-value="q[name_or_address_cont]"
+      data-autocomplete-min-length-value="2"
+    )
+      = search_form_for @q, url: spots_path, method: :get do |f|
+        .flex.items-center.w-full.space-x-2
+          = f.search_field :name_or_address_cont,
+              placeholder: "店舗名、住所で検索",
+              class: "flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent shadow-sm text-gray-700", 
+              data: { autocomplete_target: "input", action: "input->autocomplete#search"}
+          = f.submit "検索", class: "px-6 py-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 shadow-lg transition-colors duration-200"
+
+      / オートコンプリート結果表示エリア
+      ul.absolute.top-full.left-0.right-0.bg-white.border.border-gray-300.rounded-lg.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
+        data-autocomplete-target="results"
+      )
 
   / 検索結果表示エリア
   .w-full.max-w-6xl.px-2
@@ -45,7 +59,7 @@ div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.p
 
 
     - elsif params[:q].present?
-      .text-center.py-8.bg-white.rounded-lg.shadow-md.mt-6
+      .text-center.py-4.bg-white.shadow-md.mt-4.rounded-lg.max-w-md.mx-auto
         p.text-gray-500.text-lg 「#{params[:q][:name_cont]}」の検索結果が見つかりませんでした。
         p.text-gray-400.text-sm.mt-2 別のキーワードで検索してみてください。
 

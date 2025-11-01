@@ -5,6 +5,10 @@ export default class extends Controller {
   static values = { url: String }
 
   async search() {
+
+    console.log("searchメソッド呼ばれた")
+
+
     const query = this.inputTarget.value.trim()
     
     if (query.length < 2) {
@@ -13,13 +17,20 @@ export default class extends Controller {
     }
 
     try {
-      const response = await fetch(`${this.urlValue}?q=${query}`)
-      const results = await response.json()
-      this.displayResults(results)
-    } catch (error) {
-      console.error("検索エラー:", error)
-    }
+    // Rails Ransack用に q[name_cont] パラメータで送信
+    const url = new URL(this.urlValue, window.location.origin)
+    url.searchParams.append("q[name_or_address_cont]", query)
+
+    const response = await fetch(url)
+    const results = await response.json()
+
+    console.log("検索結果:", results)
+
+    this.displayResults(results)
+  } catch (error) {
+    console.error("検索エラー:", error)
   }
+}
 
   displayResults(results) {
     this.resultsTarget.innerHTML = ""
@@ -30,7 +41,6 @@ export default class extends Controller {
       li.addEventListener("click", () => {
         this.inputTarget.value = result.value
         this.hideResults()
-        this.inputTarget.form.submit()
       })
       this.resultsTarget.appendChild(li)
     })
