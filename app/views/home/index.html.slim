@@ -1,7 +1,7 @@
 div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.pt-10
 
   / 飲食店検索エリア
-  div.flex.flex-col.items-center.space-y-6
+  div.relative.w-full.max-w-lg.bg-white.rounded-xl.shadow-lg.p-6
     / オートコンプリート機能の追加
     .relative.w-full.max-w-lg(
       data-controller="autocomplete"
@@ -13,14 +13,14 @@ div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.p
         .flex.items-center.w-full.space-x-2
           = f.search_field :name_or_address_cont,
               placeholder: "店舗名、住所で検索",
-              class: "flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent shadow-sm text-gray-700", 
+              class: "flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent shadow-sm text-gray-700",
               data: { autocomplete_target: "input", action: "input->autocomplete#search"}
           = f.submit "検索", class: "px-6 py-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 shadow-lg transition-colors duration-200"
 
-      / オートコンプリート結果表示エリア
-      ul.absolute.top-full.left-0.right-0.bg-white.border.border-gray-300.rounded-lg.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
-        data-autocomplete-target="results"
-      )
+        / オートコンプリート結果表示エリア
+        ul.absolute.top-full.left-0.right-0.bg-white.border.border-gray-300.rounded.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
+          data-autocomplete-target="results"
+        )
 
   / 検索結果表示エリア
   .w-full.max-w-6xl.px-2
@@ -31,7 +31,7 @@ div.flex.flex-col.items-center.justify-start.min-h-screen.space-y-4.bg-sky-200.p
 
       .grid.grid-cols-2.sm:grid-cols-2.lg:grid-cols-3.xl:grid-cols-5.gap-4
         - @spots.each do |spot|
-          = link_to spot_path(spot), class: "block border-2 border-sky-700 rounded-sm p-4 bg-sky-100 hover:bg-sky-200 hover:shadow-lg cursor-pointer transition duration-200" do
+          = link_to spot_path(spot), class: "block border-2 border-sky-700 rounded-sm p-4 bg-sky-50 hover:bg-sky-100 hover:shadow-lg cursor-pointer transition duration-200" do
             h2.text-sm.font-bold.mb-2 = spot.name
             p.text-sm.text-gray-600.mb-3 = spot.address
             / 子ども設備情報
