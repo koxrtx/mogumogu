@@ -102,4 +102,16 @@ end
     end
   end
 
+   # Ransackで検索可能な属性を明示的に指定
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      name
+      address
+    ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
 end
