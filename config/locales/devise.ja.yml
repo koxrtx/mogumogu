@@ -10,6 +10,7 @@ ja:
       buttons:
         register: "登録"
         login: "ログイン"
+        send_reset: "パスワードリセット送信"
 
     # 各ページのi18n化
     registrations:
@@ -27,13 +28,14 @@ ja:
       update_needs_confirmation: "アカウント情報を更新しましたが、新しいメールアドレスを確認する必要があります。メールを確認してください。"
       updated: "アカウント情報を更新しました。"
       updated_but_not_signed_in: "パスワードを変更したため、再度サインインしてください。"
-
     sessions:
       new:
         title: "ログイン"
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
       already_signed_out: "すでにログアウト済みです。"
+    shared_links:
+      forgot_password: "パスワードをお忘れの方"
 
     # フラッシュ・エラー
     confirmations:
@@ -65,6 +67,11 @@ ja:
       send_instructions: "数分以内にアカウントロック解除用のメールが届きます。"
       send_paranoid_instructions: "アカウントが存在する場合、解除用メールが届きます。"
       unlocked: "アカウントロックを解除しました。サインインしてください。"
+    passwords:
+      send_instructions: "数分以内にパスワード再設定用のメールが届きます"
+      send_paranoid_instructions: "もしこのメールアドレスが登録されていれば、パスワード再設定用のリンクが届きます"
+      updated: "パスワードを変更しました"
+      updated_not_active: "パスワードを変更しました"
 
   errors:
     format: "%{attribute}%{message}"

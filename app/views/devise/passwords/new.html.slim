@@ -1,16 +1,17 @@
 - #パスワード再設定リクエスト画面
-h2 Forgot your password?
 
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+div class=page_classes
+  h1 class=page_title = t("devise.shared_links.forgot_password")
 
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .w-full.max-w-md.mx-auto
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-full bg-sky-200 p-6 rounded" }) do |f|
+      = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
 
-  .actions
-    = f.submit "Send me reset password instructions"
+      .actions
+        = f.submit t("devise.forms.buttons.send_reset"), class: button_classes
 
-= render "devise/shared/links"
+      .mt-6.flex.space-x-4.justify-center
+        = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
 
+
+  = render "devise/shared/links"
