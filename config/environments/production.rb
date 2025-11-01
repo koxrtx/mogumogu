@@ -59,10 +59,17 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  # ActionMailer 設定（Mailgun）
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],    # Mailgun APIキー
+    domain: ENV['MAILGUN_DOMAIN']       # 送信に使うドメイン
+  }
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  # メール内リンクの host 設定
+  config.action_mailer.default_url_options = { host: 'mogumogumap.onrender.com', protocol: 'https' }
+  # 本番で送信エラー確認するなら
+  config.action_mailer.raise_delivery_errors = true
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {

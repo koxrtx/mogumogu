@@ -34,4 +34,9 @@ Rails.application.routes.draw do
     resources :spots, only: [:index, :show, :destroy]
     resources :inquiries, only: [:index, :show, :destroy]
   end
+
+  # 開発環境でメール確認
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

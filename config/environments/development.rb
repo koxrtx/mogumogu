@@ -33,6 +33,10 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = "localhost:3000"
 
+  # メール送信設定
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+
   Rails.application.config.after_initialize do
     ActiveStorage::Current.url_options = Rails.application.routes.default_url_options
   end
@@ -46,7 +50,7 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  # Set localhost to be used by links generated in mailer templates.
+  # メーラーで生成されるリンクに使用するホスト名を設定
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Print deprecation notices to the Rails logger.

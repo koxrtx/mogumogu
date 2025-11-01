@@ -43,6 +43,8 @@ gem 'omniauth-rails_csrf_protection'
 # ページ
 gem 'kaminari'
 
+# メール送信API
+gem 'mailgun-ruby', '~>1.4.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -89,6 +91,8 @@ group :development do
   gem "web-console"
   # 既存のerbファイルをslim用に変換
   gem 'html2slim'
+  # 送信されるメール確認
+  gem 'letter_opener_web'
 end
 
 group :test do

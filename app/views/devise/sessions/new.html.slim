@@ -22,6 +22,11 @@ div class=page_classes
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
       = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: input_classes
 
+      - if devise_mapping.rememberable?
+        .field
+        = f.check_box :remember_me
+        = f.label :remember_me, "ログイン状態を保持する"
+        
       .actions
         = f.submit t("devise.forms.buttons.login"), class: button_classes
 
@@ -30,9 +35,6 @@ div class=page_classes
           | アカウントをお持ちでない方
           br.mt-4
           = link_to "ユーザー登録", terms_agreement_path, class: "block w-full bg-sky-700 text-white py-2 rounded hover:bg-sky-600 transition"
-    /- - if devise_mapping.rememberable?
-      - .field
-        - = f.check_box :remember_me
-        - = f.label :remember_me
 
-  -#= render "devise/shared/links"
+
+    = render "devise/shared/links"

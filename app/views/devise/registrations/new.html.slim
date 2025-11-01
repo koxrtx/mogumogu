@@ -29,6 +29,7 @@ div class=page_classes
       .actions
         = f.submit t("devise.forms.buttons.register"), class: button_classes
 
-  -# p.text-center.mt-4
-  -#  | アカウントを持っている場合は
-  -#  = link_to "ログイン", new_session_path(resource_name), class: "text-blue-500 hover:underline"
+    p.text-center.mt-4
+      | アカウントを持っている場合は
+      br.mt-4
+      = link_to "ログイン", new_session_path(resource_name), class: "text-blue-500 hover:underline"
