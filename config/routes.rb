@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   # ホーム画面
   root "home#index"
+  # オートコンプリート用
+  get '/search', to: 'home#search'
+  get 'spots', to: 'home#index'
 
   # 利用規約画面
   get "/terms", to: "pages#terms"

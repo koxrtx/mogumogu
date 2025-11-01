@@ -43,6 +43,9 @@ gem 'omniauth-rails_csrf_protection'
 # ページ
 gem 'kaminari'
 
+# 検索機能
+gem 'ransack'
+
 # メール送信API
 gem 'mailgun-ruby', '~>1.4.0'
 
