@@ -26,3 +26,7 @@ ja:
   maps:
     search:
       title: "現在地検索結果"
+  users:
+    mypage:
+      title: "マイページ"
+      edit_title: "アカウント編集"

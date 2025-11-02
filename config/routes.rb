@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get '/search', to: 'home#search'
   get 'spots', to: 'home#index'
 
+  # マイページ
+  get '/mypage', to: 'users#mypage', as: :mypage
+  get '/mypage/edit', to: 'users#edit_mypage', as: :edit_mypage
+  patch '/mypage', to: 'users#update_mypage', as: :update_mypage
+
   # 利用規約画面
   get "/terms", to: "pages#terms"
   # 利用規約同意画面

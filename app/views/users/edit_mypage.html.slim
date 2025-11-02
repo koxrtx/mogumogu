@@ -1,0 +1,17 @@
+-# 名前変更画面
+div class="page_classes max-w-md mx-auto p-6 space-y-6"
+
+  h1 class="text-3xl font-bold text-center text-gray-800" = t("users.mypage.edit_title")
+
+  -# 名前編集カード
+  .edit-card class="bg-white shadow-lg rounded-xl p-6 flex flex-col gap-4"
+
+    p class="text-gray-500 text-sm" 名前を編集
+
+    = form_with model: @user, url: update_mypage_path, method: :patch, local: true, html: { class: "flex flex-col gap-4" } do |f|
+      = f.text_field :name, class: "input input-bordered w-full text-lg", value: @user.name, placeholder: "新しい名前を入力"
+      
+      = f.submit "変更を保存", class: "btn btn-primary w-full"
+
+  .mt-6.flex.space-x-4.justify-center
+    = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"

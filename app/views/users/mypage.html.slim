@@ -1,0 +1,19 @@
+-# マイページ画面
+div class="page_classes max-w-3xl mx-auto p-4 space-y-6"
+
+  h1 class="page_title text-3xl font-bold text-center mb-6" = t("users.mypage.title")
+
+  -# 基本情報表示（カード風）
+  .profile-section class="bg-white shadow-md rounded-lg p-6 flex flex-col gap-4 max-w-md mx-auto"
+    div class="flex justify-between items-center"
+      div
+        p class="text-gray-500 text-sm" 名前
+        p class="text-xl font-semibold text-gray-800" = @user.name
+      = link_to "名前を変更", edit_mypage_path, class: "btn btn-primary"
+
+  -# メールアドレス・パスワード変更リンク（幅制限）
+  .security-section class="bg-white shadow-md rounded-lg p-6 flex flex-col gap-4 max-w-md mx-auto"
+    h2 class="text-gray-500 text-sm" アカウント設定
+    = link_to "メールアドレス・パスワード変更",
+              edit_user_registration_path,
+              class: "btn btn-secondary max-w-xs"
