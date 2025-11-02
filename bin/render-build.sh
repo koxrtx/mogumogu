@@ -3,6 +3,8 @@ set -o errexit
 
 echo "🚀 Starting Render build process..."
 
+
+
 # Gemのインストール
 echo "📦 Installing gems..."
 bundle install
