@@ -450,9 +450,9 @@ chownr@^3.0.0:
   integrity sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==
 
 daisyui@^5.3.10:
-  version "5.3.10"
-  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-5.3.10.tgz#36d386fd02c2eb38934fbcc06a54fadb9421e0f1"
-  integrity sha512-vmjyPmm0hvFhA95KB6uiGmWakziB2pBv6CUcs5Ka/3iMBMn9S+C3SZYx9G9l2JrgTZ1EFn61F/HrPcwaUm2kLQ==
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-5.4.2.tgz#d6abc98370f3b975f35e674c2b3af94a5423fdfb"
+  integrity sha512-yLoRFlx5hKvn5ODpT7CVb9oU/fAF2X1BGuLmVZo4LN33r7hcmO8v+gcxB6l33mcMas5jut3lZwHj9erqbMvvEA==
 
 detect-libc@^1.0.3:
   version "1.0.3"

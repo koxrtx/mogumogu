@@ -1,48 +1,53 @@
 -# 会員情報編集画面
-h2 Edit #{resource_name.to_s.humanize}
+div class="page_classes max-w-md mx-auto p-4 space-y-6"
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+  h1 class="page_title text-3xl font-bold text-center text-gray-800 mb-6" = t("devise.registrations.edit.title")
 
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "bg-sky-50 shadow-lg rounded-xl p-6 flex flex-col gap-4" }) do |f|
+    = render "devise/shared/error_messages", resource: resource
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: #{resource.unconfirmed_email}
+    -# メールアドレス
+    .field.flex.flex-col.gap-1
+      = f.label :email, class: "text-gray-500 text-sm"
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full"
 
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      br
-      em
-        | #{@minimum_password_length} characters minimum
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      div.text-sm.text-yellow-600
+        | Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+    -# パスワード
+    .field.flex.flex-col.gap-1
+      = f.label :password, class: "text-gray-500 text-sm"
+      span.text-gray-400.text-xs (変更しない場合は空欄)
+      = f.password_field :password, autocomplete: "new-password", class: "input input-bordered w-full"
 
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "current-password"
+      - if @minimum_password_length
+        em.text-gray-400.text-xs
+          | 最低 #{@minimum_password_length} 文字
 
-  .actions
-    = f.submit "Update"
+    -# パスワード確認
+    .field.flex.flex-col.gap-1
+      = f.label :password_confirmation, class: "text-gray-500 text-sm"
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-full"
 
-h3 Cancel my account
+    -# 現在のパスワード
+    .field.flex.flex-col.gap-1
+      = f.label :current_password, class: "text-gray-500 text-sm"
+      span.text-gray-400.text-xs (変更を保存するには現在のパスワードが必要)
+      = f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered w-full"
 
-div
-  | Unhappy? 
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete
+    -# 送信ボタン
+    .actions
+      = f.submit "変更を保存", class: "bg-sky-500 text-white px-6 py-3 rounded-lg hover:bg-sky-600 font-semibold w-full"
 
-= link_to "Back", :back
+
+  -# アカウント削除セクション
+  .mt-6.flex.space-x-2.justify-center
+    = link_to "アカウントを削除",
+        registration_path(resource_name),
+        data: { turbo_method: :delete, turbo_confirm: "アカウントを削除するとデータは元に戻せません。本当に削除しますか？" },
+        class: "flex-1 bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 text-center"
+
+  .mt-6.flex.space-x-2.justify-center
+    = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
+

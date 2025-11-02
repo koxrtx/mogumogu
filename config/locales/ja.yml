@@ -8,6 +8,7 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード確認"
+        current_password: "現在のパスワード"
       spot:
         name: "お店の名前"
         address: "住所"
@@ -26,3 +27,7 @@ ja:
   maps:
     search:
       title: "現在地検索結果"
+  users:
+    mypage:
+      title: "マイページ"
+      edit_title: "アカウント編集"
