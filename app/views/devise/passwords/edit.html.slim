@@ -3,7 +3,7 @@ div class=page_classes
   h1 class=page_title パスワード再設定
 
   .w-full.max-w-md.mx-auto
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "w-full bg-sky-200 p-6 rounded" }) do |f|
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "w-full p-6 rounded" }) do |f|
       = render "devise/shared/error_messages", resource: resource
       = f.hidden_field :reset_password_token
 

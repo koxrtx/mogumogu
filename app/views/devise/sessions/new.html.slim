@@ -2,39 +2,35 @@
 div class=page_classes
   h1 class=page_title = t("devise.sessions.new.title")
 
-  .w-full.max-w-md.mx-auto
-    / LINEログイン
-    .line-login-btn.flex.justify-center
-      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, style: "display:inline-block;" do
-        img src=asset_path("btn_login_base.png") alt="LINEでログイン" id="line-login-img"
+  .w-full.max-w-sm.mx-auto.px-4
+    / LINEログイン（公式画像 + テキスト横並び版）
+    .line-login-container.mb-4
+      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "line-login-button-official flex items-center bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden", id: "line-login-btn", data: { base_image: asset_path('btn_base.png'), hover_image: asset_path('btn_hover.png'), press_image: asset_path('btn_press.png') } do
+        / 左側：LINE公式画像
+        .flex-shrink-0
+          = image_tag "btn_base.png", alt: "LINE", class: "h-12 w-auto block", id: "line-icon-official"
+        / 右側：テキスト部分（緑背景に変更）
+        .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
+          span.text-white.font-medium.text-sm LINEでログイン
 
-    script
-      | document.addEventListener("turbo:load", () => {
-      |   const img = document.getElementById('line-login-img');
-      |   if (!img) return;
-      |   img.addEventListener('mouseover', () => { img.src = "#{asset_path('btn_login_hover.png')}" });
-      |   img.addEventListener('mouseout', () => { img.src = "#{asset_path('btn_login_base.png')}" });
-      |   img.addEventListener('mousedown', () => { img.src = "#{asset_path('btn_login_press.png')}" });
-      |   img.addEventListener('mouseup', () => { img.src = "#{asset_path('btn_login_base.png')}" });
-      | });
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full p-4 border-2 border-pink-300 bg-pink-50 rounded-lg space-y-3" }) do |f|
+      = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: "w-full px-3 py-2.5 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"
 
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
-      = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
-      = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: input_classes
+      = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: "w-full px-3 py-2.5 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"
 
       - if devise_mapping.rememberable?
-        .field
-        = f.check_box :remember_me
-        = f.label :remember_me, "ログイン状態を保持する"
-        
-      .actions
-        = f.submit t("devise.forms.buttons.login"), class: button_classes
+        .field.flex.items-center.space-x-2.mt-1
+          = f.check_box :remember_me, class: "rounded border-pink-300 text-pink-500 focus:ring-pink-400 w-4"
+          = f.label :remember_me, "ログイン状態を保持する", class: "text-xs text-gray-700"
+
+      .actions.space-y-3.mt-1
+        = f.submit t("devise.forms.buttons.login"), class: "w-full py-2.5 bg-pink-300 text-pink-800 font-bold rounded-lg border-2 border-pink-400 hover:bg-pink-400 hover:text-white transition-colors duration-200 text-sm"
 
         / ユーザー登録へのリンク
-        p.text-center.mt-4
-          | アカウントをお持ちでない方
-          br.mt-4
-          = link_to "ユーザー登録", terms_agreement_path, class: "block w-full bg-sky-700 text-white py-2 rounded hover:bg-sky-600 transition"
+        .text-center.mt-2.space-y-2
+          p.text-gray-600.text-xs アカウントをお持ちでない方
+          = link_to "ユーザー登録", terms_agreement_path, class: "block w-full bg-pink-200 text-pink-800 py-2.5 rounded-lg border-2 border-pink-300 hover:bg-pink-300 hover:text-white font-semibold transition-colors duration-200 text-sm"
 
-
+  / その他のリンク（パスワード忘れなど）
+  .mt-4.text-center
     = render "devise/shared/links"

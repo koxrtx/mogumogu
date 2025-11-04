@@ -20,7 +20,7 @@ div class=page_classes
       |   img.addEventListener('mouseup', () => { img.src = "#{asset_path('btn_login_base.png')}" });
       | });
 
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full bg-sky-200 p-6 rounded" }) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full p-6 rounded" }) do |f|
       = f.text_field :name, autofocus: true, placeholder: t("devise.forms.placeholders.name"), class: input_classes
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), class: input_classes
       = f.password_field :password, placeholder: t("devise.registrations.new.placeholders.password"), class: input_classes

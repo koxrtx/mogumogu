@@ -4,88 +4,122 @@
   height: 50px;
 }
 
+/* 横スクロール防止 */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+
 .hamburger {
   position: absolute;
-  left: 20px;
+  right: 20px;
+  top: 12px; /* かなり上寄り */
   z-index: 100;
   width: 48px;
   height: 48px;
   border: none;
-  background: transparent;
+  background-color: #fde68a; /* amber-200 */
+  border-radius: 8px; /* 角丸 */
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+  background-color: #fcd34d; /* amber-300 */
+}
+
+.hamburger__lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 12px; /* 3本線の高さ調整 */
+  width: 20px;
 }
 
 .hamburger__line {
-  position: absolute;
-  left: 11px;
-  width: 26px;
+  display: block;
   height: 2px;
-  background-color:#004780;
-  transition: all .4s;
+  width: 100%;
+  background-color: white; /* 白色に変更 */
+  border-radius: 1px;
+  transition: all 0.4s ease;
 }
 
-.hamburger__line:nth-of-type(1) {
-  top: 8px;
-}
-.hamburger__line:nth-of-type(2) {
-  top:17px;
-}
-.hamburger__line:nth-of-type(3) {
-  top: 26px;
+.hamburger__text {
+  font-size: 8px;
+  font-weight: bold;
+  color: white; /* 白色 */
+  margin-top: 2px;
+  letter-spacing: 0.5px;
 }
 
-/* メニューオープン時 */
+/* メニューオープン時のアニメーション */
 .hamburger.active .hamburger__line:nth-of-type(1) {
-  transform: translateY(9px) rotate(-45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 .hamburger.active .hamburger__line:nth-of-type(2) {
   opacity: 0;
 }
 .hamburger.active .hamburger__line:nth-of-type(3) {
-  transform: translateY(-9px) rotate(45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
+/* ナビゲーション部分 */
 .nav {
   position: fixed;
-  top: 65px;
-  left: 0;
-  width: 300px;
-  height: 100vh;
-  background-color: #b5dcf7;
-  box-shadow: 2px 0 4px rgba(0,0,0,.1);
-  transform: translateX(-100%);
-  transition: transform .4s;
+  top: 0; /* 上端から開始 */
+  right: -320px; /* 右側に完全に隠す！ */
+  width: 320px; /* 幅を320pxに固定 */
+  height: auto;
+  background-color: #fde68a; /* 白っぽい背景 */
+  backdrop-filter: blur(10px); /* ブラー効果でおしゃれに */
+  box-shadow: 0 2px 8px rgba(0,0,0,.1); /* 下向きの影 */
+  overflow: hidden; /* はみ出し部分を隠す */
+  transition: right 0.4s ease; /*  rightプロパティをアニメーション */
   z-index: 90;
+  
 }
 
+
+
+
 .nav.active {
-  transform: translateX(0);
+  right: 0; /* アクティブ時は右端に移動 */
 }
 
 .nav__list {
   margin: 0;
-  padding: 30px 0 0;
+  padding: 90px 0 30px; /*  上部にヘッダー分の余白を追加 */
   list-style: none;
-}
-
-.nav__item + .nav__item {
-  border-top: 1px solid #54bbf7; /* 各リンク間に線 */
-  padding: 15px 50px;
-}
-
-.nav__item:first-child {
-  border-top: none; /* 一番上だけ線を消す */
-  padding: 15px 50px;
+  height: auto; /* 自動調整に変更 */
 }
 
 .nav__item {
-  padding: 0 20px;
+  padding: 12px;
+  background-color: #fde68a;
 }
+
+.nav__item:hover {
+  background-color: #f2f8da;
+  transform: translateX(-5px); /* ホバー時に左にスライド */
+  transition: all 0.3s ease;
+}
+
 
 .nav__link {
   display: block;
-  padding: 80px 0;
+  width: 100%; 
+  padding: 35px 25px;
   color: #333;
   text-decoration: none;
+  font-size: 20px; /* フォントサイズも追加 */
   border-bottom: 1px solid #eee;
+  text-align: left; /* 左揃え */
 }
