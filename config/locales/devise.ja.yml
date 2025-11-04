@@ -72,6 +72,9 @@ ja:
       send_paranoid_instructions: "もしこのメールアドレスが登録されていれば、パスワード再設定用のリンクが届きます"
       updated: "パスワードを変更しました"
       updated_not_active: "パスワードを変更しました"
+    omniauth_callbacks:
+      success: "%{kind}で認証しました。"
+      failure: "%{kind}での認証に失敗しました。"
 
   errors:
     format: "%{attribute}%{message}"

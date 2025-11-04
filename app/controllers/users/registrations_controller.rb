@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :check_line_user, only: [:update]
+  
   def create
     super do |resource|
       if resource.persisted? && session[:terms_agreement]
@@ -10,6 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  # LINEユーザーはメールアドレス・パスワード変更禁止
+  def check_line_user
+    if resource.line_user? && (account_update_params[:email].present? || account_update_params[:password].present?)
+      redirect_to edit_user_registration_path, alert: 'LINEユーザーはメールアドレス・パスワードを変更できません'
+    end
+  end
 
   # create!失敗した時の例外処理作る予定
   # ユーザーと同意情報を agreements テーブルに保存
