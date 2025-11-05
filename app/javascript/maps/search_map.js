@@ -38,7 +38,7 @@ document.addEventListener('turbo:load',async function(){
   
   map = new google.maps.Map(mapElement, {
     center: { lat: lat, lng: lng },
-    zoom: 15,
+    zoom: 13,
     mapId: mapIdValue
   });
   

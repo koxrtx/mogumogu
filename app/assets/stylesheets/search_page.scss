@@ -1,0 +1,18 @@
+/* 検索ページ専用スタイル */
+.search-container {
+  /* 画面全体にふんわりピンクのグラデーション背景 */
+  background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
+  /* ページ全体を少なくとも1画面分の高さにする */
+  min-height: 100vh;
+}
+
+
+/* バウンドの動き定義 */
+@keyframes cute-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

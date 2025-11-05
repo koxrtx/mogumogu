@@ -1,7 +1,7 @@
 module ApplicationHelper
   # 各ページの最初の設定
   def page_classes
-    "min-h-screen bg-sky-200 flex flex-col items-center justify-start"
+    "min-h-screen  flex flex-col items-center justify-start"
   end
   # タイトル
   def page_title

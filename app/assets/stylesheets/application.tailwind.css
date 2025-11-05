@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+@import "./maps_search.scss";
+@import "./search_page..scss";
+
+
+:root {
+  --font-rounded: "M PLUS Rounded 1c", sans-serif; /* これ追加して可愛いフォントも定義可能 */
+}

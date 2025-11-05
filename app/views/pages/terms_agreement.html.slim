@@ -1,15 +1,20 @@
 div class=page_classes
-  .w-full.max-w-md.mx-auto
-    h1 class=page_title = t("pages.terms_agreement.title")
+  .w-full.max-w-xs.mx-auto.px-4
+    h1.text-center.text-lg.font-bold.text-pink-600.mb-6 = t("pages.terms_agreement.title")
 
-    p.mb-4
-      | ユーザー登録には利用規約への同意が必要です。
-    .w-full.max-w-md.terms-box.border.border-blue-300.rounded.bg-blue-300.p-4.mb-4.flex.justify-center.items-center
-      = link_to '利用規約はこちら', terms_path, target: '_blank', rel: 'noopener'
+    .bg-pink-50.rounded-xl.p-4.shadow-sm.border.border-pink-200
+      p.text-center.text-sm.text-pink-700.mb-4.leading-relaxed
+        | ユーザー登録には
+        br
+        | 利用規約への同意が必要です。
+      
+      .w-full.bg-pink-200.border.border-pink-300.rounded-lg.p-3.mb-4.text-center.shadow-sm
+        = link_to '利用規約はこちら', terms_path, target: '_blank', rel: 'noopener', class: 'text-pink-800 font-medium text-sm hover:text-pink-900 transition-colors duration-200'
 
-    = form_with url: new_user_registration_path, method: :get do |f|
-      .form-check.flex.items-center.justify-center.mb-4
-        = f.check_box :agreed, id: 'agreement_check'
-        = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check'
-      = f.submit t("pages.terms_agreement.submit_button"), class: button_classes, id: 'register_button'
-
+      = form_with url: new_user_registration_path, method: :get, class: 'space-y-4' do |f|
+        .form-check.flex.items-center.justify-center.mb-4
+          = f.check_box :agreed, id: 'agreement_check', class: 'rounded border-pink-300 text-pink-500 focus:ring-pink-400 w-4 h-4'
+          = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check', class: 'ml-2 text-sm text-pink-700 cursor-pointer'
+        
+        .text-center
+          = f.submit t("pages.terms_agreement.submit_button"), class: "w-full py-3 px-4 bg-pink-300 text-pink-800 font-bold rounded-lg border-2 border-pink-400 hover:bg-pink-400 hover:text-white transition-colors duration-200 text-sm shadow-sm", id: 'register_button'
