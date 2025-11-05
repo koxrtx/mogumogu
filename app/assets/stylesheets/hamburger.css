@@ -2,6 +2,7 @@
   position: relative;
   padding: 20px;
   height: 50px;
+  background: linear-gradient(135deg, #fdf2f8, #fce7f3); /* 薄ピンクのグラデーション */
 }
 
 /* 横スクロール防止 */
@@ -9,19 +10,20 @@ html, body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  font-family: 'Hiragino Maru Gothic ProN', 'ヒラギノ丸ゴ ProN W4', sans-serif; /* 可愛いフォント */
 }
 
-
 .hamburger {
-  position: absolute;
-  right: 20px;
-  top: 12px; /* かなり上寄り */
+  position: absolute; /* ← これが抜けています！ */
+  top: 12px; /* ← 上からの位置も指定 */
   z-index: 100;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
+  right: 20px;
   border: none;
-  background-color: #fde68a; /* amber-200 */
-  border-radius: 8px; /* 角丸 */
+  background: white;
+  background: linear-gradient(135deg, #f9a8d4, #f472b6); /* ピンクのグラデーション */
+  border-radius: 50%; /* 完全な円形 */
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -29,35 +31,42 @@ html, body {
   justify-content: center;
   gap: 2px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ピンクの影 */
+  border: 2px solid #f9a8d4; /* 薄ピンクの境界線 */
 }
 
 .hamburger:hover {
-  background-color: #fcd34d; /* amber-300 */
+  border-color: #f472b6;
+  background: linear-gradient(135deg, #f472b6, #ec4899); /* ホバー時は濃いピンク */
+  transform: scale(1.05); /* 少し大きくなる */
+  box-shadow: 0 6px 16px rgba(244, 114, 182, 0.4);
 }
 
 .hamburger__lines {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 12px; /* 3本線の高さ調整 */
+  height: 12px;
   width: 20px;
 }
 
 .hamburger__line {
   display: block;
-  height: 2px;
-  width: 100%;
-  background-color: white; /* 白色に変更 */
-  border-radius: 1px;
-  transition: all 0.4s ease;
+  height: 2px; /* 少し太く */
+  width: 20px;
+  background-color: #fdfdfd;
+  border-radius: 9999px; /* より丸く */
+  transition: all 0.2s;
+  margin: 1px 0;
 }
 
 .hamburger__text {
-  font-size: 8px;
+  font-size: 9px;
   font-weight: bold;
-  color: white; /* 白色 */
-  margin-top: 2px;
-  letter-spacing: 0.5px;
+  color: white;
+  margin-top: 3px;
+  letter-spacing: 0.8px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* 文字に影 */
 }
 
 /* メニューオープン時のアニメーション */
@@ -71,55 +80,146 @@ html, body {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ナビゲーション部分 */
+/*  ナビゲーション部分 */
 .nav {
   position: fixed;
-  top: 0; /* 上端から開始 */
-  right: -320px; /* 右側に完全に隠す！ */
-  width: 320px; /* 幅を320pxに固定 */
-  height: auto;
-  background-color: #fde68a; /* 白っぽい背景 */
-  backdrop-filter: blur(10px); /* ブラー効果でおしゃれに */
-  box-shadow: 0 2px 8px rgba(0,0,0,.1); /* 下向きの影 */
-  overflow: hidden; /* はみ出し部分を隠す */
-  transition: right 0.4s ease; /*  rightプロパティをアニメーション */
+  top: 0;
+  right: -350px; /* 少し幅を広げて隠す */
+  width: 350px; /* 幅を少し広く */
+  height: 100vh; /* 画面全体の高さ */
+  background: linear-gradient(180deg, #fdf2f8, #fce7f3, #fbcfe8); /* 縦のピンクグラデーション */
+  backdrop-filter: blur(15px);
+  box-shadow: -5px 0 20px rgba(244, 114, 182, 0.2); /* 左側にピンクの影 */
+  overflow-y: auto; /* 縦スクロール可能 */
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* より滑らかなアニメーション */
   z-index: 90;
+  border-left: 3px solid #f9a8d4; /* 左側にピンクの境界線 */
   
 }
 
-
-
-
 .nav.active {
-  right: 0; /* アクティブ時は右端に移動 */
+  right: 0;
+}
+
+/* ヘッダー部分を追加 */
+.nav::before {
+  content: "メニュー ";
+  display: block;
+  background: linear-gradient(135deg, #fbbddd, #ff82c1);
+  color: white;
+  text-align: center;
+  padding: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-bottom: 2px solid #f9a8d4;
+  
 }
 
 .nav__list {
   margin: 0;
-  padding: 90px 0 30px; /*  上部にヘッダー分の余白を追加 */
+  padding: 20px 0 30px;
   list-style: none;
-  height: auto; /* 自動調整に変更 */
+  height: auto;
 }
 
 .nav__item {
-  padding: 12px;
-  background-color: #fde68a;
+  margin: 8px 15px; /* 左右にマージン追加 */
+  background: linear-gradient(135deg, #fef7ff, #fdf2f8); /* 薄いピンクのグラデーション */
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #f9a8d4; /* 下線だけ残す */
+  transition: all 0.3s ease;
+  overflow: hidden; /* 角の丸みを保つ */
 }
 
 .nav__item:hover {
-  background-color: #f2f8da;
-  transform: translateX(-5px); /* ホバー時に左にスライド */
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #fce7f3, #f9a8d4); /* ホバー時は濃いピンク */
+  transform: translateX(-8px) scale(1.02); /* 左にスライド＋少し拡大 */
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.2);
+  border-color: #ec4899; /* ホバー時は濃いピンクの境界線 */
+}
+
+.nav__link {
+  display: flex; /* flexに変更 */
+  align-items: center; /* 縦中央揃え */
+  width: 100%;
+  padding: 18px 25px;
+  color: #be185d; /* 濃いピンクの文字色 */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold; /* 太字 */
+  border-bottom: none; /* 境界線を削除 */
+  text-align: left;
+  transition: color 0.3s ease;
+  font-family: 'Hiragino Maru Gothic ProN', 'ヒラギノ丸ゴ ProN W4', sans-serif
+  /* 可愛いフォント */
 }
 
 
-.nav__link {
-  display: block;
-  width: 100%; 
-  padding: 35px 25px;
-  color: #333;
-  text-decoration: none;
-  font-size: 20px; /* フォントサイズも追加 */
-  border-bottom: 1px solid #eee;
-  text-align: left; /* 左揃え */
+
+.nav__item:hover .nav__link::before {
+  animation: bounce 0.6s ease infinite alternate; /* ホバー時に絵文字がバウンス */
+}
+
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/*  スクロールバー */
+.nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nav::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #fdf2f8, #fce7f3);
+  border-radius: 10px;
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f9a8d4, #f472b6);
+  border-radius: 10px;
+  border: 1px solid #fce7f3;
+}
+
+.nav::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f472b6, #ec4899);
+}
+
+
+
+/*  メニューの背景に可愛い装飾 */
+.nav::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #fce7f3, transparent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 4s ease-in-out infinite;
+}
+
+
+/* 📱 レスポンシブ対応 */
+@media (max-width: 480px) {
+  .nav {
+    width: 300px;
+    right: -300px;
+  }
+  
+  .hamburger {
+    width: 48px;
+    height: 48px;
+    right: 15px;
+  }
+  
+  .nav__link {
+    font-size: 15px;
+    padding: 16px 20px;
+  }
 }

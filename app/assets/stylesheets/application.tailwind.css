@@ -1,39 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+@import "./maps_search.scss";
+@import "./search_page..scss";
+
 
 :root {
   --font-rounded: "M PLUS Rounded 1c", sans-serif; /* これ追加して可愛いフォントも定義可能 */
 }
-
-@layer components {
-  .login-button {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background-color: #fde68a;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    gap: 2px;
-  }
-
-  .login-button:hover {
-    background-color: #fcd34d;
-    text-decoration: none;
-  }
-
-
-  .login-text {
-    font-size: 8px;
-    font-weight: bold;
-    color: white;
-    letter-spacing: 0.5px;
-    line-height: 1;
-  }}

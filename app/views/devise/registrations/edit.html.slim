@@ -1,53 +1,99 @@
--# 会員情報編集画面
-div class="page_classes max-w-md mx-auto p-4 space-y-6"
+/ 会員情報編集画面（可愛い薄ピンクスタイル）
+div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
 
-  h1 class="page_title text-3xl font-bold text-center text-gray-800 mb-6" = t("devise.registrations.edit.title")
+  .text-center.mb-6
+    h1.text-lg.font-bold.text-pink-700.mb-2 = t("devise.registrations.edit.title")
 
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "bg-sky-50 shadow-lg rounded-xl p-6 flex flex-col gap-4" }) do |f|
+
+  / メイン編集フォーム
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "bg-white shadow-md rounded-lg p-4 border border-pink-200 space-y-4" }) do |f|
     = render "devise/shared/error_messages", resource: resource
 
-    -# メールアドレス
-    .field.flex.flex-col.gap-1
-      = f.label :email, class: "text-gray-500 text-sm"
-      = f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full"
+    / フォームヘッダー
+    .text-center.mb-4
+      span.text-pink-700.font-bold.text-sm アカウント情報の変更
+
+    / メールアドレス
+    .field.space-y-2
+      .flex.items-center.mb-1
+        .text-xs.mr-1 📧
+        = f.label :email, class: "text-pink-600 text-xs font-medium"
+      = f.email_field :email,
+        autofocus: true,
+        autocomplete: "email",
+        class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      div.text-sm.text-yellow-600
-        | Currently waiting confirmation for: #{resource.unconfirmed_email}
+      .bg-yellow-50.border.border-yellow-200.rounded-lg.p-3
+        .flex.items-center
+          .text-xs.mr-1 ⏳
+          .text-yellow-700.text-xs.font-medium 確認待ち
+        p.text-yellow-600.text-xs.mt-1
+          | 確認待ち: #{resource.unconfirmed_email}
 
-    -# パスワード
-    .field.flex.flex-col.gap-1
-      = f.label :password, class: "text-gray-500 text-sm"
-      span.text-gray-400.text-xs (変更しない場合は空欄)
-      = f.password_field :password, autocomplete: "new-password", class: "input input-bordered w-full"
+    / パスワード
+    .field.space-y-2
+      .flex.items-center.mb-1
+        .text-xs.mr-1 🔑
+        = f.label :password, class: "text-pink-600 text-xs font-medium"
+      p.text-pink-400.text-xs.mb-1 変更しない場合は空欄のままにしてください
+      = f.password_field :password,
+        autocomplete: "new-password",
+        class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
       - if @minimum_password_length
-        em.text-gray-400.text-xs
-          | 最低 #{@minimum_password_length} 文字
+        .flex.items-center.mt-1
+          p.text-pink-400.text-xs 最低 #{@minimum_password_length} 文字必要です
 
-    -# パスワード確認
-    .field.flex.flex-col.gap-1
-      = f.label :password_confirmation, class: "text-gray-500 text-sm"
-      = f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-full"
+    / パスワード確認
+    .field.space-y-2
+      .flex.items-center.mb-1
+        .text-xs.mr-1 🔑
+        = f.label :password_confirmation, class: "text-pink-600 text-xs font-medium"
+      = f.password_field :password_confirmation, 
+        autocomplete: "new-password", 
+        class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
-    -# 現在のパスワード
-    .field.flex.flex-col.gap-1
-      = f.label :current_password, class: "text-gray-500 text-sm"
-      span.text-gray-400.text-xs (変更を保存するには現在のパスワードが必要)
-      = f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered w-full"
+    / 現在のパスワード
+    .field.space-y-2
+      .flex.items-center.mb-1
+        = f.label :current_password, class: "text-pink-600 text-xs font-medium"
+      p.text-pink-400.text-xs.mb-1 変更を保存するには現在のパスワードが必要です
+      = f.password_field :current_password, 
+        autocomplete: "current-password", 
+        class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
-    -# 送信ボタン
-    .actions
-      = f.submit "変更を保存", class: "bg-sky-500 text-white px-6 py-3 rounded-lg hover:bg-sky-600 font-semibold w-full"
+    / 保存ボタン
+    .actions.mt-6
+      = f.submit "変更を保存", 
+        class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-medium py-3 px-4 rounded-lg text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
 
+  / セキュリティ注意事項
+  .bg-pink-50.rounded-lg.p-3.border.border-pink-200
+    .text-center.mb-2
+      span.text-pink-700.font-medium.text-xs セキュリティについて
 
-  -# アカウント削除セクション
-  .mt-6.flex.space-x-2.justify-center
-    = link_to "アカウントを削除",
+    .space-y-1
+      .flex.items-start
+        .text-xs.mr-1.mt-0.5 •
+        p.text-pink-600.text-xs.leading-relaxed パスワードは定期的に変更することをお勧めします
+      
+      .flex.items-start
+        .text-xs.mr-1.mt-0.5 •
+        p.text-pink-600.text-xs.leading-relaxed 他のサービスと同じパスワードは使用しないでください
+
+  / アカウント削除セクション
+  .bg-red-50.rounded-lg.p-4.border.border-red-200
+
+    .bg-white.rounded-lg.p-3.border.border-red-100
+      p.text-red-600.text-xs.mb-3.text-center.leading-relaxed
+        | アカウントを削除すると
+        br
+        | すべてのデータが完全に削除されます
+        br
+        | この操作は取り消せません
+
+      = link_to "アカウントを削除",
         registration_path(resource_name),
         data: { turbo_method: :delete, turbo_confirm: "アカウントを削除するとデータは元に戻せません。本当に削除しますか？" },
-        class: "flex-1 bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 text-center"
-
-  .mt-6.flex.space-x-2.justify-center
-    = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
-
+        class: "text-center block w-full bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white text-sm px-4 ActionView::SyntaxErrorInTemplate in Users::RegistrationsController#edit"

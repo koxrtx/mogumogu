@@ -1,76 +1,127 @@
-div.page_classes
-  h1 class=page_title = t("spots.new.title")
+div class=page_classes
+  / 可愛いヘッダー
+  .text-center.mb-4.px-4
+    h1.text-lg.sm:text-xl.font-bold.text-pink-700.mb-2 = t("spots.new.title")
 
+  / エラーメッセージ
   - if @spot.errors.present?
-    .bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.mb-4
-      h4.font-bold #{@spot.errors.count}件のエラーがあります:
-      ul
+    .bg-pink-100.border.border-pink-400.text-pink-700.px-3.py-2.rounded-lg.mb-4.mx-4
+      .flex.items-center.mb-1
+        .text-xs.mr-1 ⚠️
+        h4.font-bold.text-xs #{@spot.errors.count}件のエラーがあります:
+      ul.text-xs.space-y-1
         - @spot.errors.full_messages.each do |message|
-          li= message
+          li.ml-4= message
 
   = form_for @spot do |f|
-    / 店舗情報 + 子ども向け設備フォーム枠をまとめる
-    div.max-w-2xl.mx-auto.border.border-gray-300.rounded-xl.p-6.bg-sky-50.space-y-6
+    / メインフォーム枠
+    .max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4.mx-4
 
       / 店舗情報
-      .space-y-4
-        .flex.space-x-4
-          .flex-1
-            = f.text_field :name, placeholder: t('spot.forms.name'), class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
-          .flex-1
-            = f.telephone_field :tel, placeholder: t('spot.forms.tel'), class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+      .space-y-3
+        .text-center.mb-3
+          span.text-pink-700.font-bold.text-sm 店舗情報
 
-        = f.text_field :address, placeholder: t('spot.forms.address'), id: "address-input", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-red-500"
+        / 店舗名
+        .space-y-1
+          .flex.items-center
+            .text-xs.mr-1 🏷️
+            label.text-pink-700.font-medium.text-xs 店舗名
+          = f.text_field :name, placeholder: t('spot.forms.name'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
-        .flex.space-x-4.items-center
-          .flex-1
-            button#current-address-btn.flex.bg-cyan-600.text-white.px-4.py-2.rounded-lg.hover:bg-cyan-700.focus:outline-none type="button"
-              | 現在地から入力
-              - content_for :head do
-                script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" async defer
-          .flex-1
-            = f.text_field :opening_hours, placeholder: t('spot.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        / 電話番号
+        .space-y-1
+          .flex.items-center
+            .text-xs.mr-1 📞
+            label.text-pink-700.font-medium.text-xs 電話番号
+          = f.telephone_field :tel, placeholder: t('spot.forms.tel'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+
+        / 住所
+        .space-y-1
+          .flex.items-center
+            .text-xs.mr-1 📍
+            label.text-pink-700.font-medium.text-xs 住所
+          = f.text_field :address, placeholder: t('spot.forms.address'), id: "address-input", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+
+        / 現在地ボタン
+        button#current-address-btn.w-full.bg-pink-400.text-white.px-3.py-2.rounded-lg.hover:bg-pink-500.focus:outline-none.text-xs.font-medium.transition-all.duration-200.shadow-sm.hover:shadow-md.active:scale-95 type="button"
+          .flex.items-center.justify-center
+            .text-xs.mr-1 📍
+            | 現在地から入力
+          - content_for :head do
+            script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" async defer
+
+        / 営業時間
+        .space-y-1
+          .flex.items-center
+            .text-xs.mr-1 🕐
+            label.text-pink-700.font-medium.text-xs 営業時間
+          = f.text_field :opening_hours, placeholder: t('spot.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
       / 子ども向け設備
-      div
-        span.text-xl.font-bold.mb-4 = t('spot.forms.child_facilities')
-        .grid.grid-cols-2.gap-x-8.gap-y-2
-          label.flex.items-center
-            = f.check_box :child_chair
-            span.ml-2 = t('spot.forms.child_chair')
-          label.flex.items-center
-            = f.check_box :tatami_seat
-            span.ml-2 = t('spot.forms.tatami_seat')
-          label.flex.items-center
-            = f.check_box :child_tableware
-            span.ml-2 = t('spot.forms.child_tableware')
-          label.flex.items-center
-            = f.check_box :bring_baby_food
-            span.ml-2 = t('spot.forms.bring_baby_food')
-          label.flex.items-center
-            = f.check_box :stroller_ok
-            span.ml-2 = t('spot.forms.stroller_ok')
-          label.flex.items-center
-            = f.check_box :child_menu
-            span.ml-2 = t('spot.forms.child_menu')
-          label.flex.items-center
-            = f.check_box :parking
-            span.ml-2 = t('spot.forms.parking')
-          label.flex.items-center
-            = f.check_box :other_facility
-            span.ml-2 = t('spot.forms.other_facility')
-        = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 mt-2" , rows: 1
+      .bg-white.rounded-lg.p-3.border.border-pink-200
+        .text-center.mb-3
+          span.text-pink-700.font-bold.text-sm = t('spot.forms.child_facilities')
+        
+        .space-y-2
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :child_chair, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_chair')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :tatami_seat, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.tatami_seat')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :child_tableware, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_tableware')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :bring_baby_food, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.bring_baby_food')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :stroller_ok, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.stroller_ok')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :child_menu, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_menu')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :parking, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.parking')
+          
+          label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
+            = f.check_box :other_facility, class: "text-pink-500 focus:ring-pink-300"
+            span.ml-2.text-pink-700.text-xs = t('spot.forms.other_facility')
 
-      / 写真のアップロード
-      div
-        span.text-xl.font-bold.mb-2 子ども用メニュー写真（最大3枚）
-        .field.m-4
-          / 新規アップロード
-          = f.label :images, "写真を選択", class: "cursor-pointer bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
+        / その他設備コメント
+        .mt-3
+          = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm resize-none", rows: 2
+
+      / 写真のアップロード（コンパクト化）
+      .bg-white.rounded-lg.p-3.border.border-pink-200
+        .text-center.mb-3
+          span.text-pink-700.font-bold.text-sm 子ども用メニュー写真（最大3枚）
+        
+        .space-y-2
+          / 写真選択ボタン
+          = f.label :images, class: "cursor-pointer bg-pink-100 text-pink-700 font-medium py-2.5 px-4 rounded-lg border border-pink-300 hover:bg-pink-200 hover:border-pink-400 transition-all duration-200 shadow-sm hover:shadow-md text-center block text-sm" do
+            .flex.items-center.justify-center
+              | 写真を選択
           = f.file_field :images, multiple: true, direct_upload: true, accept: "image/*", style: "display: none;", onchange: "previewImage(this, 'previewContainer')"
 
-        / プレビュー枠
-        #previewContainer.flex.space-x-4.mt-2
+          / プレビュー枠
+          #previewContainer.flex.flex-wrap.gap-2.mt-2.justify-center
 
-      / 投稿ボタン
-      = f.submit t('spot.buttons.submit'), class: "bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 font-semibold w-full"
+      / 投稿ボタン（可愛くスタイリング）
+      .pt-4
+        = f.submit t('spot.buttons.submit'), class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
+
+  / 可愛いフッター（追加）
+  .text-center.mt-6.px-4
+    p.text-pink-500.text-xs.leading-relaxed
+      | 素敵なもぐもぐスポットの情報をありがとうございます！
+      br
+      | みんなで子育てを楽しくしましょう♪

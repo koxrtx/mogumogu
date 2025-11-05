@@ -1,53 +1,41 @@
-header.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
-    / 左側：ハンバーガーメニュー
-    button.hamburger[aria-label="メニュー" aria-controls="nav-menu" aria-expanded="false"]
-      .hamburger__lines
-        span.hamburger__line
-        span.hamburger__line
-        span.hamburger__line
+eader.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
+  button.hamburger[aria-label="メニュー" aria-controls="nav-menu" aria-expanded="false"]
+      span.hamburger__line
+      span.hamburger__line
+      span.hamburger__line
       span.hamburger__text MENU
 
-    / ナビゲーション
-    nav#nav-menu.nav[aria-hidden="true"]
-      ul.nav__list
-        - if current_user.present?
-          li.nav__item
-            = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-          li.nav__item
-            = link_to 'お店の投稿', new_spot_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-          li.nav__item
-            = link_to 'マイページ', mypage_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        - else
-          li.nav__item
-            = link_to 'ログイン', new_user_session_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-          li.nav__item
-            = link_to 'ユーザー登録', terms_agreement_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-
-        li.nav__item
-          a#current-location-link href="#" class="text-blue-500 hover:text-blue-700" 現在地から探す
-        li.nav__item
-          = link_to '使い方', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        li.nav__item
-          = link_to '利用規約', terms_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        li.nav__item
-          = link_to 'プライバシーポリシー', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-        li.nav__item
-          = link_to 'お問い合わせ', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
-
-    / 今後サイト名は画像対応するかも
-    .link-to-root.absolute.left-6.top-4
-      = link_to root_path, class: 'text-[#3A3333] text-2xl font-rounded font-bold' do
-        | もぐもぐマップ
-
-    / ハンバーガーメニューの左横にログインボタン
-    .header-login.absolute.top-3.right-20
+  / ナビゲーション
+  nav#nav-menu.nav[aria-hidden="true"]
+    ul.nav__list
       - if current_user.present?
-        / ログイン済みの場合：マイページボタン
-        = link_to mypage_path, class: 'login-button' do
-          span.login-text マイページ
+        li.nav__item
+          = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        li.nav__item
+          = link_to 'お店の投稿', new_spot_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        li.nav__item
+          = link_to 'マイページ', mypage_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
       - else
-        / 未ログインの場合：ログインボタン
-        = link_to new_user_session_path, class: 'login-button' do
-          span.login-text ログイン
+        li.nav__item
+          = link_to 'ログイン', new_user_session_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        li.nav__item
+          = link_to 'ユーザー登録', terms_agreement_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
 
-    / 右側：将来的にユーザーアイコンなどを配置可
+      li.nav__item
+        a#current-location-link href="#" class="text-blue-500 hover:text-blue-700" 現在地から探す
+      li.nav__item
+        = link_to '使い方', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+      li.nav__item
+        = link_to '利用規約', terms_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+      li.nav__item
+        = link_to 'プライバシーポリシー', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+      li.nav__item
+        = link_to 'お問い合わせ', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+
+
+  / 可愛いサイト名（中央配置）
+  .absolute.left-1/2.top-1/2.-translate-x-1/2.-translate-y-1/2
+    = link_to root_path, class: 'inline-block bg-white rounded-full px-4 py-2 shadow-md border-2 border-pink-200 hover:border-pink-300 hover:shadow-lg transition-all duration-200' do
+      .flex.items-center.space-x-1
+        span.text-pink-600.text-lg.font-bold.font-rounded もぐもぐマップ
+

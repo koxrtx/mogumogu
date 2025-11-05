@@ -1,16 +1,3 @@
 @import "tailwindcss";
-@layer utilities {
-  /* 背景色用 */
-  .bg-havelock-blue { background-color: #4b91e2; }
-  .bg-picton-blue { background-color: #50b6e2; }
-  .bg-turquoise-blue { background-color: #6cd7e5; }
-  .bg-water-leaf { background-color: #a3e6e5; }
-  .bg-polar { background-color: #def7f7; }
-
-  /* 文字色用 */
-  .text-havelock-blue { color: #4b91e2; }
-  .text-picton-blue { color: #50b6e2; }
-  .text-turquoise-blue { color: #6cd7e5; }
-  .text-water-leaf { color: #a3e6e5; }
-  .text-polar { color: #def7f7; }
-}
+@plugin "daisyui";
+@import "maps_search";

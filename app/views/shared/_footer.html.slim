@@ -1,32 +1,42 @@
-footer.w-full.text-center.py-4.bg-opacity-30.backdrop-blur-md.text-gray-800
-  .container.mx-auto.text-center
-    p.text-sm.mb-0
+footer.w-full.bg-gradient-to-r.from-pink-50.to-rose-50.border-t-2.border-pink-200.relative
+  .container.mx-auto.text-center.py-6.px-4
+    / 可愛いロゴエリア
+    .mb-3
+      h2.text-pink-600.font-bold.text-lg.mb-1
+        | もぐもぐマップ
+      p.text-pink-500.text-xs.font-medium.mb-2
+        | 子連れファミリーのための優しいお店探し 
+    
+    / コピーライト
+    p.text-pink-400.text-xs.mb-0.font-medium
       | &copy; 2025 もぐもぐマップ. All rights reserved.
 
-  / 画面右端にXとLINEのシェアボタンを横並びで固定（containerの外）
-  .absolute.top-1/2.right-0.-translate-y-1/2.flex.space-x-3.pr-4
+
+  / 画面右端にシェアボタン（可愛くアップデート）
+  .absolute.top-1/2.right-0.-translate-y-1/2.flex.flex-col.space-y-2.pr-3
     / LINE共有ボタン
     = link_to "https://social-plugins.line.me/lineit/share?url=#{CGI.escape(request.url)}",
               title: "LINEでシェア",
               target: "_blank",
               rel: "noopener noreferrer",
-              class: "inline-block relative group" do
-      = image_tag "LINE_Brand_icon.png", class: "w-6 h-6 transition-transform duration-200 group-hover:scale-110", alt: "LINEロゴ"
-      / ツールチップ
-      .absolute.bottom-full.right-0.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
+              class: "inline-block relative group bg-white rounded-full p-2 shadow-md border-2 border-pink-200 hover:border-pink-300 hover:shadow-lg transition-all duration-200" do
+      = image_tag "LINE_Brand_icon.png", class: "w-5 h-5 transition-transform duration-200 group-hover:scale-110", alt: "LINEロゴ"
+      / 可愛いツールチップ
+      .absolute.bottom-full.right-0.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
+        span.mr-1 💬
         | LINEでシェア
         / 吹き出しの三角形
-        .absolute.top-full.right-2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
+        .absolute.top-full.right-3.w-0.h-0.border-l-2.border-r-2.border-t-4.border-transparent.border-t-pink-400
 
     / X（Twitter）共有ボタン
-    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.url)}&text=#{CGI.escape("子連れで外食？もぐもぐマップで子ども用設備＿食器や座敷、ベビーカーOK情報をチェック 🍼")}&hashtags=#{CGI.escape('もぐもぐマップ')}",
+    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.url)}&text=#{CGI.escape("子連れで外食？もぐもぐマップで子ども用設備・食器や座敷、ベビーカーOK情報をチェック ")}&hashtags=#{CGI.escape('もぐもぐマップ')}",
               title: "Xでシェア",
               target: "_blank",
               rel: "noopener noreferrer",
-              class: "inline-block relative group" do
-      = image_tag "logo-black.png", class: "w-6 h-6 transition-transform duration-200 group-hover:scale-110", alt: "Xロゴ"
-      / ツールチップ
-      .absolute.bottom-full.right-0.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
+              class: "inline-block relative group bg-white rounded-full p-2 shadow-md border-2 border-pink-200 hover:border-pink-300 hover:shadow-lg transition-all duration-200" do
+      = image_tag "logo-black.png", class: "w-5 h-5 transition-transform duration-200 group-hover:scale-110", alt: "Xロゴ"
+      / 可愛いツールチップ
+      .absolute.bottom-full.right-0.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
         | Xでシェア
         / 吹き出しの三角形
-        .absolute.top-full.right-2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
+        .absolute.top-full.right-3.w-0.h-0.border-l-2.border-r-2.border-t-4.border-transparent.border-t-pink-400
