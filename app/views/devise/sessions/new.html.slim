@@ -1,6 +1,9 @@
 -# ログイン画面
 div class=page_classes
-  h1 class=page_title = t("devise.sessions.new.title")
+
+  .text-center.mb-4.px-4
+    h1.text-lg.sm:text-xl.font-bold.text-pink-700.mb-2 = t("devise.sessions.new.title")
+
 
   .w-full.max-w-sm.mx-auto.px-4
     / LINEログイン（公式画像 + テキスト横並び版）
@@ -12,6 +15,12 @@ div class=page_classes
         / 右側：テキスト部分（緑背景に変更）
         .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
           span.text-white.font-medium.text-sm LINEでログイン
+
+    / 区切り線（コンパクト化）
+    .flex.items-center.my-4
+      .flex-1.border-t.border-pink-200
+      span.px-3.text-pink-500.text-xs または
+      .flex-1.border-t.border-pink-200
 
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full p-4 border-2 border-pink-300 bg-pink-50 rounded-lg space-y-3" }) do |f|
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: "w-full px-3 py-2.5 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"

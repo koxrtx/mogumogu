@@ -1,17 +1,45 @@
-- #パスワード再設定リクエスト画面
-
+-# パスワード再設定リクエスト画面
 div class=page_classes
-  h1 class=page_title = t("devise.shared_links.forgot_password")
+  / 可愛いヘッダー（ケータイサイズ調整）
+  .text-center.mb-4.px-4
+    .text-2xl.mb-2 🔒
+    h1.text-lg.sm:text-xl.font-bold.text-pink-700.mb-2 = t("devise.shared_links.forgot_password")
 
-  .w-full.max-w-md.mx-auto
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-full  p-6 rounded" }) do |f|
-      = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: input_classes
+  .w-full.max-w-sm.mx-auto.px-4
+    / メイン再設定フォーム
+    .bg-white.rounded-lg.p-4.shadow-md.border.border-pink-200.mb-4
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-3" }) do |f|
+        / 説明テキスト
+        .text-center.mb-3
+          p.text-pink-600.text-xs.leading-relaxed
+            | 登録されているメールアドレスを入力してください
+            br
+            | パスワード再設定用のリンクをお送りします
 
-      .actions
-        = f.submit t("devise.forms.buttons.send_reset"), class: button_classes
+        / メールアドレス入力
+        .space-y-1
+          .flex.items-center
+            .text-xs.mr-1 📨
+            label.text-pink-700.font-medium.text-xs メールアドレス
+          = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-pink-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent bg-pink-50 text-gray-700 placeholder-pink-400 text-sm"
 
-      .mt-6.flex.space-x-4.justify-center
-        = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
+        / 送信ボタン
+        .actions.pt-3
+          = f.submit t("devise.forms.buttons.send_reset"), class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
 
+    / ナビゲーションボタン（
+    .space-y-2
+      / ホームボタン
+      = link_to t('spot.buttons.home'), root_path, class: "w-full bg-pink-100 text-pink-700 font-medium py-2.5 px-4 rounded-lg border border-pink-300 hover:bg-pink-200 hover:border-pink-400 transition-all duration-200 shadow-sm hover:shadow-md text-center block text-sm"
 
-  = render "devise/shared/links"
+    / その他のリンク
+    = render "devise/shared/links"
+
+  / セキュリティ注意事項（追加）
+  .bg-pink-50.rounded-lg.p-3.mt-4.mx-4.border.border-pink-200
+    .text-center.mb-2
+      p.text-pink-700.font-medium.text-xs セキュリティについて
+    .text-pink-600.text-xs.leading-relaxed.space-y-1
+      p • メールが届かない場合は迷惑メールフォルダをご確認ください
+      p • リンクの有効期限は24時間です
+      p • 第三者とリンクを共有しないでください

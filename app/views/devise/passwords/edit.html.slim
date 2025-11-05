@@ -1,29 +1,64 @@
 -# パスワード編集画面
 div class=page_classes
-  h1 class=page_title パスワード再設定
+  / 可愛いヘッダー
+  .text-center.mb-4.px-4
+    h1.text-lg.sm:text-xl.font-bold.text-pink-700.mb-2 パスワード再設定
+    p.text-pink-600.text-xs.leading-relaxed 新しいパスワードを設定してアカウントを安全に保護しましょう
 
-  .w-full.max-w-md.mx-auto
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "w-full p-6 rounded" }) do |f|
-      = render "devise/shared/error_messages", resource: resource
-      = f.hidden_field :reset_password_token
+  .w-full.max-w-sm.mx-auto.px-4
+    / メインパスワード変更フォーム
+    .bg-white.rounded-lg.p-4.shadow-md.border.border-pink-200.mb-4
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-3" }) do |f|
+        / エラーメッセージ
+        .mb-3
+          = render "devise/shared/error_messages", resource: resource
+        
+        = f.hidden_field :reset_password_token
 
-      .field
-        = f.label :password, "新しいパスワード"
-        - if @minimum_password_length
-          em
-            | (#{@minimum_password_length}文字以上)
-        br
-        = f.password_field :password, autofocus: true, autocomplete: "new-password", class: input_classes
 
-      .field
-        = f.label :password_confirmation, "パスワード確認"
-        br
-        = f.password_field :password_confirmation, autocomplete: "new-password", class: input_classes
+        / 新しいパスワード入力
+        .field.space-y-1
+          .flex.items-center.justify-between
+            .flex.items-center
+              .text-xs.mr-1 🔒
+              label.text-pink-700.font-medium.text-xs 新しいパスワード
+            - if @minimum_password_length
+              span.text-pink-500.text-xs
+                | (#{@minimum_password_length}文字以上)
+          = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "w-full px-3 py-2 border border-pink-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent bg-pink-50 text-gray-700 placeholder-pink-400 text-sm", placeholder: "新しいパスワードを入力"
 
-      .actions
-        = f.submit "パスワードを変更する", class: button_classes
+        / パスワード確認入力
+        .field.space-y-1
+          .flex.items-center
+            .text-xs.mr-1 🔐
+            label.text-pink-700.font-medium.text-xs パスワード確認
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-3 py-2 border border-pink-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent bg-pink-50 text-gray-700 placeholder-pink-400 text-sm", placeholder: "パスワードを再入力"
 
-      .mt-6.flex.space-x-4.justify-center
-        = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 text-center"
+        / 変更ボタン
+        .actions.pt-3
+          = f.submit "パスワードを変更する", class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
 
-= render "devise/shared/links"
+    / ナビゲーションボタン
+    .space-y-2
+      / ホームボタン
+      = link_to t('spot.buttons.home'), root_path, class: "w-full bg-pink-100 text-pink-700 font-medium py-2.5 px-4 rounded-lg border border-pink-300 hover:bg-pink-200 hover:border-pink-400 transition-all duration-200 shadow-sm hover:shadow-md text-center block text-sm"
+
+    / その他のリンク
+    = render "devise/shared/links"
+
+
+  / 可愛いフッター（コンパクト化）
+  .text-center.mt-6.px-4
+    p.text-pink-500.text-xs.leading-relaxed
+      | パスワード変更完了後は
+      br
+      | 新しいパスワードでログインしてください
+
+  / セキュリティ注意事項（追加）
+  .bg-pink-50.rounded-lg.p-3.mt-4.mx-4.border.border-pink-200
+    .text-center.mb-2
+      p.text-pink-700.font-medium.text-xs セキュリティについて
+    .text-pink-600.text-xs.leading-relaxed.space-y-1
+      p • パスワード変更後、全デバイスで再ログインが必要になる場合があります
+      p • このページは一度のみ有効です
+      p • 不審なアクセスを感じた場合はすぐにご連絡ください
