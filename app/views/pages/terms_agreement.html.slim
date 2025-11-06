@@ -1,4 +1,5 @@
-div class=page_classes
+/ 利用規約同意画面
+div class=page_classes data-controller="modal"
   .w-full.max-w-xs.mx-auto.px-4
     h1.text-center.text-lg.font-bold.text-pink-600.mb-6 = t("pages.terms_agreement.title")
 
@@ -8,13 +9,34 @@ div class=page_classes
         br
         | 利用規約への同意が必要です。
       
+      / 利用規約リンクボタン
       .w-full.bg-pink-200.border.border-pink-300.rounded-lg.p-3.mb-4.text-center.shadow-sm
-        = link_to '利用規約はこちら', terms_path, target: '_blank', rel: 'noopener', class: 'text-pink-800 font-medium text-sm hover:text-pink-900 transition-colors duration-200'
+        = link_to '利用規約はこちら', terms_path,
+          data: { action: "click->modal#open" },
+          class: 'text-pink-800 font-medium text-sm hover:text-pink-900 transition-colors duration-200'
 
+      / 同意フォーム
       = form_with url: new_user_registration_path, method: :get, class: 'space-y-4' do |f|
         .form-check.flex.items-center.justify-center.mb-4
           = f.check_box :agreed, id: 'agreement_check', class: 'rounded border-pink-300 text-pink-500 focus:ring-pink-400 w-4 h-4'
           = f.label :agreed, '上記の利用規約に同意します', for: 'agreement_check', class: 'ml-2 text-sm text-pink-700 cursor-pointer'
         
+        / 同意してユーザー登録画面ボタン
         .text-center
           = f.submit t("pages.terms_agreement.submit_button"), class: "w-full py-3 px-4 bg-pink-300 text-pink-800 font-bold rounded-lg border-2 border-pink-400 hover:bg-pink-400 hover:text-white transition-colors duration-200 text-sm shadow-sm", id: 'register_button'
+
+        / プライバシーポリシー画面リンク
+        .text-center
+          = link_to 'プライバシーポリシーはこちら', privacy_policy_path,
+                    data: { action: "click->modal#open" },
+                    class: 'text-pink-800 text-sm hover:text-pink-900 underline'
+
+  / モーダル本体
+  div data-action="click->modal#close" class="hidden fixed inset-0 z-50 flex items-center justify-center"
+    div data-action="click->modal#stopPropagation" class="bg-white rounded-lg max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden"
+      / ヘッダー
+      .flex.justify-between.items-center.bg-pink-100.p-4.border-b
+        h2.text-lg.font-bold.text-pink-800 プライバシーポリシー
+        button data-action="click->modal#close" class="text-2xl text-pink-600 hover:text-pink-800" &times;
+      / 本文（Turbo Frameで読み込む）
+      turbo-frame data-modal-target="frame" id="modal_frame" class="flex-1 overflow-y-auto p-4"
