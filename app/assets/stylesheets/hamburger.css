@@ -101,7 +101,7 @@ html, body {
   right: 0;
 }
 
-/* ヘッダー部分を追加 */
+/* ヘッダー部分 */
 .nav::before {
   content: "メニュー ";
   display: block;
@@ -154,7 +154,6 @@ html, body {
   text-align: left;
   transition: color 0.3s ease;
   font-family: 'Hiragino Maru Gothic ProN', 'ヒラギノ丸ゴ ProN W4', sans-serif
-  /* 可愛いフォント */
 }
 
 
@@ -190,7 +189,7 @@ html, body {
 
 
 
-/*  メニューの背景に可愛い装飾 */
+/*  メニューの背景 */
 .nav::after {
   content: "";
   position: absolute;
