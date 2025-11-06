@@ -94,7 +94,9 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
       = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-rose-300 to-rose-400 text-white font-bold rounded-lg hover:from-rose-400 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95" do
         | お店の投稿
 
+  = render 'home/usage_guide'
+
   / フッターメッセージ
   .text-center.mt-8.pb-6
     p.text-pink-400.text-xs.leading-relaxed
-      |  子連れに優しいお店を見つけよう 
+      |  子連れに優しいお店を見つけよう
