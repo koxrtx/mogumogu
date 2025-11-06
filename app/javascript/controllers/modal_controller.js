@@ -1,4 +1,5 @@
 // ユーザー登録前の利用規約とプライバシーポリシー画面のモーダル処理
+// ユーザー登録前の利用規約とプライバシーポリシー画面のモーダル処理
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -21,11 +22,15 @@ export default class extends Controller {
     this.frameTarget.src = url    // Turbo Frame に読み込む
     modal.classList.remove("hidden")  // モーダル表示
     document.body.classList.add("overflow-hidden")
+
+    // ここでスクロール位置をトップにリセット
+    this.frameTarget.scrollTop = 0
   }
 
   close() {
     const modal = this.element.querySelector('.fixed.inset-0')
     modal.classList.add("hidden")
+    this.frameTarget.scrollTop = 0
     this.frameTarget.src = ""    // 内容をクリア
     document.body.classList.remove("overflow-hidden")
   }
