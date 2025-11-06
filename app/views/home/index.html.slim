@@ -1,7 +1,7 @@
 div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-4
 
   / 飲食店検索エリア
-  / オートコンプリート機能の追加
+  / オートコンプリート機能
   .relative.w-full.max-w-sm(
     data-controller="autocomplete"
     data-autocomplete-url-value="/search"
@@ -34,7 +34,7 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
             h2.text-sm.font-bold.mb-2.text-pink-800 = spot.name
             p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
             
-            / 子ども設備情報（可愛いピンク系）
+            / 子ども設備情報
             .mt-2.text-xs.flex.flex-wrap.gap-1
               - if spot.child_chair
                 span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 👶 子ども椅子
@@ -68,7 +68,7 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
         p.text-pink-600.text-base.font-medium 「#{params[:q][:name_or_address_cont]}」の検索結果が見つかりませんでした
         p.text-pink-400.text-sm.mt-2 別のキーワードで検索してみてください
 
-  / 可愛いボタンエリア
+  / ボタンエリア
   .space-y-3.w-full.max-w-sm.mt-6
 
     / このアプリの使い方ボタン
@@ -94,7 +94,7 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
       = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-rose-300 to-rose-400 text-white font-bold rounded-lg hover:from-rose-400 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95" do
         | お店の投稿
 
-  / 可愛いフッターメッセージ
+  / フッターメッセージ
   .text-center.mt-8.pb-6
     p.text-pink-400.text-xs.leading-relaxed
       |  子連れに優しいお店を見つけよう 
