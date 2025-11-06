@@ -1,0 +1,95 @@
+.min-h-screen.bg-gradient-to-br.from-pink-50.to-rose-100
+  / ヘッダー部分
+  .text-center.py-8.px-4
+    h1.text-3xl.font-bold.text-rose-600.mb-2 もぐもぐマップ
+    p.text-rose-500.text-lg.mb-4
+      | 子連れでの外食を
+      br
+      | もっと楽しくもっと安心に。
+    p.text-gray-600.text-sm
+      | 親子で行けるお店の情報をみんなで
+      br
+      | 共有するプラッフォームです。
+
+  / 機能説明カード（方眼紙風デザイン）
+  .px-4.mb-8.grid-paper-container.py-8
+    .grid.grid-cols-1.md:grid-cols-3.gap-6
+      / 簡単検索カード
+      .cute-pink-card.p-6
+        .text-center
+          .text-4xl.mb-3 🔍
+          h3.text-lg.font-bold.text-rose-600.mb-2 簡単検索
+          p.text-gray-600.text-sm.leading-relaxed
+            | 子供椅子や座敷など、
+            br
+            | 必要な設備で絞り込みで検索できます
+
+      / 写真で確認カード
+      .cute-pink-card.p-6
+        .text-center
+          .text-4xl.mb-3 📸
+          h3.text-lg.font-bold.text-rose-600.mb-2 写真で確認
+          p.text-gray-600.text-sm.leading-relaxed
+            | 子ども用メニューを
+            br
+            | 写真で事前にチェック
+
+      / 情報共有カード
+      .cute-pink-card.p-6
+        .text-center
+          .text-4xl.mb-3 🤝
+          h3.text-lg.font-bold.text-rose-600.mb-2 情報共有
+          p.text-gray-600.text-sm.leading-relaxed
+            | 実際に行ったお店の情報を投稿して
+            br
+            | 他のママ・パパをサポート
+
+  / こんな時に便利セクション（シンプル縦並び）
+  .px-4.mb-8.text-center
+    h2.text-xl.font-bold.text-rose-600.mb-6 こんな時に便利！
+
+    .space-y-3.max-w-sm.mx-auto
+      .text-center.mt-4
+        p.text-gray-700.text-sm.leading-relaxed ベビーカーで入れるカフェを探したい
+        p.text-gray-700.text-sm.leading-relaxed 授乳室があるレストランを知りたい
+        p.text-gray-700.text-sm.leading-relaxed 家族みんなで楽しめるお店を見つけたい
+
+  / 使い方の流れ（4ステップ）
+  .px-4.mb-8
+    .bg-white.rounded-2xl.shadow-lg.p-6.border-2.border-pink-100
+      h2.text-xl.font-bold.text-rose-600.mb-6.text-center 使い方はとっても簡単！
+      
+      .space-y-6
+        / ステップ1
+        .flex.items-start.space-x-4
+          .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 1
+          div
+            h3.font-bold.text-gray-800.mb-1 お店を検索
+            p.text-gray-600.text-sm 現在地や行きたいエリアで検索。「子供椅子」「座敷」「離乳食持込OK」など、必要な設備で絞り込み
+
+        / ステップ2  
+        .flex.items-start.space-x-4
+          .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 2
+          div
+            h3.font-bold.text-gray-800.mb-1 写真・口コミをチェック
+            p.text-gray-600.text-sm 実際の店内の様子や子供向けメニューの写真を確認。他のママ・パパのリアルな口コミも参考に
+
+        / ステップ3
+        .flex.items-start.space-x-4
+          .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 3
+          div
+            h3.font-bold.text-gray-800.mb-1 安心してお出かけ
+            p.text-gray-600.text-sm 事前に情報をチェックしているから、子連れでも安心して新しいお店にチャレンジ
+
+        / ステップ4
+        .flex.items-start.space-x-4
+          .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 4
+          div
+            h3.font-bold.text-gray-800.mb-1 体験をシェア
+            p.text-gray-600.text-sm 利用後は写真付きで情報を投稿。他の子育て家族をサポートしながらコミュニティを育てよう
+
+  / CTA部分
+  .text-center.pb-8.px-4
+    h2.text-xl.font-bold.text-rose-600.mb-4 今すぐ始めてみませんか
+    .inline-block
+      = link_to 'ユーザー登録', terms_agreement_path, class: 'bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-pink-500 hover:to-rose-500 transition-all transform hover:scale-105 block'
