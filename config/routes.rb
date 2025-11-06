@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   get "/terms_agreement", to: "pages#terms_agreement"
   post "/terms_agreement", to: "agreements#create"
 
+  # プライバシーポリシー画面
+  get "/privacy_policy", to: "pages#privacy_policy"
+
   # 現在地から検索
   get "maps/search", to: "maps#search", as: :search_map
 
