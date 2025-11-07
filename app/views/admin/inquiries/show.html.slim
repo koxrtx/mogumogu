@@ -1,2 +1,54 @@
-h1 Admin::Inquiries#show
-p Find me in app/views/admin/inquiries/show.html.slim
+.admin-inquiry-detail
+  h1.text-2xl.font-bold.mb-6.text-center 問い合わせ詳細
+
+  / 戻るボタン
+  .flex.justify-center.gap-2.mb-6
+    = link_to "一覧に戻る", admin_inquiries_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+    = link_to "管理者ホームに戻る", admin_root_path, class: "bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600"
+
+  / 問い合わせ詳細カード
+  .inquiry-detail-card.max-w-4xl.mx-auto.bg-white.border.border-gray-300.rounded-lg.shadow-lg
+    / ヘッダー部分
+    .card-header.bg-gray-50.px-6.py-4.border-b.border-gray-200
+      .flex.justify-between.items-center
+        .flex.items-center.gap-4
+          h2.text-xl.font-semibold = @inquiry.subject
+          = render 'status_badge', inquiry: @inquiry
+        .text-sm.text-gray-500
+          | ID: #{@inquiry.id} | 受信日時: #{@inquiry.created_at.strftime("%Y年%m月%d日 %H:%M")}
+
+    / 基本情報部分
+    .card-body.px-6.py-4
+      .grid.grid-cols-2.gap-6.mb-6
+        .info-section
+          h3.text-lg.font-medium.mb-3.text-gray-700 送信者情報
+          .info-item.mb-2
+            .label.text-sm.font-medium.text-gray-600 名前
+            .value.text-gray-900 = @inquiry.name
+          .info-item.mb-2
+            .label.text-sm.font-medium.text-gray-600 メールアドレス
+            .value.text-gray-900 = @inquiry.email
+          .info-item.mb-2
+            .label.text-sm.font-medium.text-gray-600 電話番号
+            .value.text-gray-900 = @inquiry.phone.present? ? @inquiry.phone : "未入力"
+
+        .status-section
+          h3.text-lg.font-medium.mb-3.text-gray-700 ステータス管理
+          .flex.flex-col.gap-2
+            = link_to "保留にする", mark_as_pending_admin_inquiry_path(@inquiry), data: { turbo_method: :patch }, class: "bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-center"
+            = link_to "対応中にする", mark_as_in_progress_admin_inquiry_path(@inquiry), data: { turbo_method: :patch }, class: "bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 text-center"
+            = link_to "完了にする", mark_as_completed_admin_inquiry_path(@inquiry), data: { turbo_method: :patch }, class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-center"
+
+      / 問い合わせ内容
+      .content-section
+        h3.text-lg.font-medium.mb-3.text-gray-700 問い合わせ内容
+        .content-box.bg-gray-50.p-4.rounded.border
+          = simple_format(@inquiry.message)
+
+    / フッター部分（削除ボタンなど）
+    .card-footer.bg-gray-50.px-6.py-4.border-t.border-gray-200
+      .flex.justify-between.items-center
+        .text-sm.text-gray-500
+          | 最終更新: #{@inquiry.updated_at.strftime("%Y年%m月%d日 %H:%M")}
+        .flex.gap-2
+          = link_to "削除", admin_inquiry_path(@inquiry), data: { turbo_method: :delete, turbo_confirm: "本当にこの問い合わせを削除しますか？\n※この操作は取り消せません" }, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"

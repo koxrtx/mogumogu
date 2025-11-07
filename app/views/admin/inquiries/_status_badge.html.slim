@@ -1,0 +1,13 @@
+- case inquiry.status
+- when 'unread'
+  span.status-badge.bg-red-100.text-red-800.px-2.py-1.rounded.text-xs.font-medium 未読
+- when 'read'
+  span.status-badge.bg-blue-100.text-blue-800.px-2.py-1.rounded.text-xs.font-medium 既読
+- when 'pending'
+  span.status-badge.bg-yellow-100.text-yellow-800.px-2.py-1.rounded.text-xs.font-medium 保留
+- when 'in_progress'
+  span.status-badge.bg-orange-100.text-orange-800.px-2.py-1.rounded.text-xs.font-medium 対応中
+- when 'completed'
+  span.status-badge.bg-green-100.text-green-800.px-2.py-1.rounded.text-xs.font-medium 完了
+- else
+  span.status-badge.bg-gray-100.text-gray-800.px-2.py-1.rounded.text-xs.font-medium 不明

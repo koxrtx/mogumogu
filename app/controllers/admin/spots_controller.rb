@@ -1,8 +1,4 @@
-class Admin::SpotsController < ApplicationController
-  # ユーザーがログインしているか
-  before_action :authenticate_user!
-  # 管理者か確認
-  before_action :admin_required
+class Admin::SpotsController < Admin::BaseController
   # 対象店舗
   before_action :set_spot, only: [:show, :destroy]
 
@@ -23,15 +19,5 @@ class Admin::SpotsController < ApplicationController
   def destroy
     @spot.destroy
     redirect_to admin_spots_path, notice: '店舗情報を削除しました'
-  end
-
-  private
-
-  def set_spot
-    @spot = Spot.find(params[:id])
-  end
-
-  def admin_required
-    redirect_to root_path unless current_user.admin?
   end
 end
