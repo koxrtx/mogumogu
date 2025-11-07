@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/search', to: 'home#search'
   get 'spots', to: 'home#index'
 
-  # マイページ
+  # マイページ 修正まとめる
   get '/mypage', to: 'users#mypage', as: :mypage
   get '/mypage/edit', to: 'users#edit_mypage', as: :edit_mypage
   patch '/mypage', to: 'users#update_mypage', as: :update_mypage
@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   # 利用規約同意画面
   get "/terms_agreement", to: "pages#terms_agreement"
   post "/terms_agreement", to: "agreements#create"
+
+  # 問い合わせ画面
+  resources :inquiries, only: [:new, :create, :show]
 
   # プライバシーポリシー画面
   get "/privacy_policy", to: "pages#privacy_policy"
@@ -37,7 +40,7 @@ Rails.application.routes.draw do
     root to: "dashboard#index"
     # ユーザー管理
     resources :users, only: [:index, :show, :destroy] do
-      # 個別のリソースに対するルート
+      # 個別のリソースに対するルート(userの権限変更)
       member do
         patch :update_role
       end
