@@ -49,6 +49,9 @@ gem 'ransack'
 # メール送信API
 gem 'mailgun-ruby', '~>1.4.0'
 
+# メールアドレス検証
+gem 'email_validator', '~> 2.2'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
