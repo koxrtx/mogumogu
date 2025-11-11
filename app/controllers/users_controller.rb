@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  
+
   # マイページ表示
   def mypage
     @user = current_user
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name)
   end
 
-    # パスワード・メアドはDevise管理のため不要
+  # パスワード・メアドはDevise管理のため不要
   def user_params_for_normal_user
     # 通常ユーザーでも、メール・パスワードは別ページで変更
     params.require(:user).permit(:name)

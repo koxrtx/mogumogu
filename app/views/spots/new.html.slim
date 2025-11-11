@@ -26,22 +26,22 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 🏷️
-            label.text-pink-700.font-medium.text-xs 店舗名
-          = f.text_field :name, placeholder: t('spot.forms.name'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+            f.label.text-pink-700.font-medium.text-xs 店舗名
+          = f.text_field :name, placeholder: t('spots.forms.name'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 電話番号
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📞
-            label.text-pink-700.font-medium.text-xs 電話番号
-          = f.telephone_field :tel, placeholder: t('spot.forms.tel'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+            f.label.text-pink-700.font-medium.text-xs 電話番号
+          = f.telephone_field :tel, placeholder: t('spots.forms.tel'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 住所
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📍
-            label.text-pink-700.font-medium.text-xs 住所
-          = f.text_field :address, placeholder: t('spot.forms.address'), id: "address-input", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+            f.label.text-pink-700.font-medium.text-xs 住所
+          = f.text_field :address, placeholder: t('spots.forms.address'), id: "address-input", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 現在地ボタン
         button#current-address-btn.w-full.bg-pink-400.text-white.px-3.py-2.rounded-lg.hover:bg-pink-500.focus:outline-none.text-xs.font-medium.transition-all.duration-200.shadow-sm.hover:shadow-md.active:scale-95 type="button"
@@ -56,45 +56,45 @@ div class=page_classes
           .flex.items-center
             .text-xs.mr-1 🕐
             label.text-pink-700.font-medium.text-xs 営業時間
-          = f.text_field :opening_hours, placeholder: t('spot.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
+          = f.text_field :opening_hours, placeholder: t('spots.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
       / 子ども向け設備
       .bg-white.rounded-lg.p-3.border.border-pink-200
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm = t('spot.forms.child_facilities')
+          span.text-pink-700.font-bold.text-sm = t('spots.forms.child_facilities')
         
         .space-y-2
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :child_chair, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_chair')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.child_chair')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :tatami_seat, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.tatami_seat')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.tatami_seat')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :child_tableware, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_tableware')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.child_tableware')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :bring_baby_food, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.bring_baby_food')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.bring_baby_food')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :stroller_ok, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.stroller_ok')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.stroller_ok')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :child_menu, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.child_menu')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.child_menu')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :parking, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.parking')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.parking')
           
           label.flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100.hover:bg-pink-100.transition-colors.duration-200
             = f.check_box :other_facility, class: "text-pink-500 focus:ring-pink-300"
-            span.ml-2.text-pink-700.text-xs = t('spot.forms.other_facility')
+            span.ml-2.text-pink-700.text-xs = t('spots.forms.other_facility')
 
         / その他設備コメント
         .mt-3
@@ -117,7 +117,7 @@ div class=page_classes
 
       / 投稿ボタン
       .pt-4
-        = f.submit t('spot.buttons.submit'), class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
+        = f.submit t('spots.buttons.submit'), class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
 
   / フッター
   .text-center.mt-6.px-4

@@ -127,6 +127,8 @@ GEM
       railties (>= 6.1)
     drb (2.2.3)
     ed25519 (1.4.0)
+    email_validator (2.2.4)
+      activemodel
     erb (5.0.2)
     erubi (1.13.1)
     et-orbi (1.3.0)
@@ -518,6 +520,7 @@ DEPENDENCIES
   debug
   devise (= 4.9.4)
   dotenv-rails
+  email_validator (~> 2.2)
   geocoder
   html2slim
   image_processing (>= 1.2)

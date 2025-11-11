@@ -26,5 +26,4 @@ class PagesController < ApplicationController
       redirect_to terms_agreement_path
     end
   end
-
 end

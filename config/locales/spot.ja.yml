@@ -1,5 +1,17 @@
 ja:
-  spot:
+  # お店関連のモデル
+  activerecord:
+    attributes:
+      spot:
+        name: "お店の名前"
+        address: "住所"
+        images: "写真"
+  # お店の投稿関連
+  spots:
+    new:
+      title: "お店の投稿"
+    show:
+      title: "お店の情報"
     forms:
       name: "お店の名前"
       address: "住所"

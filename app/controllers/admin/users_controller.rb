@@ -1,8 +1,4 @@
-class Admin::UsersController < ApplicationController
-  # ユーザーがログインしているか
-  before_action :authenticate_user!
-  # 管理者か確認
-  before_action :admin_required
+class Admin::UsersController < Admin::BaseController
   # 対象ユーザー
   before_action :set_user, only: [:show, :destroy, :update_role]
 
@@ -29,15 +25,5 @@ class Admin::UsersController < ApplicationController
   def update_role
     @user.update(role: params[:role])
     redirect_to admin_users_path, notice: '権限を変更しました'
-  end
-
-  private
-
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  def admin_required
-    redirect_to root_path unless current_user.admin?
   end
 end

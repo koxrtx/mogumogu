@@ -27,7 +27,7 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 🏷️
-            p.text-pink-700.font-medium.text-xs = t('spot.forms.name')
+            p.text-pink-700.font-medium.text-xs = t('spots.forms.name')
           .bg-pink-50.rounded-lg.p-2.border.border-pink-100
             p.text-pink-800.text-sm.font-medium = @spot.name
 
@@ -35,7 +35,7 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📞
-            p.text-pink-700.font-medium.text-xs = t('spot.forms.tel')
+            p.text-pink-700.font-medium.text-xs = t('spots.forms.tel')
           .bg-pink-50.rounded-lg.p-2.border.border-pink-100
             p.text-pink-800.text-sm = @spot.tel
 
@@ -51,55 +51,55 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 🕐
-            p.text-pink-700.font-medium.text-xs = t('spot.forms.opening_hours')
+            p.text-pink-700.font-medium.text-xs = t('spots.forms.opening_hours')
           .bg-pink-50.rounded-lg.p-2.border.border-pink-100
             p.text-pink-800.text-sm = @spot.opening_hours
 
     / 子ども向け設備
     .bg-white.rounded-lg.p-3.border.border-pink-200
       .text-center.mb-3
-        span.text-pink-700.font-bold.text-sm = t('spot.forms.child_facilities')
+        span.text-pink-700.font-bold.text-sm = t('spots.forms.child_facilities')
       
       .space-y-2
         - if @spot.child_chair
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.child_chair')
+            p.text-pink-700.text-xs = t('spots.forms.child_chair')
         
         - if @spot.tatami_seat
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.tatami_seat')
+            p.text-pink-700.text-xs = t('spots.forms.tatami_seat')
         
         - if @spot.child_tableware
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.child_tableware')
+            p.text-pink-700.text-xs = t('spots.forms.child_tableware')
         
         - if @spot.bring_baby_food
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.bring_baby_food')
+            p.text-pink-700.text-xs = t('spots.forms.bring_baby_food')
         
         - if @spot.stroller_ok
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.stroller_ok')
+            p.text-pink-700.text-xs = t('spots.forms.stroller_ok')
         
         - if @spot.child_menu
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.child_menu')
+            p.text-pink-700.text-xs = t('spots.forms.child_menu')
         
         - if @spot.parking
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.parking')
+            p.text-pink-700.text-xs = t('spots.forms.parking')
         
         - if @spot.other_facility
           .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
             .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spot.forms.other_facility')
+            p.text-pink-700.text-xs = t('spots.forms.other_facility')
 
         / 設備がない場合のメッセージ
         - unless [@spot.child_chair, @spot.tatami_seat, @spot.child_tableware, @spot.bring_baby_food, @spot.stroller_ok, @spot.child_menu, @spot.parking, @spot.other_facility].any?
@@ -146,8 +146,8 @@ div class=page_classes
   / アクションボタン（ケータイ最適化）
   .mt-6.space-y-3.px-4
     .flex.space-x-3
-      = link_to t('spot.buttons.new_spot'), new_spot_path, class: "flex-1 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
-      = link_to t('spot.buttons.home'), root_path, class: "flex-1 bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
+      = link_to t('spots.buttons.new_spot'), new_spot_path, class: "flex-1 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
+      = link_to t('spots.buttons.home'), root_path, class: "flex-1 bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
 
   / シェアボタン
   .bg-white.rounded-lg.p-4.mt-4.mx-4.border.border-pink-200
