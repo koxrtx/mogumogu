@@ -27,7 +27,7 @@ class Spot < ApplicationRecord
   validate :images_count_limit
 
   # 閉店フラグ
-  enum :status, { open: 0, closed: 1 }
+  enum :business_status, { open: 0, closed: 1 }
 
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true

@@ -1,0 +1,10 @@
+- case request.status
+- when 'pending'
+  span.px-2.py-1.text-xs.font-semibold.text-yellow-800.bg-yellow-100.rounded-full
+    | 保留中
+- when 'approved'
+  span.px-2.py-1.text-xs.font-semibold.text-green-800.bg-green-100.rounded-full
+    | 承認済み
+- when 'rejected'
+  span.px-2.py-1.text-xs.font-semibold.text-red-800.bg-red-100.rounded-full
+    | 却下

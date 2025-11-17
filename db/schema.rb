@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_07_041048) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_16_103659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -210,11 +210,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_07_041048) do
     t.bigint "spot_id", null: false
     t.bigint "facility_tag_id"
     t.jsonb "request_data"
-    t.integer "checkbox", default: 0, null: false
+    t.integer "request_type", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "photo_delete_reason", null: false
+    t.text "photo_delete_reason"
     t.index ["facility_tag_id"], name: "index_spot_update_requests_on_facility_tag_id"
     t.index ["spot_id"], name: "index_spot_update_requests_on_spot_id"
     t.index ["user_id"], name: "index_spot_update_requests_on_user_id"
@@ -230,7 +230,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_07_041048) do
     t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
+    t.integer "business_status", default: 0, null: false
     t.boolean "child_chair", default: false
     t.boolean "tatami_seat", default: false
     t.boolean "child_tableware", default: false

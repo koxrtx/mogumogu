@@ -33,7 +33,11 @@ Rails.application.routes.draw do
   get "maps/search", to: "maps#search", as: :search_map
 
   # お店の情報投稿
-  resources :spots, only: [:new, :create, :show]
+  resources :spots, only: [:new, :create, :show] do
+    get 'update_requests/select_type', to: 'spot_update_requests#select_type'
+    # 特定のspotに対する修正依頼
+    resources :spot_update_requests, only: [:new, :create, :show]
+  end
 
   # 管理者画面
   namespace :admin do
@@ -47,6 +51,13 @@ Rails.application.routes.draw do
     end
     resources :spots, only: [:index, :show, :destroy]
     resources :inquiries, only: [:index, :show, :destroy]
+    resources :spot_update_requests, only: [:index, :show, :edit, :update,:destroy] do
+      member do
+        patch :approve  # 承認アクション
+        patch :reject   # 却下アクション
+      end
+    end
+
   end
 
   # 開発環境でメール確認

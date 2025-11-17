@@ -1,0 +1,195 @@
+.container.mt-4
+  .row
+    .col-12
+      h2.mb-4 店舗情報修正依頼の詳細確認
+      .alert.alert-info
+        | 依頼ID: #{@request.id} | 依頼日時: #{@request.created_at.strftime('%Y年%m月%d日 %H:%M')}
+
+  .row
+    / 左側：現在の店舗情報
+    .col-md-6
+      .card.border-primary
+        .card-header.bg-primary.text-white
+          h4.mb-0 現在の店舗情報
+        .card-body
+          h5 基本情報
+          table.table.table-striped
+            tbody
+              tr
+                th 店舗名
+                td #{@request.spot.name}
+              tr
+                th 住所
+                td #{@request.spot.address}
+              tr
+                th 電話番号
+                td #{@request.spot.tel || '未登録'}
+              tr
+                th 営業時間
+                td #{@request.spot.opening_hours || '未登録'}
+
+          / 子ども向け設備（ユーザー画面風）
+          .mt-4
+            .bg-white.rounded-lg.p-3.border.border-pink-200
+              .text-center.mb-3
+                span.text-pink-700.font-bold.text-sm 子ども向け設備
+
+              .space-y-2
+                - if @request.spot.child_chair
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子ども用椅子
+
+                - if @request.spot.tatami_seat
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 畳席
+
+                - if @request.spot.child_tableware
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子ども用食器
+
+                - if @request.spot.bring_baby_food
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 離乳食持込OK
+
+                - if @request.spot.stroller_ok
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs ベビーカー入店OK
+
+                - if @request.spot.child_menu
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子どもメニュー
+
+                - if @request.spot.parking
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 駐車場
+
+                - if @request.spot.other_facility
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs その他設備
+
+                / 設備がない場合のメッセージ
+                - unless [@request.spot.child_chair, @request.spot.tatami_seat, @request.spot.child_tableware, @request.spot.bring_baby_food, @request.spot.stroller_ok, @request.spot.child_menu, @request.spot.parking, @request.spot.other_facility].any?
+                  .text-center.py-4
+                    .text-base.mb-2 😊
+                    p.text-pink-600.text-xs 子ども向け設備の情報はまだ登録されていません
+
+          / その他設備コメント（条件付き表示）
+          - if @request.spot.other_facility_comment.present?
+            .mt-3
+              .bg-white.rounded-lg.p-3.border.border-pink-200
+                .text-xs.mr-1 📝
+                  p.text-pink-700.font-medium.text-xs その他設備の詳細
+                .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                  p.text-pink-800.text-sm.leading-relaxed #{@request.spot.other_facility_comment}
+
+    / 右側：修正依頼内容
+    .col-md-6
+      .card.border-warning
+        .card-header.bg-warning.text-dark
+          h4.mb-0 修正依頼内容
+        .card-body
+          h5 基本情報
+          table.table.table-striped
+            tbody
+              tr
+                th 店舗名
+                td #{@request.name}
+              tr
+                th 住所
+                td #{@request.address}
+              tr
+                th 電話番号
+                td #{@request.tel || '未登録'}
+              tr
+                th 営業時間
+                td #{@request.opening_hours || '未登録'}
+
+          / 子ども向け設備（ユーザー画面風）
+          .mt-4
+            .bg-white.rounded-lg.p-3.border.border-pink-200
+              .text-center.mb-3
+                span.text-pink-700.font-bold.text-sm 子ども向け設備
+
+              .space-y-2
+                - if checked?(@request.child_chair)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子ども用椅子
+
+                - if checked?(@request.tatami_seat)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 畳席
+
+                - if checked?(@request.child_tableware)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子ども用食器
+
+                - if checked?(@request.bring_baby_food)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 離乳食持込OK
+
+                - if checked?(@request.stroller_ok)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs ベビーカー入店OK
+
+                - if checked?(@request.child_menu)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 子どもメニュー
+
+                - if checked?(@request.parking)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs 駐車場
+
+                - if checked?(@request.other_facility)
+                  .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
+                    .text-xs.mr-2 ✅
+                    p.text-pink-700.text-xs その他設備
+
+                / 設備がない場合のメッセージ
+                - facility_items = [@request.child_chair, @request.tatami_seat, @request.child_tableware, @request.bring_baby_food, @request.stroller_ok, @request.child_menu, @request.parking, @request.other_facility]
+                - unless facility_items.any? { |item| checked?(item) }
+                  .text-center.py-4
+                    .text-base.mb-2 😊
+                    p.text-pink-600.text-xs 子ども向け設備の情報はまだ登録されていません
+
+          / 修正理由・コメントセクション（other_facility_comment を利用）
+          - if @request.other_facility_comment.present?
+            .section
+              .section-header.bg-gradient-to-r.from-green-500.to-teal-500.text-white.p-6
+                h2.text-xl.font-semibold.flex.items-center
+                  span.mr-2 📝
+                  | 修正理由・詳細情報
+                p.text-green-100.text-sm.mt-1 修正する理由や詳細情報があれば教えてください
+
+              .section-content.p-6
+                .bg-white.rounded-lg.p-3.border.border-yellow-300
+                  .flex.items-center.text-xs.mr-1
+                    span 📝
+                    p.text-yellow-800.font-medium.text-xs.ml-1 修正理由・コメント
+
+                  .bg-yellow-50.rounded-lg.p-2.border.border-yellow-200.mt-2
+                    p.text-yellow-900.text-sm.leading-relaxed= @request.other_facility_comment
+
+  / 承認・却下ボタン
+  .row.mt-4
+    .col-12.text-center
+      = form_with model: [:admin, @request], local: true, class: 'd-inline' do |f|
+        = f.submit '承認して反映',class: 'btn btn-success btn-lg me-3',name: 'commit', value: 'approve',data: { confirm: '修正内容を承認して店舗情報に反映しますか？' }
+        = f.submit '却下', class: 'btn btn-danger btn-lg',name: 'commit',value: 'reject', data: { confirm: '修正依頼を却下しますか？' }
+
+      .mt-3
+        = link_to '一覧に戻る', admin_spot_update_requests_path, class: 'btn btn-outline-secondary'
