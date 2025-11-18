@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_16_103659) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_18_061952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,12 +50,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_16_103659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_agreements_on_user_id"
-  end
-
-  create_table "facility_tags", force: :cascade do |t|
-    t.string "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "inquiries", force: :cascade do |t|
@@ -188,34 +182,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_16_103659) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
-  create_table "spot_facilities", force: :cascade do |t|
-    t.bigint "spot_id", null: false
-    t.bigint "facility_tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["facility_tag_id"], name: "index_spot_facilities_on_facility_tag_id"
-    t.index ["spot_id", "facility_tag_id"], name: "index_spot_facilities_on_spot_id_and_facility_tag_id", unique: true
-    t.index ["spot_id"], name: "index_spot_facilities_on_spot_id"
-  end
-
-  create_table "spot_update_request_images", force: :cascade do |t|
-    t.bigint "spot_update_request_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["spot_update_request_id"], name: "index_spot_update_request_images_on_spot_update_request_id"
-  end
-
   create_table "spot_update_requests", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "spot_id", null: false
-    t.bigint "facility_tag_id"
     t.jsonb "request_data"
     t.integer "request_type", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "photo_delete_reason"
-    t.index ["facility_tag_id"], name: "index_spot_update_requests_on_facility_tag_id"
     t.index ["spot_id"], name: "index_spot_update_requests_on_spot_id"
     t.index ["user_id"], name: "index_spot_update_requests_on_user_id"
   end
@@ -270,10 +245,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_16_103659) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "spot_facilities", "facility_tags"
-  add_foreign_key "spot_facilities", "spots"
-  add_foreign_key "spot_update_request_images", "spot_update_requests"
-  add_foreign_key "spot_update_requests", "facility_tags"
   add_foreign_key "spot_update_requests", "spots"
   add_foreign_key "spot_update_requests", "users"
   add_foreign_key "spots", "users"
