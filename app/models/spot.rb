@@ -29,6 +29,9 @@ class Spot < ApplicationRecord
   # 閉店フラグ
   enum :business_status, { open: 0, closed: 1 }
 
+  # 検索対象として有効な店舗のみ
+  scope :active, -> { where(business_status: :open) }
+
   # belongs_to :userがあるからバリデーションが自動でかかるため user_idのバリデーションは不要
   validates :name, presence: true
   validates :address, presence: true, uniqueness: { message: "この住所はすでに登録されています" }

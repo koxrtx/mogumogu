@@ -36,34 +36,42 @@ Rails.application.routes.draw do
   resources :spots, only: [:new, :create, :show] do
     get 'update_requests/select_type', to: 'spot_update_requests#select_type'
     # 特定のspotに対する修正依頼
-    resources :spot_update_requests, only: [:new, :create, :show]
+    resources :spot_update_requests, only: [:new, :create, :show] do
+      # 閉店依頼
+      post :closure_report, on: :collection
+    end
   end
 
   # 管理者画面
   namespace :admin do
     root to: "dashboard#index"
+
     # ユーザー管理
     resources :users, only: [:index, :show, :destroy] do
-      # 個別のリソースに対するルート(userの権限変更)
       member do
         patch :update_role
       end
     end
+
+    # スポット管理
     resources :spots, only: [:index, :show, :destroy]
-    resources :inquiries, only: [:index, :show, :destroy]do
-    member do
-      patch :mark_as_pending
-      patch :mark_as_in_progress
-      patch :mark_as_completed
-    end
-  end
-    resources :spot_update_requests, only: [:index, :show, :edit, :update,:destroy] do
+
+    # スポット修正依頼の一覧・承認・却下・編集・削除
+    resources :spot_update_requests, only: [:index, :show, :edit, :update, :destroy] do
       member do
-        patch :approve  # 承認アクション
-        patch :reject   # 却下アクション
+        patch :approve
+        patch :reject
       end
     end
 
+    # 問い合わせ管理
+    resources :inquiries, only: [:index, :show, :destroy] do
+      member do
+        patch :mark_as_pending
+        patch :mark_as_in_progress
+        patch :mark_as_completed
+      end
+    end
   end
 
   # 開発環境でメール確認

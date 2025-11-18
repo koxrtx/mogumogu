@@ -11,14 +11,14 @@
         .flex.items-center.justify-center
           span 写真削除・変更依頼
 
-      / 登録情報を変更依頼  
+      / 登録情報を変更依頼
       = link_to new_spot_spot_update_request_path(@spot, type: 'info_update'),
         class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
           span 登録情報を変更依頼
 
-      / 閉店報告
-      = link_to new_spot_spot_update_request_path(@spot, type: 'closure_report'),
-        class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
+      = button_to closure_report_spot_spot_update_requests_path(@spot),
+          method: :post,
+          class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
           span 閉店報告

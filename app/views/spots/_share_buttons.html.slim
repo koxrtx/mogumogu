@@ -1,0 +1,29 @@
+
+.bg-white.rounded-lg.p-4.mt-4.mx-4.border.border-pink-200
+  .text-center.mb-3
+    p.text-pink-700.font-bold.text-sm みんなにシェアしよう！
+
+  .flex.justify-center.space-x-8
+    / LINE共有ボタン
+    = link_to "https://social-plugins.line.me/lineit/share?url=#{CGI.escape(request.url)}",
+              title: "LINEでシェア",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "inline-block relative group bg-green-50 hover:bg-green-100 p-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95" do
+      = image_tag "LINE_Brand_icon.png", class: "w-8 h-8 transition-transform duration-200 group-hover:scale-110", alt: "LINEロゴ"
+      / ツールチップ
+      .absolute.bottom-full.left-1/2.transform.-translate-x-1/2.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
+        | LINEでシェア
+        .absolute.top-full.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
+
+    / X共有ボタン
+    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.url)}&text=#{CGI.escape("子連れで外食？#{spot.name}の子ども用設備や座敷、ベビーカーOK情報をチェック 🍼")}&hashtags=#{CGI.escape('もぐもぐマップ')}",
+              title: "Xでシェア",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "inline-block relative group bg-gray-50 hover:bg-gray-100 p-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95" do
+      = image_tag "logo-black.png", class: "w-8 h-8 transition-transform duration-200 group-hover:scale-110", alt: "Xロゴ"
+      / ツールチップ
+      .absolute.bottom-full.left-1/2.transform.-translate-x-1/2.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
+        | Xでシェア
+        .absolute.top-full.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800

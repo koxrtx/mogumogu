@@ -42,20 +42,10 @@ div class=page_classes
           = f.label :opening_hours, "営業時間", class: "block text-sm font-medium text-gray-700 mb-1"
           = f.text_area :opening_hours, rows: 3, class: "form-input w-full p-2 border border-gray-300 rounded"
 
-      / 位置情報セクション
-      .location-section.mb-6
-        h3.text-lg.font-medium.mb-3.text-gray-700 位置情報
-        .grid.grid-cols-3.gap-4
-          .form-group
-            = f.label :latitude, "緯度", class: "block text-sm font-medium text-gray-700 mb-1"
-            = f.number_field :latitude, step: :any, class: "form-input w-full p-2 border border-gray-300 rounded"
-          .form-group
-            = f.label :longitude, "経度", class: "block text-sm font-medium text-gray-700 mb-1"
-            = f.number_field :longitude, step: :any, class: "form-input w-full p-2 border border-gray-300 rounded"
           .form-group
             = f.label :business_status, "営業状況", class: "block text-sm font-medium text-gray-700 mb-1"
             = f.select :business_status,
-              options_for_select([['営業中', 'OPERATIONAL'],['一時休業', 'TEMPORARILY_CLOSED'], ['閉業', 'CLOSED_PERMANENTLY'] ], @request.business_status), 
+              options_for_select([['閉店', 2]], @request.business_status),
               { include_blank: "選択してください" },
               { class: "form-select w-full p-2 border border-gray-300 rounded" }
 

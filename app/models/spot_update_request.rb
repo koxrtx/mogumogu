@@ -47,6 +47,7 @@ class SpotUpdateRequest < ApplicationRecord
   scope :today, -> { where(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
   scope :this_week, -> { where(created_at: Time.current.beginning_of_week..Time.current.end_of_week) }
 
+
   # 承認処理メソッド
   def approve!
     transaction do
@@ -56,6 +57,9 @@ class SpotUpdateRequest < ApplicationRecord
 
       # 店舗情報更新タイプの場合のみ店舗データに反映
       apply_to_spot if spot_update?
+
+      # 閉店依頼タイプの場合はスポットの営業状況を閉店にする
+      spot.update!(business_status: :closed) if closure?
 
       true
     end

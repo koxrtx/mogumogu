@@ -11,139 +11,77 @@ div class=page_classes
           .text-lg 🎉
         h5.text-sm.font-semibold.mb-2.text-pink-700.text-center 投稿ありがとうございました！
         p.text-pink-600.text-xs.text-center.leading-relaxed あなたの投稿が他のママパパの役に立ちます✨
-        / 吹き出しの三角
         .absolute.left-1/2.transform.-translate-x-1/2.-bottom-3.w-0.h-0.border-l-6.border-r-6.border-t-6.border-l-transparent.border-r-transparent.border-t-pink-300
 
-  / メイン情報枠
-  .max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4.mx-4
+  / 閉店判定
+  - if @spot.closed?
+    .text-center.text-gray-400.mt-6
+      p このスポットは閉店しました
 
-    / 店舗情報
-    .bg-white.rounded-lg.p-3.border.border-pink-200
-      .text-center.mb-3
-        span.text-pink-700.font-bold.text-sm 店舗情報
-
-      .space-y-3
-        / 店舗名
-        .space-y-1
-          .flex.items-center
-            .text-xs.mr-1 🏷️
-            p.text-pink-700.font-medium.text-xs = t('spots.forms.name')
-          .bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            p.text-pink-800.text-sm.font-medium = @spot.name
-
-        / 電話番号
-        .space-y-1
-          .flex.items-center
-            .text-xs.mr-1 📞
-            p.text-pink-700.font-medium.text-xs = t('spots.forms.tel')
-          .bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            p.text-pink-800.text-sm = @spot.tel
-
-        / 住所
-        .space-y-1
-          .flex.items-center
-            .text-xs.mr-1 📍
-            p.text-pink-700.font-medium.text-xs = t('spot.forms.address')
-          .bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            p.text-pink-800.text-sm.leading-relaxed = @spot.address
-
-        / 営業時間
-        .space-y-1
-          .flex.items-center
-            .text-xs.mr-1 🕐
-            p.text-pink-700.font-medium.text-xs = t('spots.forms.opening_hours')
-          .bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            p.text-pink-800.text-sm = @spot.opening_hours
-
-    / 子ども向け設備
-    .bg-white.rounded-lg.p-3.border.border-pink-200
-      .text-center.mb-3
-        span.text-pink-700.font-bold.text-sm = t('spots.forms.child_facilities')
-      
-      .space-y-2
-        - if @spot.child_chair
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.child_chair')
-        
-        - if @spot.tatami_seat
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.tatami_seat')
-        
-        - if @spot.child_tableware
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.child_tableware')
-        
-        - if @spot.bring_baby_food
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.bring_baby_food')
-        
-        - if @spot.stroller_ok
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.stroller_ok')
-        
-        - if @spot.child_menu
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.child_menu')
-        
-        - if @spot.parking
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.parking')
-        
-        - if @spot.other_facility
-          .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
-            .text-xs.mr-2 ✅
-            p.text-pink-700.text-xs = t('spots.forms.other_facility')
-
-        / 設備がない場合のメッセージ
-        - unless [@spot.child_chair, @spot.tatami_seat, @spot.child_tableware, @spot.bring_baby_food, @spot.stroller_ok, @spot.child_menu, @spot.parking, @spot.other_facility].any?
-          .text-center.py-4
-            .text-base.mb-2 😊
-            p.text-pink-600.text-xs 子ども向け設備の情報はまだ登録されていません
-
-    / その他設備コメント（条件付き表示）
-    - if @spot.other_facility_comment.present?
-      .bg-white.rounded-lg.p-3.border.border-pink-200
-        .text-xs.mr-1 📝
-          p.text-pink-700.font-medium.text-xs その他設備の詳細
-        .bg-pink-50.rounded-lg.p-2.border.border-pink-100
-          p.text-pink-800.text-sm.leading-relaxed = @spot.other_facility_comment
-
-    / 写真表示
-    - if display_all_image_urls(@spot, size: :detail).any? { |url| url.present? }
+    / 閉店スポットはメイン情報のみ
+    .max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4.mx-4
       .bg-white.rounded-lg.p-3.border.border-pink-200
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm 子ども用メニュー写真
+          span.text-pink-700.font-bold.text-sm 店舗情報
 
-        .grid.grid-cols-2.gap-2.justify-items-center
-          - display_all_image_urls(@spot, size: :detail).each do |detail_url|
-            - if detail_url.present?
-              img src=detail_url class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 shadow-sm hover:shadow-md border border-pink-100" alt="#{@spot.name}の画像" loading="lazy" onclick="openModal('#{detail_url}')"
+        .space-y-3
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 🏷️
+              p.text-pink-700.font-medium.text-xs 店舗名
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm.font-medium = @spot.name
 
-        / モーダル部分（可愛くスタイリング）
-        #modal.hidden.fixed.inset-0.bg-black.bg-opacity-75.flex.items-center.justify-center.z-50
-          .relative.max-h-full.max-w-full.p-4
-            img#modalImage.max-h-full.max-w-full.rounded-lg.shadow-2xl
-            button.absolute.-top-2.-right-2.bg-pink-500.hover:bg-pink-600.text-white.w-8.h-8.rounded-full.flex.items-center.justify-center.text-lg.font-bold.transition-colors.duration-200.shadow-lg onclick="closeModal()" ×
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 📍
+              p.text-pink-700.font-medium.text-xs 住所
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm.leading-relaxed = @spot.address
 
-        script
-          | function openModal(src){
-          |   document.getElementById('modalImage').src = src;
-          |   document.getElementById('modal').classList.remove('hidden');
-          |   document.body.style.overflow = 'hidden';
-          | }
-          | function closeModal(){
-          |   document.getElementById('modal').classList.add('hidden');
-          |   document.body.style.overflow = 'auto';
-          | }
+  - else
+    / 通常のスポット詳細（閉店でない場合）
+    / メイン情報枠
+    .max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4.mx-4
 
-  / 修正依頼ボタン
+      / 店舗情報
+      .bg-white.rounded-lg.p-3.border.border-pink-200
+        .text-center.mb-3
+          span.text-pink-700.font-bold.text-sm 店舗情報
+
+        .space-y-3
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 🏷️
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.name')
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm.font-medium = @spot.name
+
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 📞
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.tel')
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm = @spot.tel
+
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 📍
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.address')
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm.leading-relaxed = @spot.address
+
+          .space-y-1
+            .flex.items-center
+              .text-xs.mr-1 🕐
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.opening_hours')
+            .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+              p.text-pink-800.text-sm = @spot.opening_hours
+
+      / 子ども向け設備やその他情報・写真表示
+      = render 'spot_details', spot: @spot
+
+  / 修正依頼ボタンやアクション・シェアボタンは共通で表示
   .max-w-sm.mx-auto.mt-6.mx-4
     .bg-gradient-to-r.from-orange-400.to-pink-500.rounded-lg.p-4.text-center.shadow-md
       .mb-3
@@ -163,36 +101,7 @@ div class=page_classes
       = link_to t('spots.buttons.home'), root_path, class: "flex-1 bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
 
   / シェアボタン
-  .bg-white.rounded-lg.p-4.mt-4.mx-4.border.border-pink-200
-    .text-center.mb-3
-      p.text-pink-700.font-bold.text-sm みんなにシェアしよう！
-
-    .flex.justify-center.space-x-8
-      / LINE共有ボタン
-      = link_to "https://social-plugins.line.me/lineit/share?url=#{CGI.escape(request.url)}",
-                title: "LINEでシェア",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                class: "inline-block relative group bg-green-50 hover:bg-green-100 p-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95" do
-        = image_tag "LINE_Brand_icon.png", class: "w-8 h-8 transition-transform duration-200 group-hover:scale-110", alt: "LINEロゴ"
-        / ツールチップ
-        .absolute.bottom-full.left-1/2.transform.-translate-x-1/2.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
-          | LINEでシェア
-          / 吹き出しの三角形
-          .absolute.top-full.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
-
-      / X共有ボタン
-      = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.url)}&text=#{CGI.escape("子連れで外食？#{@spot.name}の子ども用設備や座敷、ベビーカーOK情報をチェック 🍼")}&hashtags=#{CGI.escape('もぐもぐマップ')}",
-                title: "Xでシェア",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                class: "inline-block relative group bg-gray-50 hover:bg-gray-100 p-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95" do
-        = image_tag "logo-black.png", class: "w-8 h-8 transition-transform duration-200 group-hover:scale-110", alt: "Xロゴ"
-        / ツールチップ
-        .absolute.bottom-full.left-1/2.transform.-translate-x-1/2.mb-2.px-2.py-1.text-xs.text-white.bg-gray-800.rounded.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap
-          | Xでシェア
-          / 吹き出しの三角形
-          .absolute.top-full.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
+  = render 'share_buttons', spot: @spot
 
   .text-center.mt-6.mb-8.px-4
     p.text-pink-500.text-xs.leading-relaxed 

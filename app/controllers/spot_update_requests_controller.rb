@@ -1,5 +1,5 @@
 class SpotUpdateRequestsController < ApplicationController
-  before_action :set_spot, only: [:select_type, :new, :create]
+  before_action :set_spot, only: [:select_type, :new, :create, :closure_report]
 
   def new
     @request_type = params[:type]
@@ -12,23 +12,29 @@ class SpotUpdateRequestsController < ApplicationController
 
   def create
     @request = @spot.spot_update_requests.build(spot_update_request_params)
-    
-    # デバッグ用：送信されたパラメータを確認
-  Rails.logger.debug "=== 送信されたパラメータ ==="
-  Rails.logger.debug spot_update_request_params.inspect
-  
-  # デバッグ用：保存前の@requestの値を確認
-  Rails.logger.debug "=== 保存前の@requestの値 ==="
-  Rails.logger.debug "child_chair: #{@request.child_chair}"
-  Rails.logger.debug "bring_baby_food: #{@request.bring_baby_food}"
-  Rails.logger.debug "child_menu: #{@request.child_menu}"
-  
+
     if @request.save
       redirect_to @request.spot, notice: '修正依頼を送信しました'
     else
       flash.now[:alert] = "送信に失敗しました。入力内容を確認してください。"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  # 閉店報告
+  def closure_report
+    @request = @spot.spot_update_requests.new(
+      request_type: :closure,
+      status: 'pending'
+    )
+
+    if @request.save
+      flash[:notice] = "閉店報告を送信しました。管理者が確認します。"
+    else
+      flash[:alert] = "送信に失敗しました。"
+    end
+
+    redirect_to @spot
   end
 
   private

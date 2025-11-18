@@ -7,7 +7,11 @@ class Admin::SpotUpdateRequestsController < Admin::BaseController
     @q = SpotUpdateRequest.ransack(params[:q])
 
     # 検索結果
-    @requests = @q.result.recent.page(params[:page]).per(10)
+    @requests = @q.result
+                .where(request_type: [:spot_update, :closure])
+                .recent
+                .page(params[:page])
+                .per(10)
 
     # 統計情報（ダッシュボードや上部表示用）
     @stats = {
