@@ -1,4 +1,4 @@
-.admin-inquiry-detail
+div class=page_classes
   h1.text-2xl.font-bold.mb-6.text-center 問い合わせ詳細
 
   / 戻るボタン
@@ -12,7 +12,6 @@
     .card-header.bg-gray-50.px-6.py-4.border-b.border-gray-200
       .flex.justify-between.items-center
         .flex.items-center.gap-4
-          h2.text-xl.font-semibold = @inquiry.subject
           = render 'status_badge', inquiry: @inquiry
         .text-sm.text-gray-500
           | ID: #{@inquiry.id} | 受信日時: #{@inquiry.created_at.strftime("%Y年%m月%d日 %H:%M")}
@@ -28,9 +27,6 @@
           .info-item.mb-2
             .label.text-sm.font-medium.text-gray-600 メールアドレス
             .value.text-gray-900 = @inquiry.email
-          .info-item.mb-2
-            .label.text-sm.font-medium.text-gray-600 電話番号
-            .value.text-gray-900 = @inquiry.phone.present? ? @inquiry.phone : "未入力"
 
         .status-section
           h3.text-lg.font-medium.mb-3.text-gray-700 ステータス管理
@@ -43,7 +39,7 @@
       .content-section
         h3.text-lg.font-medium.mb-3.text-gray-700 問い合わせ内容
         .content-box.bg-gray-50.p-4.rounded.border
-          = simple_format(@inquiry.message)
+          = simple_format(@inquiry.inquiry_comment)
 
     / フッター部分（削除ボタンなど）
     .card-footer.bg-gray-50.px-6.py-4.border-t.border-gray-200

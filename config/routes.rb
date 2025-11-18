@@ -50,7 +50,13 @@ Rails.application.routes.draw do
       end
     end
     resources :spots, only: [:index, :show, :destroy]
-    resources :inquiries, only: [:index, :show, :destroy]
+    resources :inquiries, only: [:index, :show, :destroy]do
+    member do
+      patch :mark_as_pending
+      patch :mark_as_in_progress
+      patch :mark_as_completed
+    end
+  end
     resources :spot_update_requests, only: [:index, :show, :edit, :update,:destroy] do
       member do
         patch :approve  # 承認アクション

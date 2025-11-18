@@ -1,4 +1,4 @@
-.admin-spot-update-requests
+div class=page_classes
   h1.text-2xl.font-bold.mb-6.text-center 店舗情報修正依頼管理
 
   / 戻るボタン
@@ -20,11 +20,22 @@
 
   / 検索フォーム
   .search-section.mb-6
-    = search_form_for @q, url: admin_spot_update_requests_path, class: "flex gap-2" do |f|
-      = f.search_field :spot_name_cont, placeholder: "店舗名で検索", class: "form-input flex-1"
-      = f.select :status_eq, options_for_select([['全て', ''], ['保留', 'pending'], ['承認済み', 'approved'], ['却下', 'rejected']], params.dig(:q, :status_eq)), {}, { class: "form-select" }
-      = f.submit "検索", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    = search_form_for @q, url: admin_spot_update_requests_path, class: "flex flex-wrap gap-2 items-center" do |f|
 
+      / 店舗名検索
+      = f.search_field :spot_name_cont,
+          placeholder: "店舗名で検索",
+          class: "flex-1 min-w-[200px] border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+      / ステータス選択
+      = f.select :status_eq,
+          options_for_select([['全て', ''], ['保留', 0],['承認済み', 1],['却下', 2]], params.dig(:q, :status_eq)),
+          {},
+          class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+      / 検索ボタン
+      = f.submit "検索",
+          class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
   / 依頼一覧テーブル
   .requests-table.bg-white.rounded.shadow
     - if @requests.any?

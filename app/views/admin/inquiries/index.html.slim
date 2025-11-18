@@ -1,4 +1,4 @@
-.admin-inquiries
+div class=page_classes
   h1.text-2xl.font-bold.mb-4.text-center 問い合わせ管理
 
   / 統計情報ダッシュボード
@@ -24,7 +24,7 @@
         = f.text_field :email_cont, placeholder: "メールで検索", class: "border rounded px-3 py-2 w-48"
       .flex.flex-col
         = f.label :status_eq, "ステータス", class: "text-sm text-gray-600 mb-1"
-        = f.select :status_eq, options_for_select([['すべて', ''], ['保留', 'pending'], ['対応中', 'in_progress'], ['完了', 'completed']], params.dig(:q, :status_eq)), {}, { class: "border rounded px-3 py-2 w-32" }
+        = f.select :status_eq, options_for_select([['すべて', ''], ['保留', 0], ['対応中', 1], ['完了', 2]], params.dig(:q, :status_eq)), {}, class: "border rounded px-3 py-2 w-32"
       .flex.flex-col.justify-end
         = f.submit "検索", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
         = link_to "リセット", admin_inquiries_path, class: "text-sm text-gray-500 hover:text-gray-700 mt-1 text-center"
@@ -41,20 +41,18 @@
           th.border.border-gray-300.px-3.py-2 ID
           th.border.border-gray-300.px-3.py-2 ステータス
           th.border.border-gray-300.px-3.py-2 名前
-          th.border.border-gray-300.px-3.py-2 メール
-          th.border.border-gray-300.px-3.py-2 件名
+          th.border.border-gray-300.px-3.py-2 メアド
+          th.border.border-gray-300.px-3.py-2 内容
           th.border.border-gray-300.px-3.py-2 受信日時
-          th.border.border-gray-300.px-3.py-2 アクション
       tbody
         - @inquiries.each do |inquiry|
-          tr class=("bg-yellow-50" if inquiry.unread?)
+          tr class=("bg-yellow-50" if inquiry.pending?)
             td.border.border-gray-300.px-3.py-2 = inquiry.id
             td.border.border-gray-300.px-3.py-2
               = render 'status_badge', inquiry: inquiry
             td.border.border-gray-300.px-3.py-2 = inquiry.name
-            td.border.border-gray-300.px-3.py-2 = inquiry
-            td.border.border-gray-300.px-3.py-2 = truncate(inquiry.email, length: 30)
-            td.border.border-gray-300.px-3.py-2 = truncate(inquiry.subject, length: 40)
+            td.border.border-gray-300.px-3.py-2 = inquiry.email
+            td.border.border-gray-300.px-3.py-2 = truncate(inquiry.inquiry_comment, length: 20)
             td.border.border-gray-300.px-3.py-2 = inquiry.created_at.strftime("%Y/%m/%d %H:%M")
             td.border.border-gray-300.px-3.py-2
               .flex.gap-1.flex-wrap
