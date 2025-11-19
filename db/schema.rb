@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_18_061952) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_19_020915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -182,6 +182,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_061952) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "spot_image_update_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "spot_id", null: false
+    t.jsonb "request_data"
+    t.integer "request_type"
+    t.integer "status", default: 0
+    t.text "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot_id"], name: "index_spot_image_update_requests_on_spot_id"
+    t.index ["user_id"], name: "index_spot_image_update_requests_on_user_id"
+  end
+
   create_table "spot_update_requests", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "spot_id", null: false
@@ -245,6 +258,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_061952) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "spot_image_update_requests", "spots"
+  add_foreign_key "spot_image_update_requests", "users"
   add_foreign_key "spot_update_requests", "spots"
   add_foreign_key "spot_update_requests", "users"
   add_foreign_key "spots", "users"

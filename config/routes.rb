@@ -64,6 +64,14 @@ Rails.application.routes.draw do
       end
     end
 
+    # 写真依頼
+    resources :spot_image_update_requests, only: [:index, :show, :edit, :update, :destroy] do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
+
     # 問い合わせ管理
     resources :inquiries, only: [:index, :show, :destroy] do
       member do

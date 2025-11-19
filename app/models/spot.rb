@@ -8,8 +8,6 @@ class Spot < ApplicationRecord
 
   # 店舗情報が消えたら設備情報や写真・修正依頼も消える楔形
   belongs_to :user
-  has_many :spot_facilities, dependent: :destroy
-  has_many :facility_tags, through: :spot_facilities
   has_many :spot_update_requests, dependent: :destroy
 
   # ファイルをレコードに添付する
@@ -25,6 +23,15 @@ class Spot < ApplicationRecord
 
   # 写真枚数制限
   validate :images_count_limit
+  # 写真枚数カウント
+  def images_count
+    images.count
+  end
+
+  # 写真残り枚数カウント
+  def images_remaining_count
+    3 - images.count
+  end
 
   # 閉店フラグ
   enum :business_status, { open: 0, closed: 1 }
@@ -41,11 +48,11 @@ class Spot < ApplicationRecord
   def normalize_image_filenames
     images.each do |image|
       original_filename = image.blob.filename.to_s
-      
+
       # 問題のあるファイル名かチェック
       if problematic_filename?(original_filename)
         safe_filename = sanitize_filename(original_filename)
-        
+
         # ファイル名を更新
         image.blob.update!(filename: safe_filename)
         Rails.logger.info "ファイル名を正規化しました: #{original_filename} → #{safe_filename}"
@@ -54,33 +61,33 @@ class Spot < ApplicationRecord
   end
 
   def sanitize_filename(filename)
-  extension = File.extname(filename)
-  name_without_ext = File.basename(filename, extension)
-  
-  # 特殊文字を安全な文字に変換
-  safe_name = name_without_ext
+    extension = File.extname(filename)
+    name_without_ext = File.basename(filename, extension)
+
+    # 特殊文字を安全な文字に変換
+    safe_name = name_without_ext
                 .gsub(/[^\w\-_]/, '_')  # 英数字、ハイフン、アンダースコア以外を_に変換
                 .gsub(/_+/, '_')        # 連続する_を1つに
                 .gsub(/^_+|_+$/, '')    # 先頭と末尾の_を除去
-  
-  # 空になった場合のフォールバック
-  safe_name = 'image' if safe_name.blank?
-  
-  # タイムスタンプを追加して一意性を確保
-  timestamp = Time.current.strftime('%Y%m%d_%H%M%S')
-  "#{safe_name}_#{timestamp}#{extension}"
-end
 
-def problematic_filename?(filename)
-  return false if filename.blank?
+    # 空になった場合のフォールバック
+    safe_name = 'image' if safe_name.blank?
+
+    # タイムスタンプを追加して一意性を確保
+    timestamp = Time.current.strftime('%Y%m%d_%H%M%S')
+    "#{safe_name}_#{timestamp}#{extension}"
+  end
+
+  def problematic_filename?(filename)
+    return false if filename.blank?
   
-  # 特殊文字をチェック
-  filename.match?(/[^\w\-_.]/) ||
-  filename.include?(' ') ||
-  filename.include?('(') ||
-  filename.include?(')') ||
-  filename.include?('%')
-end
+    # 特殊文字をチェック
+    filename.match?(/[^\w\-_.]/) ||
+    filename.include?(' ') ||
+    filename.include?('(') ||
+    filename.include?(')') ||
+    filename.include?('%')
+  end
 
   # 住所登録したときの例外エラー
   def address_be_geocode
@@ -105,7 +112,7 @@ end
     end
   end
 
-   # Ransackで検索可能な属性を明示的に指定
+  # Ransackで検索可能な属性を明示的に指定
   def self.ransackable_attributes(auth_object = nil)
     %w[
       name
@@ -116,5 +123,4 @@ end
   def self.ransackable_associations(auth_object = nil)
     []
   end
-
 end

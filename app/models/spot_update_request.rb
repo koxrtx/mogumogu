@@ -16,7 +16,6 @@ class SpotUpdateRequest < ApplicationRecord
   # 店舗情報修正依頼時にはログインしてないユーザーもできる設計
   belongs_to :user, optional: true
   belongs_to :spot
-  belongs_to :facility_tag, optional: true
   has_many :spot_update_request_images, dependent: :destroy
 
   # enum 定義

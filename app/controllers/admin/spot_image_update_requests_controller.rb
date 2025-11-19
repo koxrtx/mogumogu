@@ -1,4 +1,4 @@
-class Admin::SpotUpdateRequestsController < Admin::BaseController
+class Admin::SpotImageUpdateRequestsController < Admin::BaseController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   before_action :set_spot_from_request, only: [:show, :edit]
 
@@ -7,22 +7,23 @@ class Admin::SpotUpdateRequestsController < Admin::BaseController
 
   def index
     # 検索
-    @q = SpotUpdateRequest.ransack(params[:q])
+    @q = SpotImageUpdateRequest.ransack(params[:q])
 
     # 検索結果
     @requests = @q.result
-                      .where(request_type: [:spot_update, :closure])
-                      .recent
-                .page(params[:page])
-                .per(10)
+                  .where(request_type: [:add, :remove])
+                  .recent
+                  .page(params[:page])
+                  .per(10)
 
     # 統計情報（ダッシュボードや上部表示用）
     @stats = {
-      pending: SpotUpdateRequest.pending.count,          # 未処理の依頼件数
-      today: SpotUpdateRequest.today.count,              # 今日届いた依頼件数
-      this_week: SpotUpdateRequest.this_week.count       # 今週届いた依頼件数
+      pending: SpotImageUpdateRequest.pending.count,          # 未処理の依頼件数
+      today: SpotImageUpdateRequest.today.count,              # 今日届いた依頼件数
+      this_week: SpotImageUpdateRequest.this_week.count       # 今週届いた依頼件数
     }
   end
+
 
   def show
   end
@@ -30,7 +31,7 @@ class Admin::SpotUpdateRequestsController < Admin::BaseController
   def edit
   end
 
-  # 管理者側に店舗情報修正依頼きたときのコントローラー
+  # 管理者側に写真修正依頼きたときのコントローラー
   def update
     begin
       # commitパラメータで処理を分岐
@@ -61,16 +62,13 @@ class Admin::SpotUpdateRequestsController < Admin::BaseController
   private
 
 
+
   # admin_paramsは通常の更新時のみ使用
   # 承認・却下処理では呼び出されないため、パラメータエラーが発生しない
   def admin_params
-    params.require(:spot_update_request).permit(
-      :status,
-      :name, :address, :tel, :opening_hours, :other_facility_comment,
-      :latitude, :longitude, :business_status,
-      # 子ども向け設備のパラメータ
-      :child_chair, :tatami_seat, :child_tableware, :bring_baby_food,
-      :stroller_ok, :child_menu, :parking, :other_facility
+    params.require(:spot_image_update_request).permit(
+      # 基本情報・子供用設備はSpotUpdateRequestで管理
+      images: []
     )
   end
 end
