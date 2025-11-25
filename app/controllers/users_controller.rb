@@ -4,12 +4,10 @@ class UsersController < ApplicationController
 
   # マイページ表示
   def mypage
-    @user = current_user
   end
 
   # 編集
   def edit_mypage
-    @user = current_user
   end
 
   # 更新

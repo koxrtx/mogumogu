@@ -77,4 +77,8 @@ end
       status
     ]
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[spot]
+  end
 end

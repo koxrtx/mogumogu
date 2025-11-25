@@ -56,14 +56,14 @@ div class=page_classes
                 = render 'status_badge', request: request
               td.px-4.py-2
                 -# request_type 表示
-                  - case request.request_type
-                  - when "spot_update"
-                    span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs 店舗修正
+                - case request.request_type
+                - when "spot_update"
+                  span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs 店舗修正
                 - when "image_delete"
                   span.bg-orange-200.text-orange-800.px-2.py-1.rounded.text-xs 写真削除
-                  - when "closure"
-                    span.bg-red-200.text-red-800.px-2.py-1.rounded.text-xs 閉店報告
-                              td.px-4.py-2 = request.created_at.strftime("%Y/%m/%d %H:%M")
+                - when "closure"
+                  span.bg-red-200.text-red-800.px-2.py-1.rounded.text-xs 閉店報告
+              td.px-4.py-2 = request.created_at.strftime("%Y/%m/%d %H:%M")
               td.px-4.py-2
                 .flex.gap-1
                   = link_to "詳細", admin_admin_spot_image_update_requests_path(request), class: "bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600"

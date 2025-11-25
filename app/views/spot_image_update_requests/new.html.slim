@@ -1,0 +1,30 @@
+div.container.mx-auto.px-4.py-6.max-w-2xl
+  h1.text-2xl.font-bold.mb-6.text-center 写真修正依頼
+
+  / 戻るボタン
+  .mb-4
+    = link_to "店舗ページに戻る", spot_path(@spot), class: "text-blue-500 hover:underline"
+
+  / エラーメッセージ
+  - if @request.errors.any?
+    .bg-red-100.border.border-red-400.text-red-700.p-4.rounded.mb-4
+      h2.font-bold.mb-2 エラーがあります：
+      ul.list-disc.pl-5
+        - @request.errors.full_messages.each do |msg|
+          li= msg
+
+  = form_with model: [@spot, @request], local: true, html: { multipart: true, class: "space-y-4" } do |f|
+
+    / 修正タイプ（追加 or 削除）
+    .flex.items-center.gap-2
+      = f.label :request_type, "修正タイプ", class: "font-medium"
+      = f.select :request_type, SpotImageUpdateRequest.request_types.keys.map { |k| [k.humanize, k] }, {}, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+    / 写真添付
+    .flex.flex-col
+      = f.label :images, "写真を選択", class: "font-medium mb-1"
+      = f.file_field :images, multiple: true, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+    / 送信ボタン
+    .text-center
+      = f.submit "修正依頼を送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
