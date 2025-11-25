@@ -14,11 +14,14 @@ class Inquiry < ApplicationRecord
   enum :status, { pending: 0, in_progress: 1, completed: 2 }
 
   # 管理者画面用の検索機能(スコープ)
-  # スコープ
+  # 作成日時が新しい順に並べる
   scope :recent, -> { order(created_at: :desc) }
+  # 今日作られたものだけを取得
   scope :today, -> { where(created_at: Date.current.all_day) }
+  # 1週間以内に作られたものを取得
   scope :this_week, -> { where(created_at: 1.week.ago..Time.current) }
-  scope :unread, -> { where(status: :unread) }
+  # 未読の問い合わせだけを取得
+  scope :unread, -> { where(status: :pending) }
   
   # 新着件数取得
   def self.unread_count

@@ -1,0 +1,72 @@
+div class=page_classes
+  h1.text-2xl.font-bold.mb-6.text-center 店舗情報修正依頼管理
+
+  / 戻るボタン
+  .flex.justify-center.gap-2.mb-6
+    = link_to "管理者ホームに戻る", admin_root_path, class: "bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600"
+
+  / 統計情報
+  .stats-section.mb-6
+    .grid.grid-cols-3.gap-4
+      .stat-card.bg-yellow-100.p-4.rounded.text-center
+        .text-2xl.font-bold.text-yellow-600 = @stats[:pending]
+        .text-sm.text-gray-600 未処理
+      .stat-card.bg-blue-100.p-4.rounded.text-center
+        .text-2xl.font-bold.text-blue-600 = @stats[:today]
+        .text-sm.text-gray-600 今日の依頼
+      .stat-card.bg-green-100.p-4.rounded.text-center
+        .text-2xl.font-bold.text-green-600 = @stats[:this_week]
+        .text-sm.text-gray-600 今週の依頼
+
+  / 検索フォーム
+  .search-section.mb-6
+    = search_form_for @q, url: admin_spot_update_requests_path, class: "flex flex-wrap gap-2 items-center" do |f|
+      = f.search_field :spot_name_cont,
+          placeholder: "店舗名で検索",
+          class: "flex-1 min-w-[200px] border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      = f.select :status_eq,
+          options_for_select([['全て', ''], ['保留', 0], ['承認済み', 1], ['却下', 2]], params.dig(:q, :status_eq)),
+          {},
+          class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      = f.submit "検索",
+          class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+
+  / 依頼一覧テーブル
+  .requests-table.bg-white.rounded.shadow
+    - if @requests.any?
+      table.w-full
+        thead.bg-gray-50
+          tr
+            th.px-4.py-2.text-left ID
+            th.px-4.py-2.text-left 店舗名
+            th.px-4.py-2.text-left ステータス
+            th.px-4.py-2.text-left 依頼日時
+            th.px-4.py-2.text-left 操作
+        tbody
+          - @requests.each do |request|
+            tr.border-t
+              td.px-4.py-2 = request.id
+              td.px-4.py-2 = request.name || request.spot&.name || "未設定"
+              td.px-4.py-2
+                = render 'status_badge', request: request
+              td.px-4.py-2
+                - case request.request_type
+                  - when "spot_update"
+                    span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs 店舗修正
+                  - when "image_delete"
+                    span.bg-orange-200.text-orange-800.px-2.py-1.rounded.text-xs 写真削除
+                  - when "closure"
+                    span.bg-red-200.text-red-800.px-2.py-1.rounded.text-xs 閉店報告
+              td.px-4.py-2 = request.created_at.strftime("%Y/%m/%d %H:%M")
+              td.px-4.py-2
+                .flex.gap-1
+                  = link_to "詳細", admin_spot_update_request_path(request), class: "bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600"
+                  = link_to "編集", edit_admin_spot_update_request_path(request), class: "bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600"
+                  = link_to "削除", admin_spot_update_request_path(request), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600"
+
+      / ページネーション
+      .pagination-wrapper.mt-4.text-center
+        = paginate @requests
+    - else
+      .empty-state.text-center.py-8
+        p.text-gray-500 修正依頼がありません

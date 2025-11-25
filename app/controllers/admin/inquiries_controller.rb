@@ -9,12 +9,11 @@ class Admin::InquiriesController < Admin::BaseController
 
     # 検索結果を取得 /一覧 .recentはモデルで定義したスコープ(作成日順)
     @inquiries = @q.result.recent.page(params[:page]).per(20)
-    
+
     # 統計情報（ダッシュボードや上部表示用）
     @stats = {
-      total: Inquiry.count,               # 総問い合わせ数
-      unread: Inquiry.unread_count,       # 未読の問い合わせ件数（スコープ）
-      today: Inquiry.today_count,         # 今日届いた問い合わせ件数（スコープ）
+      unread: Inquiry.unread_count,       # 保留の問い合わせ件数
+      today: Inquiry.today_count,         # 今日届いた問い合わせ件数
       this_week: Inquiry.this_week.count  # 今週届いた問い合わせ件数
     }
   end

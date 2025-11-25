@@ -5,6 +5,7 @@ class Admin::BaseController < ApplicationController
   before_action :admin_required
 
   private
+
   # 管理者か確認
   def admin_required
     redirect_to root_path unless current_user.admin?
@@ -18,6 +19,19 @@ class Admin::BaseController < ApplicationController
   # 店舗情報を取得
   def set_spot
     @spot = Spot.find(params[:id])
+  end
+
+  # 修正依頼(request)からSpotを取得
+  def set_spot_from_request
+    @spot = @request.spot
+    unless @spot
+      redirect_to admin_spot_update_requests_path,
+                  alert: "関連する店舗が見つかりません"
+    end
+  end
+
+  def set_request
+    @request = SpotUpdateRequest.find(params[:id])
   end
 
   # 問い合わせ情報取得

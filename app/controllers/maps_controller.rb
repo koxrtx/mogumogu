@@ -1,7 +1,8 @@
 class MapsController < ApplicationController
   # マップに投稿一覧を渡す
   def search
-    @spots = Spot.all
+    # 営業中飲み検索対象
+    @spots = Spot.active
     @spots_json = @spots.to_json(
       only: [
         :id, :name, :address, :latitude, :longitude, :other_facility_comment,
@@ -11,7 +12,7 @@ class MapsController < ApplicationController
     )
     # 近い順に10件表示
     if params[:lat].present? && params[:lng].present?
-      @spots_near = Spot.near([params[:lat], params[:lng]], 5, units: :km).limit(10)
+      @spots_near = Spot.active.near([params[:lat], params[:lng]], 5, units: :km).limit(10)
     else
       @spots_near = []
     end

@@ -1,0 +1,100 @@
+div class=page_classes
+  h1.text-2xl.font-bold.mb-6.text-center 店舗情報修正依頼の編集
+
+  / 戻るボタン
+  .flex.justify-center.gap-2.mb-6
+    = link_to "詳細に戻る", admin_spot_update_request_path(@request), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+    = link_to "一覧に戻る", admin_spot_update_requests_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+
+  / エラーメッセージ
+  - if @request.errors.any?
+    .error-messages.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.mb-6
+      h4.font-bold エラーが発生しました:
+      ul.list-disc.list-inside
+        - @request.errors.full_messages.each do |message|
+          li = message
+
+  / 編集フォーム
+  .edit-form.max-w-4xl.mx-auto.bg-white.border.border-gray-300.rounded-lg.shadow-lg
+    = form_with model: [:admin, @request], local: true, class: "p-6" do |f|
+      / ステータス選択（重要）
+      .status-section.mb-6.bg-yellow-50.p-4.rounded.border
+        h3.text-lg.font-medium.mb-3.text-gray-700 ステータス
+        = f.select :status,
+          options_for_select([['未処理', 'pending'],['承認済み', 'approved'],['却下', 'rejected']], @request.status),
+          {},
+          { class: "form-select w-full p-2 border border-gray-300 rounded" }
+
+      / 基本情報セクション
+      .basic-info-section.mb-6
+        h3.text-lg.font-medium.mb-3.text-gray-700 基本情報
+        .grid.grid-cols-2.gap-4
+          .form-group
+            = f.label :name, "店舗名", class: "block text-sm font-medium text-gray-700 mb-1"
+            = f.text_field :name, class: "form-input w-full p-2 border border-gray-300 rounded"
+          .form-group
+            = f.label :tel, "電話番号", class: "block text-sm font-medium text-gray-700 mb-1"
+            = f.text_field :tel, class: "form-input w-full p-2 border border-gray-300 rounded"
+        .form-group.mt-4
+          = f.label :address, "住所", class: "block text-sm font-medium text-gray-700 mb-1"
+          = f.text_area :address, rows: 2, class: "form-input w-full p-2 border border-gray-300 rounded"
+        .form-group.mt-4
+          = f.label :opening_hours, "営業時間", class: "block text-sm font-medium text-gray-700 mb-1"
+          = f.text_area :opening_hours, rows: 3, class: "form-input w-full p-2 border border-gray-300 rounded"
+
+          .form-group
+            = f.label :business_status, "営業状況", class: "block text-sm font-medium text-gray-700 mb-1"
+            = f.select :business_status,
+              options_for_select([['閉店', 2]], @request.business_status),
+              { include_blank: "選択してください" },
+              { class: "form-select w-full p-2 border border-gray-300 rounded" }
+
+      / 子ども向け設備セクション
+      .facilities-section.mb-6
+        h3.text-lg.font-medium.mb-3.text-gray-700 子ども向け設備
+        .grid.grid-cols-2.gap-4
+          .form-group
+            = f.check_box :child_chair, class: "mr-2"
+            = f.label :child_chair, "子ども椅子", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :tatami_seat, class: "mr-2"
+            = f.label :tatami_seat, "座敷席", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :child_tableware, class: "mr-2"
+            = f.label :child_tableware, "子ども食器", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :bring_baby_food, class: "mr-2"
+            = f.label :bring_baby_food, "離乳食持込可", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :stroller_ok, class: "mr-2"
+            = f.label :stroller_ok, "ベビーカー入店可", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :child_menu, class: "mr-2"
+            = f.label :child_menu, "子どもメニュー", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :parking, class: "mr-2"
+            = f.label :parking, "駐車場", class: "text-sm font-medium text-gray-700"
+          .form-group
+            = f.check_box :other_facility, class: "mr-2"
+            = f.label :other_facility, "その他設備", class: "text-sm font-medium text-gray-700"
+      / その他コメント
+      .comment-section.mb-6
+        = f.label :other_facility_comment, "その他設備の詳細", class: "block text-sm font-medium text-gray-700 mb-1"
+        = f.text_area :other_facility_comment, rows: 4, class: "form-input w-full p-2 border border-gray-300 rounded", placeholder: "その他の設備や特記事項があれば記入してください"
+
+      / 送信ボタン
+      .form-actions.flex.justify-center.gap-4
+        = f.submit "承認して反映",
+          class: "bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 font-medium",
+          name: "commit",
+          value: "approve",
+          data: { confirm: "修正内容を承認して店舗情報に反映しますか？" }
+
+        = f.submit "却下",
+          class: "bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 font-medium",
+          name: "commit",
+          value: "reject",
+          data: { confirm: "修正依頼を却下しますか？" }
+
+        = f.submit "更新",
+          class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 font-medium"

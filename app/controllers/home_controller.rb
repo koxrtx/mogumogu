@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @q = Spot.ransack(params[:q])
+    @q = Spot.active.ransack(params[:q])
     base_spots = @q.result(distinct: true)
 
     if params[:q].present?
@@ -36,13 +36,9 @@ class HomeController < ApplicationController
       return
     end
 
-    # データベースからデータを取得
-    spots = Spot.select(:id, :name, :address, :latitude, :longitude)
-                .where("name ILIKE ? OR address ILIKE ?", "%#{query}%", "%#{query}%")
-                .limit(10)
-                .order(:name)
+    # データベースから営業店のみのデータを取得
+    spots = Spot.active.where("name ILIKE ? OR address ILIKE ?", "%#{query}%", "%#{query}%")
 
-    # 距離順での並び替えを追加
     if latitude.present? && longitude.present?
       spots = spots.near([latitude, longitude], 10).limit(10)
     else

@@ -1,4 +1,4 @@
-.admin-users
+div class=page_classes
   h1.text-2xl.font-bold.mb-4.text-center 店舗詳細
 
   / 店舗情報枠
@@ -6,60 +6,60 @@
     .space-y-4
       .flex.space-x-4
         .flex-1
-          p.font-bold = t('spot.forms.name')
+          p.font-bold = t('spots.forms.name')
           p = @spot.name
         .flex-1
-          p.font-bold = t('spot.forms.tel')
+          p.font-bold = t('spots.forms.tel')
           p = @spot.tel
 
       .space-y-2
-        p.font-bold = t('spot.forms.address')
+        p.font-bold = t('spots.forms.address')
         p = @spot.address
 
       .space-y-2
-        p.font-bold = t('spot.forms.opening_hours')
+        p.font-bold = t('spots.forms.opening_hours')
         p = @spot.opening_hours
 
     / 子ども向け設備
     div
-      span.text-xl.font-bold.mb-4 = t('spot.forms.child_facilities')
+      span.text-xl.font-bold.mb-4 = t('spots.forms.child_facilities')
       .grid.grid-cols-2.gap-x-8.gap-y-2.mt-2
         - if @spot.child_chair
           p
-            | ✅ 
-            = t('spot.forms.child_chair')
+            | ✅
+            = t('spots.forms.child_chair')
         - if @spot.tatami_seat
           p
             | ✅ 
-            = t('spot.forms.tatami_seat')
+            = t('spots.forms.tatami_seat')
         - if @spot.child_tableware
           p
             | ✅ 
-            = t('spot.forms.child_tableware')
+            = t('spots.forms.child_tableware')
         - if @spot.bring_baby_food
           p
             | ✅ 
-            = t('spot.forms.bring_baby_food')
+            = t('spots.forms.bring_baby_food')
         - if @spot.stroller_ok
           p
             | ✅ 
-            = t('spot.forms.stroller_ok')
+            = t('spots.forms.stroller_ok')
         - if @spot.child_menu
           p
             | ✅ 
-            = t('spot.forms.child_menu')
+            = t('spots.forms.child_menu')
         - if @spot.parking
           p
             | ✅ 
-            = t('spot.forms.parking')
+            = t('spots.forms.parking')
         - if @spot.other_facility
           p
             | ✅ 
-            = t('spot.forms.other_facility')
+            = t('spots.forms.other_facility')
 
       - if @spot.other_facility_comment.present?
         .mt-2
-          p.font-bold = t('spot.forms.other_facility_comment')
+          p.font-bold = t('spots.forms.other_facility_comment')
           p = @spot.other_facility_comment
 
       / 画像表示
