@@ -39,6 +39,8 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-rails_csrf_protection'
 # 環境変数の管理 (LINE_CHANNEL_ID, SECRET etc.)は開発環境で記載
+# Googleログイン
+gem 'omniauth-google-oauth2'
 
 # ページ
 gem 'kaminari'
@@ -106,3 +108,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+

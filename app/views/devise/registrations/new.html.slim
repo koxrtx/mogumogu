@@ -12,16 +12,21 @@ div class=page_classes
 
       / LINEログインセクション（コンパクト化）
       .text-center.mb-2
-        p.text-pink-700.font-medium.text-xs LINEで簡単登録
+        p.text-pink-700.font-medium.text-xs LINE/Googleで簡単登録
       
       .line-login-container.mb-4
-      = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "line-login-button-official flex items-center bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden", id: "line-login-btn", data: { base_image: asset_path('btn_base.png'), hover_image: asset_path('btn_hover.png'), press_image: asset_path('btn_press.png') } do
-        / 左側：LINE公式画像
-        .flex-shrink-0
-          = image_tag "btn_base.png", alt: "LINE", class: "h-12 w-auto block", id: "line-icon-official"
-        / 右側：テキスト部分（緑背景に変更）
-        .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
-          span.text-white.font-medium.text-sm LINEでログイン
+        = link_to user_line_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "line-login-button-official flex items-center bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden", id: "line-login-btn", data: { base_image: asset_path('btn_base.png'), hover_image: asset_path('btn_hover.png'), press_image: asset_path('btn_press.png') } do
+          / 左側：LINE公式画像
+          .flex-shrink-0
+            = image_tag "btn_base.png", alt: "LINE", class: "h-12 w-auto block", id: "line-icon-official"
+          / 右側：テキスト部分
+          .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
+            span.text-white.font-medium.text-sm LINEで登録
+        
+      / Googleログインセクション
+      .google-login-container
+        = link_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex justify-center" do
+          = image_tag "google_sign_up.svg", alt: "Sign in with Google", class: "h-12 w-auto"
 
     / 区切り線（コンパクト化）
     .flex.items-center.my-4

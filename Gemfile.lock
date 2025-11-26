@@ -285,6 +285,11 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
+    omniauth-google-oauth2 (1.2.1)
+      jwt (>= 2.9.2)
+      oauth2 (~> 2.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
@@ -531,6 +536,7 @@ DEPENDENCIES
   letter_opener_web
   mailgun-ruby (~> 1.4.0)
   omniauth
+  omniauth-google-oauth2
   omniauth-oauth2
   omniauth-rails_csrf_protection
   pg (~> 1.6)

@@ -16,6 +16,11 @@ div class=page_classes
         .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
           span.text-white.font-medium.text-sm LINEでログイン
 
+    / Googleログイン（画像そのまま）
+    .google-login-container.mb-4
+      = link_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex justify-center" do
+        = image_tag "google_sign_in.svg", alt: "Sign in with Google", class: "h-12 w-auto"
+
     / 区切り線（コンパクト化）
     .flex.items-center.my-4
       .flex-1.border-t.border-pink-200
