@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :recoverable → パスワードリセット
   # :rememberable → ログイン保持
   # :validatable → メールとパスワードのバリデーション
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:line]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:line, :google_oauth2]
   # ユーザーが削除されても店舗情報や修正依頼は消えない
   has_many :spots, dependent: :nullify
   has_many :spot_update_requests, dependent: :nullify
@@ -22,16 +22,16 @@ class User < ApplicationRecord
   enum :role, { user: 0, admin: 1 }
 
   def self.from_omniauth(auth, current_user = nil)
-    # ログイン済みユーザーがLINE連携を追加する場合
-    return link_line_account(auth, current_user) if current_user && !current_user.line_connected?
+    # ログイン済みユーザーがLINE・Google連携を追加する場合
+    return external_authentication_account(auth, current_user) if current_user && !current_user.provider_connected?(auth.provider)
 
-    # 既存のLINEユーザーでログインまたは新規ユーザー作成
-    sign_in_or_create_user_from_line(auth)
+    # 既存のLINE・Googleユーザーでログインまたは新規ユーザー作成
+    sign_in_or_create_user(auth)
   end
 
-  # 既存ユーザーにLINE連携を追加
-  def self.link_line_account(auth, current_user)
-    # 他のユーザーが既にこのLINEアカウントを使用していないかチェック
+  # 既存ユーザーにLINE/Google連携を追加
+  def self.external_authentication_account(auth, current_user)
+    # 他のユーザーが既にこのLINE・Googleアカウントを使用していないかチェック
     return nil if exists?(provider: auth.provider, uid: auth.uid)
 
     success = current_user.update(
@@ -42,21 +42,28 @@ class User < ApplicationRecord
     success ? current_user : nil
   end
 
-  # LINEログインまたは新規ユーザー作成
-  def self.sign_in_or_create_user_from_line(auth)
+  # LINE/Googleログインまたは新規ユーザー作成
+  def self.sign_in_or_create_user(auth)
     find_or_create_by(
       provider: auth.provider,
       uid: auth.uid
     ) do |user|
       user.email = auth.info.email || "#{auth.uid}@line.example.com"
-      user.name = auth.info.name || "LINE User"
+      user.name = auth.info.name || "User"
       user.password = Devise.friendly_token[0, 20]
     end
   end
 
-  # LINE連携チェックメソッド
-  def line_connected?
-    uid.present? && provider == 'line'
+  # LINE/Google連携チェックメソッド
+  def provider_connected?(provider_name)
+    case provider_name.to_s
+    when 'line'
+      line_connected?
+    when 'google_oauth2'
+      google_connected?
+    else
+      false
+    end
   end
 
   # OAuth認証ユーザーか

@@ -3,8 +3,6 @@ module Users
 
     Rails.logger.info "===OmniauthCallbacksController 読み込み完了==="
 
-    skip_before_action :verify_authenticity_token, only: :line
-
 
     # 認証処理
     def line
@@ -23,22 +21,34 @@ module Users
       end
     end
 
+    # Google認証
+    def google_oauth2
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+
+      if @user.persisted?
+        flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
+        sign_in_and_redirect @user, event: :authentication
+      else
+        redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
+      end
+    end
+
     private
 
     def notify_line_already_linked
-      redirect_to user_setting_path
       set_flash_message(:alert, :failure, kind: 'LINE', reason: '他アカウントでLINE連携済みです')
+      redirect_to user_setting_path
     end
 
     def complete_line_login
-      sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: 'LINE')
+      sign_in_and_redirect @user, event: :authentication
     end
 
     def fail_line_login
       session['devise.line_data'] = request.env['omniauth.auth'].except(:extra)
-      redirect_to new_user_registration_url
       set_flash_message(:alert, :failure, kind: 'LINE', reason: 'LINE連携に失敗しました')
+      redirect_to new_user_registration_url
     end
   end
 end
