@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post "/terms_agreement", to: "agreements#create"
   # プライバシーポリシー画面
   get "/privacy_policy", to: "pages#privacy_policy"
+  # 使い方画面
+  get "/usage_guide", to: "pages#usage_guide"
 
   # 現在地から検索
   get "maps/search", to: "maps#search", as: :search_map

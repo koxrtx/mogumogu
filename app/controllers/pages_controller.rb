@@ -11,6 +11,11 @@ class PagesController < ApplicationController
   def privacy_policy
   end
 
+  # 使い方画面
+  def usage_guide
+  end
+  
+
   # 利用規約への同意処理
   def create_agreement
     if params[:agreed] == '1'

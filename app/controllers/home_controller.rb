@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   def index
     @q = Spot.active.ransack(params[:q])
     base_spots = @q.result(distinct: true)
