@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   # お店の情報投稿
   resources :spots, only: [:new, :create, :show] do
     get 'update_requests/select_type', to: 'spot_update_requests#select_type'
+    # 特定のspotに対する写真削除追加依頼
+    resources :spot_image_update_requests, only: [:new, :create]
     # 特定のspotに対する修正依頼
     resources :spot_update_requests, only: [:new, :create, :show] do
       # 閉店依頼

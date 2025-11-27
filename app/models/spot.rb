@@ -9,6 +9,7 @@ class Spot < ApplicationRecord
   # 店舗情報が消えたら設備情報や写真・修正依頼も消える楔形
   belongs_to :user
   has_many :spot_update_requests, dependent: :destroy
+  has_many :spot_image_update_requests, dependent: :destroy
 
   # ファイルをレコードに添付する
   has_many_attached :images do |attachable|
