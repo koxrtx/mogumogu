@@ -1,4 +1,4 @@
-eader.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
+header.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
   button.hamburger[aria-label="メニュー" aria-controls="nav-menu" aria-expanded="false"]
       span.hamburger__line
       span.hamburger__line
@@ -24,7 +24,7 @@ eader.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
       li.nav__item
         a#current-location-link href="#" class="text-blue-500 hover:text-blue-700" 現在地から探す
       li.nav__item
-        = link_to '使い方', '#', class: 'text-[#3A3333] hover:text-blue-500 font-medium'
+        = link_to '使い方', usage_guide_path, data: { turbo: false }, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
       li.nav__item
         = link_to '利用規約', terms_path, class: 'text-[#3A3333] hover:text-blue-500 font-medium'
       li.nav__item
@@ -37,5 +37,5 @@ eader.w-full.text-center.py-10.bg-opacity-30.backdrop-blur-md.text-gray-800.z-50
   .absolute.left-1/2.top-1/2.-translate-x-1/2.-translate-y-1/2
     = link_to root_path, class: 'inline-block bg-white rounded-full px-4 py-2 shadow-md border-2 border-pink-200 hover:border-pink-300 hover:shadow-lg transition-all duration-200' do
       .flex.items-center.space-x-1
-        span.text-pink-600.text-lg.font-bold.font-rounded もぐもぐマップ
+        span.text-pink-600.text-lg.font-bold.font-rounded Mog&Map.
 

@@ -72,8 +72,7 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
   .space-y-3.w-full.max-w-sm.mt-6
 
     / このアプリの使い方ボタン
-    = button_to "#", method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 shadow-md transition-all duration-200 active:scale-95" do
-      span.mr-2 📱
+    = link_to "#usage-guide", class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 shadow-md transition-all duration-200 active:scale-95" do
       | このアプリの使い方
 
     / 現在地から探すボタン

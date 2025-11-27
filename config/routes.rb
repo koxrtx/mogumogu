@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post "/terms_agreement", to: "agreements#create"
   # プライバシーポリシー画面
   get "/privacy_policy", to: "pages#privacy_policy"
+  # 使い方画面
+  get "/usage_guide", to: "pages#usage_guide"
 
   # 現在地から検索
   get "maps/search", to: "maps#search", as: :search_map
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
   # お店の情報投稿
   resources :spots, only: [:new, :create, :show] do
     get 'update_requests/select_type', to: 'spot_update_requests#select_type'
+    # 特定のspotに対する写真削除追加依頼
+    resources :spot_image_update_requests, only: [:new, :create]
     # 特定のspotに対する修正依頼
     resources :spot_update_requests, only: [:new, :create, :show] do
       # 閉店依頼

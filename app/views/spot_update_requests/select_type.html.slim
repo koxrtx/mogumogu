@@ -6,7 +6,7 @@
 
     .space-y-3
       / 写真削除・変更依頼
-      = link_to new_spot_spot_update_request_path(@spot, type: 'image_delete'),
+      = link_to new_spot_spot_image_update_request_path(@spot, type: 'image_delete'),
         class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
           span 写真削除・変更依頼
