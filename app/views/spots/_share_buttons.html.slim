@@ -17,8 +17,8 @@
         | LINEでシェア
         .absolute.top-full.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-2.border-transparent.border-t-gray-800
 
-    / X共有ボタン
-    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(spot_url(spot))}&text=#{CGI.escape("子連れで外食？#{spot.name}の子ども用設備や座敷、ベビーカーOK情報をチェック 🍼")}&hashtags=#{CGI.escape('Mog&Map.')}",
+    / X共有ボタン（ハッシュタグを i18n 化）
+    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(spot_url(spot))}&text=#{CGI.escape("子連れで外食？#{spot.name}の子ども用設備や座敷、ベビーカーOK情報をチェック 🍼")}&hashtags=#{CGI.escape(t('app.name'))}",
               title: "Xでシェア",
               target: "_blank",
               rel: "noopener noreferrer",

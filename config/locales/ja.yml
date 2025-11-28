@@ -1,4 +1,6 @@
 ja:
+  app:
+    name: "Mog&Map."
   # モデル関連のi18n
   activerecord:
     models:

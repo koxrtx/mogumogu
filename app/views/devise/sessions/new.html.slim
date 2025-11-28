@@ -14,17 +14,19 @@ div class=page_classes
           = image_tag "btn_base.png", alt: "LINE", class: "h-12 w-auto block", id: "line-icon-official"
         / 右側：テキスト部分（緑背景に変更）
         .flex-1.text-center.py-3.px-4.border-l.border-gray-200.hover:brightness-110.transition-all.duration-200 style="background-color: #00B900;"
-          span.text-white.font-medium.text-sm LINEでログイン
+          / LINEでログイン
+          span.text-white.font-medium.text-sm = t("devise.omniauth.line_register")
 
-    / Googleログイン（画像そのまま）
+    / Googleログイン
     .google-login-container.mb-4
       = link_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "flex justify-center" do
         = image_tag "google_sign_in.svg", alt: "Sign in with Google", class: "h-12 w-auto"
 
-    / 区切り線（コンパクト化）
+    / 区切り線
     .flex.items-center.my-4
       .flex-1.border-t.border-pink-200
-      span.px-3.text-pink-500.text-xs または
+      / または
+      span.px-3.text-pink-500.text-xs = t("devise.registrations.or")
       .flex-1.border-t.border-pink-200
 
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full p-4 border-2 border-pink-300 bg-pink-50 rounded-lg space-y-3" }) do |f|
@@ -35,7 +37,8 @@ div class=page_classes
       - if devise_mapping.rememberable?
         .field.flex.items-center.space-x-2.mt-1
           = f.check_box :remember_me, class: "rounded border-pink-300 text-pink-500 focus:ring-pink-400 w-4"
-          = f.label :remember_me, "ログイン状態を保持する", class: "text-xs text-gray-700"
+          / ログイン状態を保持する
+          = f.label :remember_me, t("devise.sessions.new.remember_me"), class: "text-xs text-gray-700"
 
       .actions.space-y-3.mt-1
         = f.submit t("devise.forms.buttons.login"), class: "w-full py-2.5 bg-pink-300 text-pink-800 font-bold rounded-lg border-2 border-pink-400 hover:bg-pink-400 hover:text-white transition-colors duration-200 text-sm"
@@ -43,7 +46,8 @@ div class=page_classes
         / ユーザー登録へのリンク
         .text-center.mt-2.space-y-2
           p.text-gray-600.text-xs アカウントをお持ちでない方
-          = link_to "ユーザー登録", terms_agreement_path, class: "block w-full bg-pink-200 text-pink-800 py-2.5 rounded-lg border-2 border-pink-300 hover:bg-pink-300 hover:text-white font-semibold transition-colors duration-200 text-sm"
+          / ユーザー登録
+          = link_to t("devise.sessions.new.sign_up"), terms_agreement_path, class: "block w-full bg-pink-200 text-pink-800 py-2.5 rounded-lg border-2 border-pink-300 hover:bg-pink-300 hover:text-white font-semibold transition-colors duration-200 text-sm"
 
   / その他のリンク（パスワード忘れなど）
   .mt-4.text-center
