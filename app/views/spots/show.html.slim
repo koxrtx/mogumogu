@@ -9,33 +9,39 @@ div class=page_classes
       .relative.bg-pink-100.border.border-pink-300.rounded-2xl.p-4.shadow-md.max-w-sm.w-full
         .text-center.mb-2
           .text-lg 🎉
-        h5.text-sm.font-semibold.mb-2.text-pink-700.text-center 投稿ありがとうございました！
-        p.text-pink-600.text-xs.text-center.leading-relaxed あなたの投稿が他のママパパの役に立ちます✨
+        / 投稿あありがとうございました！
+        h5.text-sm.font-semibold.mb-2.text-pink-700.text-center = t("spots.show.thanks_title")
+        / あなたの投稿が他のママパパの役に立ちます
+        p.text-pink-600.text-xs.text-center.leading-relaxed = t("spots.show.thanks_body")
         .absolute.left-1/2.transform.-translate-x-1/2.-bottom-3.w-0.h-0.border-l-6.border-r-6.border-t-6.border-l-transparent.border-r-transparent.border-t-pink-300
 
   / 閉店判定
   - if @spot.closed?
     .text-center.text-gray-400.mt-6
-      p このスポットは閉店しました
+      / この店舗は閉店しました
+      p = t("spots.show.closed_notice")
 
     / 閉店スポットはメイン情報のみ
     .max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4.mx-4
       .bg-white.rounded-lg.p-3.border.border-pink-200
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm 店舗情報
+          / 店舗情報
+          span.text-pink-700.font-bold.text-sm = t('spots.new.section_title')
 
         .space-y-3
           .space-y-1
             .flex.items-center
               .text-xs.mr-1 🏷️
-              p.text-pink-700.font-medium.text-xs 店舗名
+              / 店舗名
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.name')
             .bg-pink-50.rounded-lg.p-2.border.border-pink-100
               p.text-pink-800.text-sm.font-medium = @spot.name
 
           .space-y-1
             .flex.items-center
               .text-xs.mr-1 📍
-              p.text-pink-700.font-medium.text-xs 住所
+              / 住所
+              p.text-pink-700.font-medium.text-xs = t('spots.forms.address')
             .bg-pink-50.rounded-lg.p-2.border.border-pink-100
               p.text-pink-800.text-sm.leading-relaxed = @spot.address
 
@@ -47,7 +53,8 @@ div class=page_classes
       / 店舗情報
       .bg-white.rounded-lg.p-3.border.border-pink-200
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm 店舗情報
+          / 店舗情報
+          span.text-pink-700.font-bold.text-sm = t('spots.new.section_title')
 
         .space-y-3
           .space-y-1
@@ -86,13 +93,16 @@ div class=page_classes
     .bg-gradient-to-r.from-orange-400.to-pink-500.rounded-lg.p-4.text-center.shadow-md
       .mb-3
         .text-white.text-lg
-        h3.text-white.font-bold.text-sm.mb-1 情報に間違いがありますか？
-        p.text-orange-100.text-xs みんなで正しい情報にしていきましょう！
+        / 情報に間違いがありますか？
+        h3.text-white.font-bold.text-sm.mb-1 = t('spots.show.incorrect_title')
+        / みんなで正しい情報にしていきましょう！
+        p.text-orange-100.text-xs = t('spots.show.incorrect_body')
 
       = link_to spot_update_requests_select_type_path(@spot),
         class: "inline-block w-full bg-white text-orange-600 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
-          span 修正依頼を送る
+          / 修正依頼を送る
+          span = t('spots.show.request_link')
 
   / アクションボタン
   .mt-6.space-y-3.px-4

@@ -20,27 +20,31 @@ div class=page_classes
       / 店舗情報
       .space-y-3
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm 店舗情報
+          / 店舗情報
+          span.text-pink-700.font-bold.text-sm = t('spots.new.section_title')
 
         / 店舗名
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 🏷️
-            f.label.text-pink-700.font-medium.text-xs 店舗名
+            / 店舗名
+            = label_tag nil, t('spots.forms.name'), class: "text-pink-700.font-medium.text-xs"
           = f.text_field :name, placeholder: t('spots.forms.name'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 電話番号
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📞
-            f.label.text-pink-700.font-medium.text-xs 電話番号
+            / 電話番号
+            = label_tag nil, t('spots.forms.tel'), class: "text-pink-700.font-medium.text-xs"
           = f.telephone_field :tel, placeholder: t('spots.forms.tel'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 住所
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📍
-            f.label.text-pink-700.font-medium.text-xs 住所
+            / 住所
+            = label_tag nil, t('spots.forms.address'), class: "text-pink-700.font-medium.text-xs"
           = f.text_field :address, placeholder: t('spots.forms.address'), id: "address-input", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
         / 現在地ボタン
@@ -55,7 +59,8 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 🕐
-            label.text-pink-700.font-medium.text-xs 営業時間
+            / 営業時間
+            = label_tag nil, t('spots.forms.opening_hours'), class: "text-pink-700.font-medium.text-xs"
           = f.text_field :opening_hours, placeholder: t('spots.forms.opening_hours') + " (例：10:00〜20:00)", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm"
 
       / 子ども向け設備
@@ -98,13 +103,15 @@ div class=page_classes
 
         / その他設備コメント
         .mt-3
-          = f.text_area :other_facility_comment, placeholder: "その他設備の詳細を入力", class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm resize-none", rows: 2
+          / その他の設備の情報を入力
+          = f.text_area :other_facility_comment, placeholder: t('spots.forms.other_facility_comment'), class: "bg-white border border-pink-200 rounded-lg p-2.5 w-full focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent placeholder-pink-400 text-sm resize-none", rows: 2
 
-      / 写真のアップロード（コンパクト化）
+      / 写真のアップロード
       .bg-white.rounded-lg.p-3.border.border-pink-200
         .text-center.mb-3
-          span.text-pink-700.font-bold.text-sm 子ども用メニュー写真（最大3枚）
-        
+          /子ども用メニュー写真（最大3枚）
+          span.text-pink-700.font-bold.text-sm = t('spots.new.photo_section_title')
+
         .space-y-2
           / 写真選択ボタン
           = f.label :images, class: "cursor-pointer bg-pink-100 text-pink-700 font-medium py-2.5 px-4 rounded-lg border border-pink-300 hover:bg-pink-200 hover:border-pink-400 transition-all duration-200 shadow-sm hover:shadow-md text-center block text-sm" do
