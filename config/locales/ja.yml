@@ -1,6 +1,16 @@
 ja:
   app:
     name: "Mog&Map."
+  # ホーム画面
+  home:
+    index:
+      search_placeholder: "店舗名、住所で検索"
+      search_button: "検索"
+      no_image: "画像準備中"
+      how_to_use: "このアプリの使い方"
+      search_by_location: "現在地から探す"
+      share_promotion_title: "あなたのおすすめのお店を共有しませんか？"
+      footer_message: "子連れに優しいお店を見つけよう"
   # モデル関連のi18n
   activerecord:
     models:
