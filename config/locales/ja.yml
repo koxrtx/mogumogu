@@ -37,5 +37,11 @@ ja:
   inquiries:
     new:
       title: "お問い合わせ"
+      subtitle: "お気軽にご連絡ください"
+      name_label: "お名前"
+      name_placeholder: "山田 花子"
+      email_label: "メールアドレス"
+      comment_label: "お問い合わせ内容"
+      submit_button: "送信する"
     show:
       title: "お問い合わせ詳細確認"
