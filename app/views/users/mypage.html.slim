@@ -9,7 +9,7 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
   / プロフィール情報カード
   .bg-white.shadow-md.rounded-lg.p-4.border.border-pink-200
     .text-center.mb-4
-      span.text-pink-700.font-bold.text-sm プロフィール
+      span.text-pink-700.font-bold.text-sm = t('users.mypage.profile')
 
     .space-y-3
       / 名前表示
@@ -18,19 +18,21 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
           div.flex-1
             .flex.items-center.mb-1
               .text-xs.mr-1 🏷️
-              p.text-pink-600.text-xs.font-medium 名前
+              p.text-pink-600.text-xs.font-medium = t('users.mypage.name_label')
             p.text-pink-800.text-sm.font-semibold.truncate = @user.name
-          
-          = link_to "変更", edit_mypage_path, class: "bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 ml-2"
+          / 変更ボタン
+          = link_to t('users.mypage.change'), edit_mypage_path, class: "bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 ml-2"
 
   / 通常ユーザー向けアカウント設定
   - unless current_user.line_user?
     .bg-white.shadow-md.rounded-lg.p-4.border.border-pink-200
       .text-center.mb-4
-        span.text-pink-700.font-bold.text-sm アカウント設定
+        / アカウント設定
+        span.text-pink-700.font-bold.text-sm = t('users.mypage.account_settings')
 
       .bg-pink-50.rounded-lg.p-3.border.border-pink-100
-        = link_to "メールアドレス・パスワード変更",
+        / メールアドレス・パスワード変更
+        = link_to t('users.mypage.edit_credentials'),
                   edit_user_registration_path,
                   class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white text-sm px-4 py-2.5 rounded-lg font-medium text-center transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
 
@@ -39,15 +41,16 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
     .bg-white.shadow-md.rounded-lg.p-4.border.border-red-200
       .text-center.mb-4
         .text-sm.mb-1 ⚠️
-        span.text-red-600.font-bold.text-sm アカウント削除
+        / アカウント削除
+        span.text-red-600.font-bold.text-sm = t('users.mypage.account_deletion.title')
 
       .bg-red-50.rounded-lg.p-3.border.border-red-100
         p.text-red-600.text-xs.mb-3.text-center.leading-relaxed
           | 削除したデータは元に戻せません
           br
           | 本当によろしいですか？
-        
-        = link_to "アカウントを削除",
+        / アカウントを削除
+        = link_to t('users.mypage.account_deletion.delete_button'),
                   registration_path(resource_name),
                   data: { turbo_method: :delete, turbo_confirm: "アカウントを削除するとデータは元に戻せません。本当に削除しますか？" },
                   class: "block w-full bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white text-sm px-4 py-2.5 rounded-lg font-medium text-center transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
@@ -55,23 +58,27 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
   / 便利な機能案内
   .bg-pink-50.rounded-lg.p-4.border.border-pink-200
     .text-center.mb-3
-      span.text-pink-700.font-bold.text-sm Mog&Map.を活用しよう！
+      / Mog&Map.を活用仕様
+      span.text-pink-700.font-bold.text-sm = t('users.mypage.features.title')
 
     .space-y-2
       .bg-white.rounded-lg.p-2.border.border-pink-100
         .flex.items-center
           .text-xs.mr-2 🍼
-          p.text-pink-600.text-xs 子連れに優しいスポットを探す
+          / 子連れに優しいお店を探す
+          p.text-pink-600.text-xs = t('users.mypage.features.find_spots')
       
       .bg-white.rounded-lg.p-2.border.border-pink-100
         .flex.items-center
           .text-xs.mr-2 📝
-          p.text-pink-600.text-xs 新しいスポット情報を投稿する
+          / 新しい店舗情報を投稿する
+          p.text-pink-600.text-xs = t('users.mypage.features.post_spot')
       
       .bg-white.rounded-lg.p-2.border.border-pink-100
         .flex.items-center
           .text-xs.mr-2 💕
-          p.text-pink-600.text-xs お友達にシェアして情報交換
+          / 友達にシェアにsて情報交換
+          p.text-pink-600.text-xs = t('users.mypage.features.share')
 
   / ホームボタン
   .mt-6

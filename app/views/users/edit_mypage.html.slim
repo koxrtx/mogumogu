@@ -7,12 +7,14 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
   / 名前編集カード
   .bg-white.shadow-md.rounded-lg.p-4.border.border-pink-200
     .text-center.mb-4
-      span.text-pink-700.font-bold.text-sm 名前の編集
+      / 名前の編集
+      span.text-pink-700.font-bold.text-sm = t('users.mypage.edit.section_title')
 
     / 現在の名前表示
     .bg-pink-50.rounded-lg.p-3.border.border-pink-100.mb-4
       .flex.items-center.mb-1
-        p.text-pink-600.text-xs.font-medium 現在の名前
+        / 現在の名前
+        p.text-pink-600.text-xs.font-medium = t('users.mypage.edit.current_name_label')
       p.text-pink-800.text-sm.font-semibold = @user.name
 
     / 編集フォーム
@@ -22,22 +24,24 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
       .space-y-2
         .flex.items-center.mb-2
           .text-xs.mr-1 ✨
-          label.text-pink-600.text-xs.font-medium for="user_name" 新しい名前
+          / 新しい名前
+          label.text-pink-600.text-xs.font-medium for="user_name" = t('users.mypage.edit.new_name_label')
         
-        = f.text_field :name, 
-          class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200", 
-          value: @user.name, 
+        = f.text_field :name,
+          class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200",
+          value: @user.name,
           placeholder: "新しい名前を入力してください",
           id: "user_name"
 
       / 保存ボタン
-      = f.submit "変更を保存", 
+      = f.submit t('users.mypage.edit.save_button'),
         class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white text-sm px-4 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
 
   / 注意事項
   .bg-pink-50.rounded-lg.p-3.border.border-pink-200
     .text-center.mb-2
-      span.text-pink-700.font-medium.text-xs ご注意ください
+      / ご注意ください
+      span.text-pink-700.font-medium.text-xs = t('users.mypage.edit.notice_title')
 
     .space-y-1
       .flex.items-start
@@ -51,10 +55,10 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
   / アクションボタン
   .space-y-3
     / マイページに戻るボタン
-    = link_to "マイページに戻る", mypage_path, 
+    = link_to t('users.mypage.back_to_mypage'), mypage_path,
       class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
     
     / ホームボタン
-    = link_to t('spots.buttons.home'), root_path, 
+    = link_to t('spots.buttons.home'), root_path,
       class: "block w-full bg-gradient-to-r from-pink-200 to-pink-300 hover:from-pink-300 hover:to-pink-400 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
 

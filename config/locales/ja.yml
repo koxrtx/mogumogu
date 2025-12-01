@@ -79,7 +79,21 @@ ja:
   users:
     mypage:
       title: "マイページ"
-      edit_title: "アカウント編集"
+      edit_title: "名前の編集"
+      profile: "プロフィール"
+      name_label: "名前"
+      change: "変更"
+      account_settings: "アカウント設定"
+      edit_credentials: "メールアドレス・パスワード変更"
+      account_deletion:
+        title: "アカウント削除"
+        delete_button: "アカウントを削除"
+      features:
+        title: "Mog&Map.を活用しよう！"
+        find_spots: "子連れに優しいお店を探す"
+        post_spot: "新しいお店情報を投稿する"
+        share: "お友達にシェアして情報交換"
+      home_button: "ホームに戻る"
 
   # お問い合わせ
   inquiries:
