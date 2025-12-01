@@ -1,3 +1,4 @@
+// ユーザー登録前に利用規約を見てチェックおさないとユーザー登録ボタンが動かないjs
 document.addEventListener('turbo:load', function() {
   //console.log('turbo:load発火'); 
   
@@ -13,9 +14,9 @@ document.addEventListener('turbo:load', function() {
     console.log('初期設定完了');
     
     agreementCheck.addEventListener('change', function() {
-      console.log('changeイベント発火！チェック状態:', this.checked);
+      // console.log('changeイベント発火！チェック状態:', this.checked);
       registerButton.disabled = !this.checked;
-      console.log('ボタンdisabled設定:', registerButton.disabled);
+      // console.log('ボタンdisabled設定:', registerButton.disabled);
     });
   } else {
     // console.log('要素が見つかりません');

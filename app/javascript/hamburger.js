@@ -1,4 +1,5 @@
-console.log("hamburger.js読み込み完了");
+// console.log("hamburger.js読み込み完了");
+// ハンバーガーメニューのjs
 
 document.addEventListener("turbo:load", function() {
   //console.log("turbo:load - ハンバーガーメニュー初期化開始");
@@ -7,7 +8,7 @@ document.addEventListener("turbo:load", function() {
   const nav = document.querySelector(".nav");
 
   if (!hamburger || !nav) {
-    console.log("ハンバーガーメニュー要素が見つかりません");
+    // console.log("ハンバーガーメニュー要素が見つかりません");
     return;
   }
   
@@ -28,7 +29,7 @@ document.addEventListener("turbo:load", function() {
     hamburger.setAttribute("aria-expanded", isOpen);
     nav.setAttribute("aria-hidden", !isOpen);
 
-    console.log("メニュー状態:", isOpen ? "開く" : "閉じる");
+    // console.log("メニュー状態:", isOpen ? "開く" : "閉じる");
   }
 
   hamburger.addEventListener("click", handleHamburgerClick);
@@ -48,5 +49,5 @@ document.addEventListener("turbo:load", function() {
   document.removeEventListener("click", handleOutsideClick);
   document.addEventListener("click", handleOutsideClick);
   
-  console.log("ハンバーガーメニュー初期化完了");
+  // console.log("ハンバーガーメニュー初期化完了");
 });
