@@ -93,3 +93,52 @@ ja:
       submit_button: "送信する"
     show:
       title: "お問い合わせ詳細確認"
+
+  # 修正依頼選択画面
+  spot_update_requests:
+    select_type:
+      title: "どんな修正をしますか？"
+      options:
+        image_request: "写真削除・変更依頼"
+        info_update: "登録情報を変更依頼"
+        closure_report: "閉店報告"
+
+  # スポット更新依頼
+  spot_update_requests:
+    new:
+      title: "✨ 店舗情報の修正依頼"
+    errors:
+      header: "入力内容を確認してください"
+    form:
+      basic:
+        title: "基本情報"
+      name:
+        label: "店舗名"
+      tel:
+        label: "電話番号"
+        placeholder: "例：03-1234-5678"
+      address:
+        label: "住所"
+        placeholder: "正しい住所を入力"
+      opening_hours:
+        label: "営業時間"
+        placeholder: "例：平日 9:00-18:00 / 土日 10:00-17:00"
+      facilities:
+        title: "子ども向け設備"
+        description: "該当する設備にチェックを入れてください"
+        seating_title: "子どもの設備情報"
+      comment:
+        title: "修正理由・詳細情報"
+        description: "修正する理由や詳細情報があれば教えてください"
+        label: "コメント・修正理由"
+        placeholder: "例：営業時間が変更になっていました。子ども用椅子も新しく設置されています。"
+      cancel: "キャンセル"
+      submit: "修正依頼を送信"
+      confirm: "修正依頼を送信しますか？"
+    notice:
+      title: "修正依頼について"
+      items:
+        - "修正依頼は管理者が確認後、店舗情報に反映されます"
+        - "確認には数日かかる場合があります"
+        - "明らかに間違った情報の修正依頼はお断りする場合があります"
+        - "正確な情報提供にご協力ください"

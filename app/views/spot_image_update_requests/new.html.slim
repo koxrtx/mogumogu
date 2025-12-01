@@ -1,14 +1,17 @@
+/ 写真修正依頼画面
 div.container.mx-auto.px-4.py-6.max-w-2xl
-  h1.text-2xl.font-bold.mb-6.text-center 写真修正依頼
+  / 写真修正依頼
+  h1.text-2xl.font-bold.mb-6.text-center = t('spot_image_update_requests.new.title')
 
   / 戻るボタン
   .mb-4
-    = link_to "店舗ページに戻る", spot_path(@spot), class: "text-blue-500 hover:underline"
+    = link_to t('spot_image_update_requests.new.back_to_spot'), spot_path(@spot), class: "text-blue-500 hover:underline"
 
   / エラーメッセージ
   - if @request.errors.any?
     .bg-red-100.border.border-red-400.text-red-700.p-4.rounded.mb-4
-      h2.font-bold.mb-2 エラーがあります：
+      / エラーがあります
+      h2.font-bold.mb-2 = t('spot_image_update_requests.errors.header')
       ul.list-disc.pl-5
         - @request.errors.full_messages.each do |msg|
           li= msg
@@ -17,6 +20,7 @@ div.container.mx-auto.px-4.py-6.max-w-2xl
 
     / 修正タイプ（追加 or 削除）
     .flex.items-center.gap-2
+      / 修正タイプ
       = f.label :request_type, "修正タイプ", class: "font-medium"
       = f.select :request_type, SpotImageUpdateRequest.request_types.keys.map { |k| [k.humanize, k] }, {}, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
 
