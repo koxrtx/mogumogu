@@ -1,0 +1,26 @@
+/ 子ども設備情報
+/ 共通パーツとして使用
+.mt-2.text-xs.flex.flex-wrap.gap-1
+  - if spot.child_chair
+    span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.child_chair')
+
+  - if spot.tatami_seat
+    span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.tatami_seat')
+
+  - if spot.child_tableware
+    span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.child_tableware')
+
+  - if spot.bring_baby_food
+    span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.bring_baby_food')
+
+  - if spot.stroller_ok
+    span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.stroller_ok')
+
+  - if spot.child_menu
+    span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.child_menu')
+
+  - if spot.parking
+    span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.parking')
+
+  - if spot.other_facility.present?
+    span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.other_facility')

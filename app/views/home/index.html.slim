@@ -36,31 +36,8 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
             p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
 
             / 子ども設備情報
-            .mt-2.text-xs.flex.flex-wrap.gap-1
-              - if spot.child_chair
-                / 子供椅子
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.child_chair')
-              - if spot.tatami_seat
-                / お座席
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.tatami_seat')
-              - if spot.child_tableware
-                / 子供用食器
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.child_tableware')
-              - if spot.bring_baby_food
-                / 離乳食持ち込みOK
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.bring_baby_food')
-              - if spot.stroller_ok
-                / ベビーカーOK
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.stroller_ok')
-              - if spot.child_menu
-                / 子供用メニューあり
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.child_menu')
-              - if spot.parking
-                / 駐車場
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 = t('spots.forms.parking')
-              - if spot.other_facility
-                / その他設備
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 = t('spots.forms.other_facility')
+            .mt-2
+              = render 'spots/child_facilities_tags', spot: spot
 
             - thumbnail_url = display_image_url(spot, size: :thumb, image_attribute: :images)
             - if thumbnail_url.present?

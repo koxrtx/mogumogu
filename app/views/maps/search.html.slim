@@ -69,6 +69,10 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
                   / 画像準備中
                   p.text-pink-400.text-xs = t('maps.search.no_image')
 
+            / 設備タグ
+            .mt-3
+              = render 'spots/child_facilities_tags', spot: spot
+
             / アクセント
             .flex.justify-end.mt-2
               .text-xs.text-pink-400 →
