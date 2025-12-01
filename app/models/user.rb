@@ -66,14 +66,19 @@ class User < ApplicationRecord
     end
   end
 
-  # OAuth認証ユーザーか
+  # OAuth認証ユーザー（LINEまたはGoogle）
   def oauth_user?
-    provider.present? && uid.present?
+    (line_user? || google_user?) && uid.present?
   end
 
   # LINEユーザーか
   def line_user?
     provider == 'line'
+  end
+
+  # Googleユーザーか
+  def google_user?
+    provider == 'google_oauth2'
   end
 
   # LINE通知が有効か
