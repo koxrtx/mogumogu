@@ -1,16 +1,11 @@
 ja:
   app:
     name: "Mog&Map."
-  # ホーム画面
-  home:
-    index:
-      search_placeholder: "店舗名、住所で検索"
-      search_button: "検索"
-      no_image: "画像準備中"
-      how_to_use: "このアプリの使い方"
-      search_by_location: "現在地から探す"
-      share_promotion_title: "あなたのおすすめのお店を共有しませんか？"
-      footer_message: "子連れに優しいお店を見つけよう"
+  common:
+    home_button: "ホームに戻る"
+    spot_button: "お店の投稿"
+    user_button: "ユーザー登録"
+
   # モデル関連のi18n
   activerecord:
     models:
@@ -28,6 +23,40 @@ ja:
         name: "名前"
         email: "メールアドレス"
         inquiry_comment: "お問い合わせ内容"
+
+  # ホーム画面
+  home:
+    index:
+      search_placeholder: "店舗名、住所で検索"
+      search_button: "検索"
+      no_image: "画像準備中"
+      how_to_use: "このアプリの使い方"
+      search_by_location: "現在地から探す"
+      share_promotion_title: "あなたのおすすめのお店を共有しませんか？"
+      footer_message: "子連れに優しいお店を見つけよう"
+    # ホーム画面の使い方
+    usage:
+      cards:
+        search:
+          title: "簡単検索"
+        photo:
+          title: "写真で確認"
+        share:
+          title: "情報共有"
+      when:
+        title: "こんな時に便利！"
+      steps:
+        title: "使い方はとっても簡単！"
+        step1:
+          title: "お店を検索"
+        step2:
+          title: "写真・口コミをチェック"
+        step3:
+          title: "安心してお出かけ"
+        step4:
+          title: "体験をシェア"
+      cta:
+        title: "今すぐ始めてみませんか"
 
   # 利用規約・プライバシーポリシー画面
   pages:

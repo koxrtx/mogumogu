@@ -101,3 +101,10 @@
         .text-center.pt-4
           p.text-xs.text-gray-500
             | 通常1-2営業日以内にご返信いたします
+        
+    / ホームボタン
+    .mt-6
+      = link_to t('common.home_button'), root_path,
+        class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
+
+
