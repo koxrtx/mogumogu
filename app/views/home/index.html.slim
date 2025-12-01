@@ -14,7 +14,8 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
               placeholder: "店舗名、住所で検索",
               class: "flex-1 px-4 py-3 border-2 border-pink-200 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 text-gray-700 shadow-sm",
               data: { autocomplete_target: "input", action: "input->autocomplete#search"}
-        = f.submit "検索", class: "px-4 py-3 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 transition-all duration-200 shadow-sm text-sm"
+        / 検索
+        = f.submit t('home.index.search_button'), class: "px-4 py-3 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 transition-all duration-200 shadow-sm text-sm"
 
         / オートコンプリート結果表示エリア
         ul.absolute.top-full.left-0.right-0.bg-white.border.border-pink-200.rounded-lg.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
@@ -33,25 +34,10 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
           = link_to spot_path(spot), class: "block border-2 border-pink-200 rounded-lg p-4 bg-white hover:bg-pink-50 hover:shadow-md cursor-pointer transition-all duration-200 shadow-sm" do
             h2.text-sm.font-bold.mb-2.text-pink-800 = spot.name
             p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
-            
+
             / 子ども設備情報
-            .mt-2.text-xs.flex.flex-wrap.gap-1
-              - if spot.child_chair
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 👶 子ども椅子
-              - if spot.tatami_seat
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200  お座席
-              - if spot.child_tableware
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 🍴 子ども用食器
-              - if spot.bring_baby_food
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 🍼 離乳食持込可
-              - if spot.stroller_ok
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 🚼 ベビーカーOK
-              - if spot.child_menu
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 🍱 子どもメニュー
-              - if spot.parking
-                span.inline-block.bg-pink-100.text-pink-700.px-2.py-1.rounded-full.text-xs.border.border-pink-200 🚗 駐車場
-              - if spot.other_facility
-                span.inline-block.bg-rose-100.text-rose-700.px-2.py-1.rounded-full.text-xs.border.border-rose-200 ✨ その他
+            .mt-2
+              = render 'spots/child_facilities_tags', spot: spot
 
             - thumbnail_url = display_image_url(spot, size: :thumb, image_attribute: :images)
             - if thumbnail_url.present?
@@ -60,7 +46,8 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
             - else
               .mt-3.bg-pink-50.rounded-lg.border.border-pink-200.h-32.flex.items-center.justify-center style="border-style: dashed;"
                 .text-center
-                  p.text-pink-400.text-xs 画像準備中
+                  / 画像準備中
+                  p.text-pink-400.text-xs = t('home.index.no_image')
 
     - elsif params[:q].present?
       .text-center.py-6.bg-white.shadow-sm.mt-4.rounded-lg.border.border-pink-200
@@ -73,16 +60,19 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
 
     / このアプリの使い方ボタン
     = link_to "#usage-guide", class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 shadow-md transition-all duration-200 active:scale-95" do
-      | このアプリの使い方
+      / このアプリの使い方
+      = t('home.index.how_to_use')
 
     / 現在地から探すボタン
     button#current-location-btn.flex.items-center.justify-center.w-full.px-6.py-4.rounded-lg.shadow-md.font-bold.border-2.border-pink-300.hover:bg-pink-100.bg-white.text-pink-700.transition-all.duration-200.active:scale-95
-      | 現在地から探す
+      / 現在地から探す
+      = t('home.index.search_by_location')
 
     / 投稿促進メッセージエリア
     - if current_user.present?
       .bg-gradient-to-r.from-pink-50.to-rose-50.rounded-lg.p-4.border-2.border-pink-200.shadow-sm.mb-4.text-center
-        h3.text-pink-700.font-bold.text-sm.mb-2 あなたのおすすめのお店を共有しませんか？
+        / あなたのおすすめのお店を共有しませんか？
+        h3.text-pink-700.font-bold.text-sm.mb-2 = t('home.index.share_promotion_title')
         p.text-pink-600.text-xs.leading-relaxed.px-2
           | 子連れで行って良かったお店の情報を投稿して
           br
@@ -91,11 +81,12 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
     / お店の投稿ボタン
     - if current_user.present?
       = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-rose-300 to-rose-400 text-white font-bold rounded-lg hover:from-rose-400 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95" do
-        | お店の投稿
+        / お店の投稿
+        = t('spots.buttons.new_spot')
 
   = render 'home/usage_guide'
 
   / フッターメッセージ
   .text-center.mt-8.pb-6
-    p.text-pink-400.text-xs.leading-relaxed
-      |  子連れに優しいお店を見つけよう
+    / 子連れに優しいお店を見つけよう
+    p.text-pink-400.text-xs.leading-relaxed = t('home.index.footer_message')

@@ -20,14 +20,15 @@ div class=page_classes
         .space-y-1
           .flex.items-center
             .text-xs.mr-1 📨
-            label.text-pink-700.font-medium.text-xs メールアドレス
+            / メールアドレス
+            label.text-pink-700.font-medium.text-xs = t("devise.forms.labels.email")
           = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-pink-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-transparent bg-pink-50 text-gray-700 placeholder-pink-400 text-sm"
 
         / 送信ボタン
         .actions.pt-3
           = f.submit t("devise.forms.buttons.send_reset"), class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 text-sm"
 
-    / ナビゲーションボタン（
+    / ナビゲーションボタン
     .space-y-2
       / ホームボタン
       = link_to t('spots.buttons.home'), root_path, class: "w-full bg-pink-100 text-pink-700 font-medium py-2.5 px-4 rounded-lg border border-pink-300 hover:bg-pink-200 hover:border-pink-400 transition-all duration-200 shadow-sm hover:shadow-md text-center block text-sm"

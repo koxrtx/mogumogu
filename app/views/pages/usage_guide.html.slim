@@ -1,7 +1,8 @@
+/ 使い方画面
 .min-h-screen.bg-gradient-to-br.from-pink-50.to-rose-100
   / ヘッダー部分
   .text-center.py-8.px-4
-    h1.text-3xl.font-bold.text-rose-600.mb-2 Mog&Map.
+    h1.text-3xl.font-bold.text-rose-600.mb-2 = t('app.name')
     p.text-rose-500.text-lg.mb-4
       | 子連れでの外食を
       br
@@ -18,7 +19,7 @@
       .cute-pink-card.p-6
         .text-center
           .text-4xl.mb-3 🔍
-          h3.text-lg.font-bold.text-rose-600.mb-2 簡単検索
+          h3.text-lg.font-bold.text-rose-600.mb-2 = t('home.usage.cards.search.title')
           p.text-gray-600.text-sm.leading-relaxed
             | 子供椅子や座敷など、
             br
@@ -28,7 +29,7 @@
       .cute-pink-card.p-6
         .text-center
           .text-4xl.mb-3 📸
-          h3.text-lg.font-bold.text-rose-600.mb-2 写真で確認
+          h3.text-lg.font-bold.text-rose-600.mb-2 = t('home.usage.cards.photo.title')
           p.text-gray-600.text-sm.leading-relaxed
             | 子ども用メニューを
             br
@@ -38,15 +39,16 @@
       .cute-pink-card.p-6
         .text-center
           .text-4xl.mb-3 🤝
-          h3.text-lg.font-bold.text-rose-600.mb-2 情報共有
+          h3.text-lg.font-bold.text-rose-600.mb-2 = t('home.usage.cards.share.title')
           p.text-gray-600.text-sm.leading-relaxed
             | 実際に行ったお店の情報を投稿して
             br
             | 他のママ・パパをサポート
 
-  / こんな時に便利セクション（シンプル縦並び）
+  / こんな時に便利セクション
   .px-4.mb-8.text-center
-    h2.text-xl.font-bold.text-rose-600.mb-6 こんな時に便利！
+    / こんな時に便利！
+    h2.text-xl.font-bold.text-rose-600.mb-6 = t('home.usage.when.title')
 
     .space-y-3.max-w-sm.mx-auto
       .text-center.mt-4
@@ -57,49 +59,57 @@
   / 使い方の流れ（4ステップ）
   .px-4.mb-8
     .bg-white.rounded-2xl.shadow-lg.p-6.border-2.border-pink-100
-      h2.text-xl.font-bold.text-rose-600.mb-6.text-center 使い方はとっても簡単！
-      
+      / 使い方はとっても簡単
+      h2.text-xl.font-bold.text-rose-600.mb-6.text-center = t('home.usage.steps.title')
+
       .space-y-6
         / ステップ1
         .flex.items-start.space-x-4
           .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 1
           div
-            h3.font-bold.text-gray-800.mb-1 お店を検索
+            / お店を検索
+            h3.font-bold.text-gray-800.mb-1 = t('home.usage.steps.step1.title')
             p.text-gray-600.text-sm 現在地や行きたいエリアで検索。「子供椅子」「座敷」「離乳食持込OK」など、必要な設備で絞り込み
 
-        / ステップ2  
+        / ステップ2
         .flex.items-start.space-x-4
           .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 2
           div
-            h3.font-bold.text-gray-800.mb-1 写真・口コミをチェック
+            / 写真・口コミをチェック
+            h3.font-bold.text-gray-800.mb-1 = t('home.usage.steps.step2.title')
             p.text-gray-600.text-sm 実際の店内の様子や子供向けメニューの写真を確認。他のママ・パパのリアルな口コミも参考に
 
         / ステップ3
         .flex.items-start.space-x-4
           .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 3
           div
-            h3.font-bold.text-gray-800.mb-1 安心してお出かけ
+            / 安心してお出かけ
+            h3.font-bold.text-gray-800.mb-1 = t('home.usage.steps.step3.title')
             p.text-gray-600.text-sm 事前に情報をチェックしているから、子連れでも安心して新しいお店にチャレンジ
 
         / ステップ4
         .flex.items-start.space-x-4
           .flex-shrink-0.w-8.h-8.bg-rose-400.text-white.rounded-full.flex.items-center.justify-center.font-bold.text-sm 4
           div
-            h3.font-bold.text-gray-800.mb-1 体験をシェア
+            / 体験をシェア
+            h3.font-bold.text-gray-800.mb-1 = t('home.usage.steps.step4.title')
             p.text-gray-600.text-sm 利用後は写真付きで情報を投稿。他の子育て家族をサポートしながらコミュニティを育てよう
 
   / CTA部分
   .text-center.pb-8.px-4
-    h2.text-xl.font-bold.text-rose-600.mb-4 今すぐ始めてみませんか
+    / 今すぐ始めてみませんか
+    h2.text-xl.font-bold.text-rose-600.mb-4 = t('home.usage.cta.title')
     .inline-block
       - if current_user.present?
-        = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-rose-300 to-rose-400 text-white font-bold rounded-lg hover:from-rose-400 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95 mb-6" do
-          | お店の投稿
+        = button_to new_spot_path, method: :get, class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-rose-300 to-rose-400 text-white font-bold rounded-lg hover:from-rose-400 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95" do
+          / お店の投稿
+          = t('common.spot_button')
+      / ユーザー登録
       - else
-        = link_to 'ユーザー登録', terms_agreement_path, class: 'bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-pink-500 hover:to-rose-500 transition-all transform hover:scale-105 block mb-6'
+        = link_to t('common.user_button'), terms_agreement_path, class: 'bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-pink-500 hover:to-rose-500 transition-all transform hover:scale-105 block'
 
       / ホームボタン
-      = link_to root_path,
-          class: "flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-rose-300 hover:to-rose-500 shadow-md transition-all duration-200 active:scale-95" do
-        span.mr-2 🏠
-        | ホーム画面へ
+      .mt-6
+      = link_to t('common.home_button'), root_path,
+        class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
+

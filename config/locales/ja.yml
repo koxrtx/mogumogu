@@ -1,8 +1,17 @@
 ja:
+  app:
+    name: "Mog&Map."
+  common:
+    home_button: "ホームに戻る"
+    spot_button: "お店の投稿"
+    user_button: "ユーザー登録"
+
   # モデル関連のi18n
   activerecord:
     models:
       user: "ユーザー"
+      spot: "店舗"
+      inquiry: "お問い合わせ"
     attributes:
       user:
         name: "名前"
@@ -15,6 +24,40 @@ ja:
         email: "メールアドレス"
         inquiry_comment: "お問い合わせ内容"
 
+  # ホーム画面
+  home:
+    index:
+      search_placeholder: "店舗名、住所で検索"
+      search_button: "検索"
+      no_image: "画像準備中"
+      how_to_use: "このアプリの使い方"
+      search_by_location: "現在地から探す"
+      share_promotion_title: "あなたのおすすめのお店を共有しませんか？"
+      footer_message: "子連れに優しいお店を見つけよう"
+    # ホーム画面の使い方
+    usage:
+      cards:
+        search:
+          title: "簡単検索"
+        photo:
+          title: "写真で確認"
+        share:
+          title: "情報共有"
+      when:
+        title: "こんな時に便利！"
+      steps:
+        title: "使い方はとっても簡単！"
+        step1:
+          title: "お店を検索"
+        step2:
+          title: "写真・口コミをチェック"
+        step3:
+          title: "安心してお出かけ"
+        step4:
+          title: "体験をシェア"
+      cta:
+        title: "今すぐ始めてみませんか"
+
   # 利用規約・プライバシーポリシー画面
   pages:
     terms:
@@ -22,18 +65,94 @@ ja:
     terms_agreement:
       title: "利用規約への同意"
       submit_button: "ユーザー登録画面"
-  # マップ表示(現在地取得画面)
+
+    # マップ表示(現在地取得画面)
   maps:
     search:
       title: "現在地検索結果"
+      map_label: "周辺マップ"
+      tap_note: "タップして詳細をチェック"
+      list_title: "もぐもぐリスト"
+      no_image: "画像準備中"
+
   # マイページ
   users:
     mypage:
       title: "マイページ"
-      edit_title: "アカウント編集"
-  # 問い合わせ
+      edit_title: "名前の編集"
+      profile: "プロフィール"
+      name_label: "名前"
+      change: "変更"
+      account_settings: "アカウント設定"
+      edit_credentials: "メールアドレス・パスワード変更"
+      account_deletion:
+        title: "アカウント削除"
+        delete_button: "アカウントを削除"
+      features:
+        title: "Mog&Map.を活用しよう！"
+        find_spots: "子連れに優しいお店を探す"
+        post_spot: "新しいお店情報を投稿する"
+        share: "お友達にシェアして情報交換"
+      home_button: "ホームに戻る"
+
+  # お問い合わせ
   inquiries:
     new:
       title: "お問い合わせ"
+      subtitle: "お気軽にご連絡ください"
+      name_label: "お名前"
+      name_placeholder: "山田 花子"
+      email_label: "メールアドレス"
+      comment_label: "お問い合わせ内容"
+      submit_button: "送信する"
     show:
       title: "お問い合わせ詳細確認"
+
+  # 修正依頼選択画面
+  spot_update_requests:
+    select_type:
+      title: "どんな修正をしますか？"
+      options:
+        image_request: "写真削除・変更依頼"
+        info_update: "登録情報を変更依頼"
+        closure_report: "閉店報告"
+
+  # スポット更新依頼
+  spot_update_requests:
+    new:
+      title: "✨ 店舗情報の修正依頼"
+    errors:
+      header: "入力内容を確認してください"
+    form:
+      basic:
+        title: "基本情報"
+      name:
+        label: "店舗名"
+      tel:
+        label: "電話番号"
+        placeholder: "例：03-1234-5678"
+      address:
+        label: "住所"
+        placeholder: "正しい住所を入力"
+      opening_hours:
+        label: "営業時間"
+        placeholder: "例：平日 9:00-18:00 / 土日 10:00-17:00"
+      facilities:
+        title: "子ども向け設備"
+        description: "該当する設備にチェックを入れてください"
+        seating_title: "子どもの設備情報"
+      comment:
+        title: "修正理由・詳細情報"
+        description: "修正する理由や詳細情報があれば教えてください"
+        label: "コメント・修正理由"
+        placeholder: "例：営業時間が変更になっていました。子ども用椅子も新しく設置されています。"
+      cancel: "キャンセル"
+      submit: "修正依頼を送信"
+      confirm: "修正依頼を送信しますか？"
+    notice:
+      title: "修正依頼について"
+      items:
+        - "修正依頼は管理者が確認後、店舗情報に反映されます"
+        - "確認には数日かかる場合があります"
+        - "明らかに間違った情報の修正依頼はお断りする場合があります"
+        - "正確な情報提供にご協力ください"

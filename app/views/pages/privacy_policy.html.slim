@@ -1,4 +1,5 @@
-/ プライバシーポリシー モーダル用 Turbo Frame
+/ プライバシーポリシー
+/ モーダル化
 turbo-frame id="modal_frame"
   .container.mx-auto.p-4.max-w-4xl
     .text-center.mb-8
@@ -100,3 +101,8 @@ turbo-frame id="modal_frame"
     .bg-gray-100.p-4.mt-8.text-center.border-t-2.border-gray-200
       p.text-gray-600.text-sm.font-medium 制定日：2025年11月06日
       p.text-gray-500.text-xs.mt-2 Mog&Map. プライバシーポリシー
+
+    .mt-6
+      = link_to t('common.home_button'), root_path,
+        class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
+

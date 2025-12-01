@@ -1,12 +1,13 @@
 - if spot.closed?
   .text-center.text-gray-400.mt-6
-    p このスポットは閉店しました
+    / この店舗は閉店しました
+    p = t('spots.show.closed_notice')
 - else
   / 子ども向け設備
   .bg-white.rounded-lg.p-3.border.border-pink-200
     .text-center.mb-3
       span.text-pink-700.font-bold.text-sm = t('spots.forms.child_facilities')
-    
+
     .space-y-2
       - if spot.child_chair
         .flex.items-center.bg-pink-50.rounded-lg.p-2.border.border-pink-100
@@ -51,12 +52,14 @@
       - unless [spot.child_chair, spot.tatami_seat, spot.child_tableware, spot.bring_baby_food, spot.stroller_ok, spot.child_menu, spot.parking, spot.other_facility].any?
         .text-center.py-4
           .text-base.mb-2 😊
-          p.text-pink-600.text-xs 子ども向け設備の情報はまだ登録されていません
+          / 子ども向け設備の情報はまだ登録されていません
+          p.text-pink-600.text-xs = t('spots.show.no_child_facilities')
 
   / その他設備コメント
   - if spot.other_facility_comment.present?
     .bg-white.rounded-lg.p-3.border.border-pink-200
-      p.text-xs.mr-1.text-pink-700.font-medium 📝 その他設備の詳細
+      / その他の設備の情報
+      p.text-xs.mr-1.text-pink-700.font-medium 📝 = t('spots.show.other_facility_details_label')
       .bg-pink-50.rounded-lg.p-2.border.border-pink-100
         p.text-pink-800.text-sm.leading-relaxed = spot.other_facility_comment
 
@@ -64,7 +67,8 @@
   - if display_all_image_urls(spot, size: :detail).any? { |url| url.present? }
     .bg-white.rounded-lg.p-3.border.border-pink-200
       .text-center.mb-3
-        span.text-pink-700.font-bold.text-sm 子ども用メニュー写真
+        / 子ども用メニュー写真
+        span.text-pink-700.font-bold.text-sm = t('spots.show.photo_title')
 
       .grid.grid-cols-2.gap-2.justify-items-center
         - display_all_image_urls(spot, size: :detail).each do |detail_url|

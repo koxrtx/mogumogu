@@ -4,22 +4,50 @@ ja:
     forms:
       placeholders:
         name: "名前"
-        email: "メール"
+        email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード認証"
+      labels:
+        name: "お名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        current_password: "現在のパスワード"
       buttons:
         register: "登録"
         login: "ログイン"
         send_reset: "パスワードリセット送信"
 
+    # Omniauth / ログイン文言
+    omniauth:
+      line_or_google: "LINE/Googleで簡単登録"
+      line_register: "LINEで登録"
+      google_register: "Googleで登録"
+
     # 各ページのi18n化
+    # 新規登録
     registrations:
       new:
         title: "ユーザー登録"
+        subtitle: "みんなで素敵な %{app_name} を作りましょう！"
         placeholders:
           password: "パスワード(6文字以上)"
       edit:
         title: "アカウント編集"
+        header: "アカウント情報の変更"
+        pending_label: "確認待ち"
+        current_password_note: "変更を保存するには現在のパスワードが必要です"
+        save_changes: "変更を保存"
+        security:
+          title: "セキュリティについて"
+          change_password_recommendation: "パスワードは定期的に変更することをお勧めします"
+          avoid_reuse_passwords: "他のサービスと同じパスワードは使用しないでください"
+        delete_account: "アカウントを削除"
+        delete_confirm: "アカウントを削除するとデータは元に戻せません。本当に削除しますか？"
+        back_to_mypage: "マイページに戻る"
+      or: "または"
+      already_have_account: "すでにアカウントをお持ちの方は"
+      login: "ログイン"
       destroyed: "アカウントを削除しました。ご利用ありがとうございました。"
       signed_up: "登録が完了しました。"
       signed_up_but_inactive: "登録は完了しましたが、アカウントがまだ有効化されていません。"
@@ -28,14 +56,29 @@ ja:
       update_needs_confirmation: "アカウント情報を更新しましたが、新しいメールアドレスを確認する必要があります。メールを確認してください。"
       updated: "アカウント情報を更新しました。"
       updated_but_not_signed_in: "パスワードを変更したため、再度サインインしてください。"
+
+    # ログイン
     sessions:
       new:
         title: "ログイン"
+        remember_me: "ログイン状態を保持する"
+        sign_up: "ユーザー登録"
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
       already_signed_out: "すでにログアウト済みです。"
+
+    # パスワード再設定
     shared_links:
       forgot_password: "パスワードをお忘れの方"
+    
+    # パスワード再編集
+    passwords:
+      edit:
+        title: "パスワード再設定"
+        subtitle: "新しいパスワードを設定してアカウントを安全に保護しましょう"
+        new_password_label: "新しいパスワード"
+        new_password_placeholder: "新しいパスワードを入力"
+        change_button: "パスワードを変更する"
 
     # フラッシュ・エラー
     confirmations:

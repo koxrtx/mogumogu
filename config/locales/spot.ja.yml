@@ -10,8 +10,23 @@ ja:
   spots:
     new:
       title: "お店の投稿"
+      section_title: "店舗情報"
+      current_address_button: "現在地から入力"
+      photo_section_title: "子ども用メニュー写真（最大3枚）"
+    
     show:
       title: "お店の情報"
+      thanks_title: "投稿ありがとうございました！"
+      thanks_body: "あなたの投稿が他のママパパの役に立ちます✨"
+      closed_notice: "この店舗は閉店しました"
+      incorrect_title: "情報に間違いがありますか？"
+      incorrect_body: "みんなで正しい情報にしていきましょう！"
+      request_link: "修正依頼を送る"
+      share_line1: "このスポットが気に入ったら、"
+      share_line2: "ぜひお友達にもシェアしてくださいね♪"
+      no_child_facilities: "子ども向け設備の情報はまだ登録されていません"
+      other_facility_details_label: "その他設備の詳細"
+      photo_title: "子ども用メニュー写真"
     forms:
       name: "お店の名前"
       address: "住所"
@@ -31,3 +46,11 @@ ja:
       submit: "投稿する"
       new_spot: "新しい店舗を投稿"
       home: "ホームに戻る"
+    share:
+      title: "みんなにシェアしよう！"
+      line_button: "LINEでシェア"
+      line_tooltip: "LINEでシェア"
+      line_alt: "LINEロゴ"
+      x_button: "Xでシェア"
+      x_tooltip: "Xでシェア"
+      x_alt: "Xロゴ"

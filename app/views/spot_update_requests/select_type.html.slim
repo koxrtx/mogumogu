@@ -1,7 +1,9 @@
+/ 修正依頼選択画面
 .max-w-sm.mx-auto.mt-6.mx-4
   .bg-gradient-to-r.from-pink-400.to-pink-200.rounded-lg.p-4.text-center.shadow-md
     .mb-3
-      h3.text-white.font-bold.text-sm.mb-1 どんな修正をしますか？
+      / どんな修正をしますか？
+      h3.text-white.font-bold.text-sm.mb-1 = t('spot_update_requests.select_type.title')
       p.text-orange-100.text-xs 修正内容を選んでください
 
     .space-y-3
@@ -9,16 +11,19 @@
       = link_to new_spot_spot_image_update_request_path(@spot, type: 'image_delete'),
         class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
-          span 写真削除・変更依頼
+          / 写真削除・変更依頼
+          span = t('spot_update_requests.select_type.options.image_request')
 
       / 登録情報を変更依頼
       = link_to new_spot_spot_update_request_path(@spot, type: 'info_update'),
         class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
-          span 登録情報を変更依頼
+          / 登録情報を変更依頼
+          span = t('spot_update_requests.select_type.options.info_update')
 
       = button_to closure_report_spot_spot_update_requests_path(@spot),
           method: :post,
           class: "block w-full bg-white text-pink-700 font-bold py-3 px-4 rounded-lg hover:bg-orange-50 transition-colors duration-200 text-sm shadow-sm" do
         .flex.items-center.justify-center
-          span 閉店報告
+          / 閉店依頼
+          span = t('spot_update_requests.select_type.options.closure_report')

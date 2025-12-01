@@ -11,6 +11,7 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
 
     / フォームヘッダー
     .text-center.mb-4
+      / アカウント情報の変更
       span.text-pink-700.font-bold.text-sm アカウント情報の変更
 
     / メールアドレス
@@ -27,7 +28,8 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
       .bg-yellow-50.border.border-yellow-200.rounded-lg.p-3
         .flex.items-center
           .text-xs.mr-1 ⏳
-          .text-yellow-700.text-xs.font-medium 確認待ち
+          / 確認待ち
+          .text-yellow-700.text-xs.font-medium = t("devise.registrations.edit.pending_label")
         p.text-yellow-600.text-xs.mt-1
           | 確認待ち: #{resource.unconfirmed_email}
 
@@ -50,41 +52,45 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
       .flex.items-center.mb-1
         .text-xs.mr-1 🔑
         = f.label :password_confirmation, class: "text-pink-600 text-xs font-medium"
-      = f.password_field :password_confirmation, 
-        autocomplete: "new-password", 
+      = f.password_field :password_confirmation,
+        autocomplete: "new-password",
         class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
     / 現在のパスワード
     .field.space-y-2
       .flex.items-center.mb-1
         = f.label :current_password, class: "text-pink-600 text-xs font-medium"
-      p.text-pink-400.text-xs.mb-1 変更を保存するには現在のパスワードが必要です
-      = f.password_field :current_password, 
-        autocomplete: "current-password", 
+      / 変更を保持するには現在のパスワードが必要です
+      p.text-pink-400.text-xs.mb-1 = t("devise.registrations.edit.current_password_note")
+      = f.password_field :current_password,
+        autocomplete: "current-password",
         class: "w-full px-3 py-2.5 text-sm border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 bg-white placeholder-pink-300 transition-all duration-200"
 
     / 保存ボタン
     .actions.mt-6
-      = f.submit "変更を保存", 
+      / 変更を保存
+      = f.submit t("devise.registrations.edit.save_changes"),
         class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-medium py-3 px-4 rounded-lg text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
 
   / セキュリティ注意事項
   .bg-pink-50.rounded-lg.p-3.border.border-pink-200
     .text-center.mb-2
-      span.text-pink-700.font-medium.text-xs セキュリティについて
+      / セキュリティについて
+      span.text-pink-700.font-medium.text-xs = t("devise.registrations.edit.security.title")
 
     .space-y-1
       .flex.items-start
         .text-xs.mr-1.mt-0.5 •
-        p.text-pink-600.text-xs.leading-relaxed パスワードは定期的に変更することをお勧めします
-      
+        / パスワードは定期的に変更することをお勧めします
+        p.text-pink-600.text-xs.leading-relaxed = t("devise.registrations.edit.security.change_password_recommendation")
+
       .flex.items-start
         .text-xs.mr-1.mt-0.5 •
-        p.text-pink-600.text-xs.leading-relaxed 他のサービスと同じパスワードは使用しないでください
+        / 他のサービスと同じパスワードは使用しないでください
+        p.text-pink-600.text-xs.leading-relaxed = t("devise.registrations.edit.security.avoid_reuse_passwords")
 
   / アカウント削除セクション
   .bg-red-50.rounded-lg.p-4.border.border-red-200
-
     .bg-white.rounded-lg.p-3.border.border-red-100
       p.text-red-600.text-xs.mb-3.text-center.leading-relaxed
         | アカウントを削除すると
@@ -93,7 +99,8 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
         br
         | この操作は取り消せません
 
-      = link_to "アカウントを削除",
+      / アカウントを削除
+      = link_to t("devise.registrations.edit.delete_account"),
         registration_path(resource_name),
         data: { turbo_method: :delete, turbo_confirm: "アカウントを削除するとデータは元に戻せません。本当に削除しますか？" },
         class: "text-center block w-full bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white text-sm px-4 ActionView::SyntaxErrorInTemplate in Users::RegistrationsController#edit"
@@ -101,9 +108,9 @@ div.page_classes.max-w-sm.mx-auto.p-4.space-y-4
     / アクションボタン
   .space-y-3
     / マイページに戻るボタン
-    = link_to "マイページに戻る", mypage_path, 
+    = link_to t("devise.registrations.edit.back_to_mypage"), mypage_path,
       class: "block w-full bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
-    
+
     / ホームボタン
-    = link_to t('spots.buttons.home'), root_path, 
+    = link_to t('spots.buttons.home'), root_path,
       class: "block w-full bg-gradient-to-r from-pink-200 to-pink-300 hover:from-pink-300 hover:to-pink-400 text-white font-medium py-2.5 px-4 rounded-lg text-center text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
