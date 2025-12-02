@@ -14,6 +14,7 @@ div class=page_classes data-controller="modal"
       .w-full.bg-pink-200.border.border-pink-300.rounded-lg.p-3.mb-4.text-center.shadow-sm
         = link_to '利用規約はこちら', terms_path,
           data: { action: "click->modal#open" },
+          id: 'terms_link',
           class: 'text-pink-800 font-medium text-sm hover:text-pink-900 transition-colors duration-200'
 
       / 同意フォーム
