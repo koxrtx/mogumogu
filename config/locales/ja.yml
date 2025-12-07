@@ -116,9 +116,6 @@ ja:
         image_request: "写真削除・変更依頼"
         info_update: "登録情報を変更依頼"
         closure_report: "閉店報告"
-
-  # スポット更新依頼
-  spot_update_requests:
     new:
       title: "✨ 店舗情報の修正依頼"
     errors:

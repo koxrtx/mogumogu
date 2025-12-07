@@ -32,8 +32,7 @@ class SpotImageUpdateRequestsController < ApplicationController
   # お店の写真を修正依頼するパラメーター
   def spot_image_update_request_params
     params.require(:spot_image_update_request).permit(
-      # 基本情報・子供用設備はSpotUpdateRequestで管理
-      images: []
+      :request_type
     )
   end
 end

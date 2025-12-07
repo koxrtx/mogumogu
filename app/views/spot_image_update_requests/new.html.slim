@@ -1,34 +1,51 @@
 / 写真修正依頼画面
-div.container.mx-auto.px-4.py-6.max-w-2xl
-  / 写真修正依頼
-  h1.text-2xl.font-bold.mb-6.text-center = t('spot_image_update_requests.new.title')
+div.container.mx-auto.px-4.py-6.max-w-md
+  h1.text-xl.font-bold.mb-4.text-center = t('spot_image_update_requests.new.title')
 
-  / 戻るボタン
-  .mb-4
-    = link_to t('spot_image_update_requests.new.back_to_spot'), spot_path(@spot), class: "text-blue-500 hover:underline"
+  .mb-4.text-center
+    = link_to t('spot_image_update_requests.new.back_to_spot'),
+      spot_path(@spot),
+      class: "text-blue-500 hover:underline text-sm"
 
-  / エラーメッセージ
   - if @request.errors.any?
-    .bg-red-100.border.border-red-400.text-red-700.p-4.rounded.mb-4
-      / エラーがあります
+    .bg-red-100.border.border-red-400.text-red-700.p-4.rounded.mb-4.text-sm
       h2.font-bold.mb-2 = t('spot_image_update_requests.errors.header')
       ul.list-disc.pl-5
         - @request.errors.full_messages.each do |msg|
           li= msg
 
-  = form_with model: [@spot, @request], local: true, html: { multipart: true, class: "space-y-4" } do |f|
+  = form_with model: [@spot, @request],
+      local: true,
+      html: { multipart: true, class: "space-y-4", data: { controller: "image-request" } } do |f|
 
-    / 修正タイプ（追加 or 削除）
-    .flex.items-center.gap-2
-      / 修正タイプ
-      = f.label :request_type, "修正タイプ", class: "font-medium"
-      = f.select :request_type, SpotImageUpdateRequest.request_types.keys.map { |k| [k.humanize, k] }, {}, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    / 修正タイプ選択
+    = f.select :request_type,
+        [["追加", "add"], ["削除", "delete"], ["追加＋削除", "both"]],
+        {},
+        class: "border rounded px-3 py-2 w-full",
+        data: { action: "change->image-request#changeType" }
 
-    / 写真添付
-    .flex.flex-col
-      = f.label :images, "写真を選択", class: "font-medium mb-1"
-      = f.file_field :images, multiple: true, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    / 追加エリア
+    .hidden data-image-request-target="addField"
+      = f.label :images, "追加する写真", class: "font-medium"
+      = f.file_field :images,
+          multiple: true,
+          class: "border rounded px-3 py-2 w-full"
 
-    / 送信ボタン
+    / 削除エリア
+    .hidden data-image-request-target="deleteField"
+
+      - if @spot.images.any?
+        p.font-medium.mb-2 削除する写真を選択
+
+        - @spot.images.each do |img|
+          .flex.items-center.mb-2
+            = check_box_tag "delete_images[]", img.id
+            = image_tag url_for(img), class: "w-16 h-16 ml-2 rounded"
+
+      - else
+        p.text-gray-500.text-sm 削除できる写真はありません
+
     .text-center
-      = f.submit "修正依頼を送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
+      = f.submit "修正依頼を送信",
+          class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors w-full text-sm font-bold"
