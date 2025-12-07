@@ -16,7 +16,7 @@ class SpotUpdateRequest < ApplicationRecord
   # 店舗情報修正依頼時にはログインしてないユーザーもできる設計
   belongs_to :user, optional: true
   belongs_to :spot
-  has_many :spot_update_request_images, dependent: :destroy
+  has_many :spot_image_update_requests, dependent: :destroy
 
   # enum 定義
   # 店舗修正依頼、写真削除、閉店依頼の3種類
@@ -28,12 +28,12 @@ class SpotUpdateRequest < ApplicationRecord
   with_options if: :user_submission? do
     validates :request_type, presence: true
     # 写真削除依頼
-    validates :photo_delete_reason, presence: true, if: :image_delete?
-    validates :spot_update_request_images, presence: true, if: :image_delete?
+    #validates :photo_delete_reason, presence: true, if: :image_delete?
+    #validates :spot_image_update_requests, presence: true, if: :image_delete?
     # 店舗情報修正時
-    validate :spot_update_excludes_other_fields, if: :spot_update?
+    #validate :spot_update_excludes_other_fields, if: :spot_update?
     # 閉店依頼時
-    validate :closure_excludes_all_fields, if: :closure?
+    #validate :closure_excludes_all_fields, if: :closure?
   end
 
   # 管理者編集時

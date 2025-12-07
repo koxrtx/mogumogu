@@ -2,6 +2,8 @@ class SpotImageUpdateRequest < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :spot
 
+  require "open-uri"
+
   # enum 定義
   # 写真の追加・削除・削除と追加
   enum :request_type, { add: 0, remove: 1 ,both: 2 }
@@ -13,72 +15,101 @@ class SpotImageUpdateRequest < ApplicationRecord
   scope :today, -> { where(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
   scope :this_week, -> { where(created_at: Time.current.beginning_of_week..Time.current.end_of_week) }
 
-  # 承認処理メソッド
+  # 承認処理
   def approve!
     transaction do
-      # ステータスを承認に変更
-      self.status = :approved
-      save!
-
-      # 写真更新タイプの場合のみ店舗データに反映
-      apply_to_spot_image_changes if add?
-
+      update!(status: :approved, processed_at: Time.current)
+      apply_spot_image_changes if add? || remove? || both?
       true
     end
   rescue => e
-    # エラーログ出力（本番環境での問題調査用）
-    Rails.logger.error "承認処理でエラーが発生: #{e.message}"
+    Rails.logger.error "承認処理エラー: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
     false
   end
 
-  # 却下処理メソッド
   def reject!
-    # ステータスを却下に変更（シンプルな処理）
     update!(status: :rejected)
     true
   rescue => e
-    # エラーログ出力（本番環境での問題調査用）
-    Rails.logger.error "却下処理でエラーが発生: #{e.message}"
+    Rails.logger.error "却下処理エラー: #{e.message}"
     false
   end
 
-  # 承認時に実際の店舗情報を更新するメソッド
-  def apply_to_spot_image_changes
-  return false unless add?
+  private
 
-  # 削除処理
-  if request_data["delete_image_ids"].present?
-    request_data["delete_image_ids"].each do |blob_id|
-      blob = ActiveStorage::Blob.find_by(id: blob_id)
-      blob&.purge
+  def apply_spot_image_changes
+    Rails.logger.info "=== 画像更新処理開始 ==="
+    Rails.logger.info "Request ID: #{id}"
+    Rails.logger.info "Request Type: #{request_type}"
+    Rails.logger.info "Request Data: #{request_data.inspect}"
+
+    # 削除処理（キー名を修正）
+    if request_data["delete_image_ids"].present? && (remove? || both?)
+      delete_images
+    end
+
+    # 追加処理
+    if request_data["add_images"].present? && (add? || both?)
+      add_images
+    end
+
+    Rails.logger.info "=== 画像更新処理完了 ==="
+    true
+  rescue => e
+    Rails.logger.error "画像更新エラー: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    false
+  end
+
+  # 画像削除処理
+  def delete_images
+    
+    # request_dataから削除対象のblob_idを取得
+    blob_ids = request_data["delete_image_ids"]
+    
+
+    blob_ids.each do |blob_id|
+
+      # Blob IDから該当するAttachmentを検索して削除
+      # Cloudinaryを使っている場合もこれで削除できます
+      attachment = ActiveStorage::Attachment.find_by(blob_id: blob_id)
+
+      if attachment
+        attachment.purge
+      else
+        
+        # 念のためBlobを直接削除
+        blob = ActiveStorage::Blob.find_by(id: blob_id)
+        if blob
+          blob.purge
+        else
+        end
+      end
     end
   end
 
-  # 追加処理
-  if request_data["add_images"].present?
-    request_data["add_images"].each do |uploaded_io|
-      spot.images.attach(uploaded_io)
+  # 画像追加処理（将来的に使う場合）
+  def add_images
+  
+    if request_data["add_images"].is_a?(Array)
+      request_data["add_images"].each do |image|
+        # インターネットのURLから写真を取ってきて、お店にくっつける
+        file = URI.open(image['url'])
+        spot.images.attach(
+          io: file,
+          filename: image['original_filename'],
+          content_type: image['content_type']
+        )
     end
   end
-
-  true
-rescue => e
-  Rails.logger.error "写真更新でエラーが発生: #{e.message}"
-  false
 end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[
-      created_at
-      id
-      request_data
-      request_type
-      spot_id
-      status
-    ]
+    %w[created_at id request_type spot_id status]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    %w[spot]
+    %w[spot user]
   end
 end

@@ -30,8 +30,14 @@ class Admin::BaseController < ApplicationController
     end
   end
 
+  # 店舗修正依頼取得
   def set_request
     @request = SpotUpdateRequest.find(params[:id])
+  end
+
+  # 写真修正依頼取得
+  def set_image_request
+    @request = SpotImageUpdateRequest.find(params[:id])
   end
 
   # 問い合わせ情報取得

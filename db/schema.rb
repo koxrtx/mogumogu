@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_19_020915) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_07_125159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -191,6 +191,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_19_020915) do
     t.text "reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "processed_at"
     t.index ["spot_id"], name: "index_spot_image_update_requests_on_spot_id"
     t.index ["user_id"], name: "index_spot_image_update_requests_on_user_id"
   end

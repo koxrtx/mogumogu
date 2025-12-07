@@ -51,24 +51,24 @@ div class=page_classes
           - @requests.each do |request|
             tr.border-t
               td.px-4.py-2 = request.id
-              td.px-4.py-2 = request.name || request.spot&.name || "未設定"
+              td.px-4.py-2 = request.spot&.name
               td.px-4.py-2
                 = render 'status_badge', request: request
               td.px-4.py-2
                 -# request_type 表示
                 - case request.request_type
-                - when "spot_update"
-                  span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs 店舗修正
-                - when "image_delete"
+                - when "add"
+                  span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs 写真追加
+                - when "remove"
                   span.bg-orange-200.text-orange-800.px-2.py-1.rounded.text-xs 写真削除
-                - when "closure"
-                  span.bg-red-200.text-red-800.px-2.py-1.rounded.text-xs 閉店報告
+                - when "both"
+                  span.bg-purple-200.text-purple-800.px-2.py-1.rounded.text-xs 追加＋削除
               td.px-4.py-2 = request.created_at.strftime("%Y/%m/%d %H:%M")
               td.px-4.py-2
                 .flex.gap-1
-                  = link_to "詳細", admin_admin_spot_image_update_requests_path(request), class: "bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600"
-                  = link_to "編集", edit_admin_spot_image_update_requests_path(request), class: "bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600"
-                  = link_to "削除", admin_spot_image_update_requests_path(request), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600"
+                  = link_to "詳細", admin_spot_image_update_request_path(request), class: "bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600"
+                  = link_to "編集", edit_admin_spot_image_update_request_path(request), class: "bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600"
+                  = link_to "削除", admin_spot_image_update_request_path(request), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600"
 
       / ページネーション
       .pagination-wrapper.mt-4.text-center

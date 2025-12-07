@@ -20,7 +20,7 @@ div.container.mx-auto.px-4.py-6.max-w-md
 
     / 修正タイプ選択
     = f.select :request_type,
-        [["追加", "add"], ["削除", "delete"], ["追加＋削除", "both"]],
+        [["修正依頼の内容を選択", ""], ["追加", "add"], ["削除", "remove"], ["追加＋削除", "both"]],
         {},
         class: "border rounded px-3 py-2 w-full",
         data: { action: "change->image-request#changeType" }

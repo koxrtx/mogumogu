@@ -1,0 +1,62 @@
+div.page_classes
+  / ヘッダー
+  .text-center.mb-4.px-4
+    h1.text-lg.sm:text-xl.font-bold.text-pink-700.mb-2 写真修正依頼詳細
+
+  / 戻るボタン
+  .flex.justify-center.gap-2.mb-6
+    = link_to "一覧に戻る", admin_spot_image_update_requests_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+
+  / 依頼ステータスとタイプ
+  .status-overview.max-w-sm.mx-auto.mb-4.px-4
+    p.text-sm.text-gray-700.font-medium
+      | 現在のステータス:
+      span.font-bold.text-pink-700 = @request.status.titleize
+    - case @request.request_type
+    - when "add"
+      span.bg-blue-200.text-blue-800.px-2.py-1.rounded.text-xs.mb-2 写真追加
+    - when "remove"
+      span.bg-orange-200.text-orange-800.px-2.py-1.rounded.text-xs.mb-2 写真削除
+    - when "both"
+      span.bg-purple-200.text-purple-800.px-2.py-1.rounded.text-xs.mb-2 追加＋削除
+
+  / ステータス操作ボタン
+  .status-actions.max-w-sm.mx-auto.mb-6
+    = form_with url: admin_spot_image_update_request_path(@request), method: :patch, local: true do
+      .flex.gap-2
+        = submit_tag "承認", name: "commit", value: "approve", class: "flex-1 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        = submit_tag "却下", name: "commit", value: "reject", class: "flex-1 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+
+  / 店舗基本情報（店舗名・住所のみ）
+  .spot-info.max-w-sm.mx-auto.border.border-pink-200.rounded-lg.p-4.bg-pink-50.space-y-4
+    .space-y-2
+      .flex.items-center
+        .text-xs.mr-1 🏷️
+        p.text-pink-700.font-medium.text-xs 店舗名
+      .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+        p.text-pink-800.text-sm.font-medium = @request.spot&.name || "未設定"
+
+    .space-y-2
+      .flex.items-center
+        .text-xs.mr-1 📍
+        p.text-pink-700.font-medium.text-xs 住所
+      .bg-pink-50.rounded-lg.p-2.border.border-pink-100
+        p.text-pink-800.text-sm.leading-relaxed = @request.spot&.address || "未設定"
+
+  / 追加依頼の写真
+  - if @request.request_data && @request.request_data["add_images"].present?
+    .text-center
+      h3.text-lg.font-semibold.mb-2.mt-6 追加予定の写真
+      .grid.grid-cols-3.gap-4.justify-items-center.mx-auto
+        - @request.request_data["add_images"].each do |image|
+          - next unless image.present?
+          img src=image class="rounded border p-1 shadow w-32 h-32 object-cover cursor-pointer hover:opacity-80 transition-all duration-200" onclick="openModal('#{image}')"
+
+  / 削除依頼の写真
+  - if @request.request_data && @request.request_data["delete_image_urls"].present?
+    .text-center
+      h3.text-lg.font-semibold.mb-2.mt-6 削除予定の写真
+      .grid.grid-cols-3.gap-4.justify-items-center.mx-auto
+        - @request.request_data["delete_image_urls"].each do |image|
+          - next unless image.present?
+          img src=image class="rounded border p-1 shadow w-32 h-32 object-cover cursor-pointer hover:opacity-80 transition-all duration-200" onclick="openModal('#{image}')"

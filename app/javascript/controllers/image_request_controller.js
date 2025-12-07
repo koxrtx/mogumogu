@@ -22,7 +22,7 @@ export default class extends Controller {
     }
 
     // 削除
-    if (type === "delete") {
+    if (type === "remove") {
       this.deleteFieldTarget.classList.remove("hidden")
     }
 

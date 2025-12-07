@@ -24,16 +24,16 @@ module SpotUpdateRequestPrivateMethods
 
 
   # 店舗情報修正時は写真削除できない
-  def spot_update_excludes_other_fields
-    if spot_update_request_images.any?
-      errors.add(:base, "店舗情報修正依頼のときは写真削除はできません")
-    end
-  end
+  #def spot_update_excludes_other_fields
+    #if spot_image_update_requests.any?
+      #errors.add(:base, "店舗情報修正依頼のときは写真削除はできません")
+    #end
+  #end
 
   # 閉店依頼時は写真削除も店舗情報修正もできない
-  def closure_excludes_all_fields
-    if spot_update_request_images.any? || facility_tag_id.present? || request_data.present?
-      errors.add(:base, "閉店依頼のときは写真削除や店舗情報変更はできません")
-    end
-  end
+  #def closure_excludes_all_fields
+   #if spot_image_update_requests.any? || facility_tag_id.present? || request_data.present?
+     # errors.add(:base, "閉店依頼のときは写真削除や店舗情報変更はできません")
+    #end
+  #end
 end

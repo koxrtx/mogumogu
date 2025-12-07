@@ -37,15 +37,16 @@ class Admin::SpotUpdateRequestsController < Admin::BaseController
       case params[:commit]
       when 'approve'
         # 承認処理：admin_paramsは使わない（パラメータエラー回避）
-        handle_approval(@request)
+        handle_approval(@request, redirect_path: admin_spot_update_requests_path)
       when 'reject'
         # 却下処理：admin_paramsは使わない（パラメータエラー回避）
-        handle_rejection(@request)
+        handle_rejection(@request, redirect_path: admin_spot_update_requests_path)
       else
         # 通常の更新処理：editフォームからの詳細データ更新
         # この場合のみadmin_paramsとset_admin_editingが必要
         @request.set_admin_editing
-        handle_normal_update(@request, admin_params)
+        handle_normal_update(@request, admin_params, redirect_path: admin_spot_update_requests_path)
+
       end
     rescue => e
       # エラーハンドリング：予期しないエラーをキャッチ
