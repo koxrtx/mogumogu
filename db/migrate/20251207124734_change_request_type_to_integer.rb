@@ -8,4 +8,3 @@ class ChangeRequestTypeToInteger < ActiveRecord::Migration[7.0]
     change_column :spot_image_update_requests, :request_type, :string
   end
 end
-end
