@@ -1,5 +1,7 @@
 // ホーム画面ボタンとヘッダーのリンク両方に
 // moveToCurrentLpcationを実行するイベントをつける
+// 現在地から検索ボタン押したら、現在地を取得してその場所の地図ページに移動させるjs
+// 地図の表示はmaps/search_map.jsで行う
 document.addEventListener('turbo:load', function() {
   const locationButton = document.getElementById("current-location-btn");
   const locationLink = document.getElementById("current-location-link");

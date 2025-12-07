@@ -1,3 +1,4 @@
+// 地図にお店の設備情報を表示するためのjs
 export function buildFacilityInfo(spot) {
   let info = [];
 

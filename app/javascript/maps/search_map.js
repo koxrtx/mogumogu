@@ -3,17 +3,17 @@ import { buildFacilityInfo} from "./facility_info";
 let map, infoWindow;
 
 document.addEventListener('turbo:load',async function(){
-  console.log("読み込まれてる");
+  // console.log("読み込まれてる");
   // マップ要素の確認を最初に行う
   const mapElement = document.getElementById("map");
   if (!mapElement) {
-    console.log("マップ要素が存在しないため、処理をスキップ");
+    // console.log("マップ要素が存在しないため、処理をスキップ");
     return;
   }
 
     if (typeof google === 'undefined'){
   // GoogleMAP APIが読み込まれているか
-    console.log('Google Maps APIが読み込まれていません');
+    // console.log('Google Maps APIが読み込まれていません');
     return;
   }
 

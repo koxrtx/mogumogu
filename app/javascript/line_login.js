@@ -1,10 +1,11 @@
+// LINE ログインボタンの画像を、状態（通常・ホバー・押した時）によって切り替えるjs
 document.addEventListener("turbo:load", () => {
   const button = document.getElementById('line-login-btn');
   const icon = document.getElementById('line-icon-official');
   if (!button || !icon) return;
 
   const baseSrc = button.dataset.baseImage;
-  const hoverSrc = button.dataset.hoverImage;  
+  const hoverSrc = button.dataset.hoverImage;
   const pressSrc = button.dataset.pressImage;
 
   // ホバー時
