@@ -1,5 +1,5 @@
 / 店舗情報修正依頼画面
-.spot-update-request.min-h-screen.bg-gradient-to-br.from-pink-50.to-purple-100.py-8
+.spot-update-request.min-h-screen.bg-gradient-to-br.bg-fuchsia-50.py-8
   .container.mx-auto.px-4.max-w-4xl
     /  ヘッダー部分
     .text-center.mb-8
@@ -27,7 +27,7 @@
               li = message
 
     /  メインフォーム
-    .form-container.bg-white.rounded-2xl.shadow-xl.overflow-hidden
+    .form-container.bg-white.max-w-sm.mx-auto.rounded-2xl.shadow-xl.overflow-hidden
       = form_with model: [@spot, @request], local: true, class: "space-y-0" do |f|
 
         /  基本情報セクション

@@ -1,11 +1,10 @@
 / 写真修正依頼画面
-.min-h-screen.bg-gradient-to-b.from-pink-50.to-pink-100.pb-8
+.min-h-screen.bg-gradient-to-b.bg-fuchsia-50.pb-8
   .container.mx-auto.px-4.py-6.max-w-full.sm:max-w-md
     / ヘッダー部分
-    .bg-white.rounded-2xl.shadow-lg.p-6.mb-6
-      h1.text-2xl.font-bold.mb-2.text-center.text-pink-600
-        = t('spot_image_update_requests.new.title')
-      
+    h1.text-2xl.font-bold.mb-2.text-center.text-pink-600
+      = t('spot_image_update_requests.new.title')
+
       .text-center
         = link_to spot_path(@spot),
             class: "inline-flex items-center text-pink-500 hover:text-pink-700 text-sm font-medium transition-colors" do
@@ -26,7 +25,7 @@
                 li.mb-1= msg
 
     / フォーム本体
-    .bg-white.rounded-2xl.shadow-lg.p-6
+    .bg-white.max-w-sm.mx-auto.rounded-2xl.shadow-lg.p-6
       = form_with model: [@spot, @request],
           local: true,
           html: { multipart: true, class: "space-y-6", data: { controller: "spot-image-limit", spot_image_limit_max_images_value: 3, spot_image_limit_current_count_value: @spot.images.count}} do |f|

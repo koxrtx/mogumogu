@@ -153,3 +153,29 @@ ja:
         - "確認には数日かかる場合があります"
         - "明らかに間違った情報の修正依頼はお断りする場合があります"
         - "正確な情報提供にご協力ください"
+
+  # 写真修正依頼
+  spot_image_update_requests:
+    new:
+      title: "写真修正依頼"
+      back_to_spot: "お店に戻る"
+    errors:
+      header: "入力に問題があります"
+    current_count:
+      separator: " 枚 / "
+      unit: "枚"
+      label: "現在の登録枚数"
+    select_request_type:
+      label: "修正内容を選んでください"
+      option_default: "選択してください"
+      add: "写真を追加"
+      remove: "写真を削除"
+      both: "追加＋削除"
+    add_field:
+      label: "追加する写真を選んでください"
+      help_text: "※ 複数枚選択できます"
+    delete_field:
+      label: "削除する写真を選んでください"
+      none: "🤷‍♀️ 削除できる写真がありません"
+    submit: "修正依頼を送信する"
+    footer_note: "送信後、運営が確認してから反映されます"
