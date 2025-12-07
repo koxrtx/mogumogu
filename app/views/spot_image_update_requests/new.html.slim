@@ -1,51 +1,104 @@
 / 写真修正依頼画面
-div.container.mx-auto.px-4.py-6.max-w-md
-  h1.text-xl.font-bold.mb-4.text-center = t('spot_image_update_requests.new.title')
+.min-h-screen.bg-gradient-to-b.from-pink-50.to-pink-100.pb-8
+  .container.mx-auto.px-4.py-6.max-w-full.sm:max-w-md
+    / ヘッダー部分
+    .bg-white.rounded-2xl.shadow-lg.p-6.mb-6
+      h1.text-2xl.font-bold.mb-2.text-center.text-pink-600
+        = t('spot_image_update_requests.new.title')
+      
+      .text-center
+        = link_to spot_path(@spot),
+            class: "inline-flex items-center text-pink-500 hover:text-pink-700 text-sm font-medium transition-colors" do
+          svg.w-4.h-4.mr-1 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+          = t('spot_image_update_requests.new.back_to_spot')
 
-  .mb-4.text-center
-    = link_to t('spot_image_update_requests.new.back_to_spot'),
-      spot_path(@spot),
-      class: "text-blue-500 hover:underline text-sm"
+    / エラーメッセージ
+    - if @request.errors.any?
+      .bg-red-50.border-2.border-red-200.rounded-2xl.p-4.mb-6.shadow-md
+        .flex.items-start
+          svg.w-5.h-5.text-red-500.mt-0.5.mr-2 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          div
+            h2.font-bold.text-red-700.mb-2 = t('spot_image_update_requests.errors.header')
+            ul.list-disc.pl-5.text-red-600.text-sm
+              - @request.errors.full_messages.each do |msg|
+                li.mb-1= msg
 
-  - if @request.errors.any?
-    .bg-red-100.border.border-red-400.text-red-700.p-4.rounded.mb-4.text-sm
-      h2.font-bold.mb-2 = t('spot_image_update_requests.errors.header')
-      ul.list-disc.pl-5
-        - @request.errors.full_messages.each do |msg|
-          li= msg
+    / フォーム本体
+    .bg-white.rounded-2xl.shadow-lg.p-6
+      = form_with model: [@spot, @request],
+          local: true,
+          html: { multipart: true, class: "space-y-6", data: { controller: "spot-image-limit", spot_image_limit_max_images_value: 3, spot_image_limit_current_count_value: @spot.images.count}} do |f|
 
-  = form_with model: [@spot, @request],
-      local: true,
-      html: { multipart: true, class: "space-y-4", data: { controller: "image-request" } } do |f|
+        / 現在の画像枚数表示
+        .bg-pink-50.rounded-xl.p-4.border-2.border-pink-200.text-center
+          p.text-sm.text-gray-700
+            span.font-bold.text-pink-600.text-lg = @spot.images.count
+            span 枚 /
+            span.font-bold.text-gray-600 3枚
+          p.text-xs.text-gray-500.mt-1 現在の登録枚数
 
-    / 修正タイプ選択
-    = f.select :request_type,
-        [["修正依頼の内容を選択", ""], ["追加", "add"], ["削除", "remove"], ["追加＋削除", "both"]],
-        {},
-        class: "border rounded px-3 py-2 w-full",
-        data: { action: "change->image-request#changeType" }
+        / 修正タイプ選択
+        .space-y-2
+          label.block.text-sm.font-bold.text-gray-700.mb-2
+            | 修正内容を選んでください
 
-    / 追加エリア
-    .hidden data-image-request-target="addField"
-      = f.label :images, "追加する写真", class: "font-medium"
-      = f.file_field :images,
-          multiple: true,
-          class: "border rounded px-3 py-2 w-full"
+          = f.select :request_type,
+              [["選択してください", ""], ["写真を追加 ", "add"], ["写真を削除", "remove"], ["追加＋削除", "both"]],
+              {},
+              class: "w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring focus:ring-pink-200 focus:ring-opacity-50 transition-all text-gray-700 bg-pink-50",
+              data: { action: "change->spot-image-limit#changeType" }
 
-    / 削除エリア
-    .hidden data-image-request-target="deleteField"
+        / 追加エリア
+        .hidden.space-y-3 data-spot-image-limit-target="addField"
+          .bg-pink-50.rounded-xl.p-4.border-2.border-dashed.border-pink-300
+            label.block.text-sm.font-bold.text-pink-700.mb-3
+              span.inline-block.mr-2
+              | 追加する写真を選んでください
 
-      - if @spot.images.any?
-        p.font-medium.mb-2 削除する写真を選択
+            = f.file_field :images,
+                multiple: true,
+                accept: "image/*",
+                class: "w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-500 file:text-white hover:file:bg-pink-600 file:cursor-pointer transition-all",
+                data: { action: "change->spot-image-limit#validateFileCount", spot_image_limit_target: "fileInput"}
 
-        - @spot.images.each do |img|
-          .flex.items-center.mb-2
-            = check_box_tag "delete_images[]", img.id
-            = image_tag url_for(img), class: "w-16 h-16 ml-2 rounded"
+            p.text-xs.text-pink-500.mt-2 data-spot-image-limit-target="helpText"
+              | ※ 複数枚選択できます
 
-      - else
-        p.text-gray-500.text-sm 削除できる写真はありません
+        / 削除エリア
+        .hidden.space-y-3 data-spot-image-limit-target="deleteField"
+          .bg-pink-50.rounded-xl.p-4.border-2.border-pink-200
+            - if @spot.images.any?
+              p.font-bold.text-pink-700.mb-4.text-sm
+                span.inline-block.mr-2
+                | 削除する写真を選んでください
 
-    .text-center
-      = f.submit "修正依頼を送信",
-          class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors w-full text-sm font-bold"
+              .space-y-3
+                - @spot.images.each do |img|
+                  label.flex.items-center.p-3.bg-white.rounded-lg.border-2.border-gray-200.hover:border-pink-300.cursor-pointer.transition-all
+                    = check_box_tag "delete_images[]",
+                        img.id,
+                        false,
+                        class: "w-5 h-5 text-pink-500 border-2 border-gray-300 rounded focus:ring-pink-500"
+
+                    = image_tag url_for(img),
+                        class: "w-20 h-20 ml-3 rounded-lg object-cover shadow-sm"
+
+            - else
+              .text-center.py-6
+                p.text-gray-400.text-sm
+                  | 🤷‍♀️ 削除できる写真がありません
+
+        / プレビューエリア
+        #image-preview-container.grid.grid-cols-3.gap-2.mt-4
+
+        / 送信ボタン
+        .pt-4
+          = f.submit "修正依頼を送信する",
+              class: "w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-base"
+
+    / フッター注意書き
+    .text-center.mt-6.px-4
+      p.text-xs.text-gray-500
+        |  送信後、運営が確認してから反映されます
