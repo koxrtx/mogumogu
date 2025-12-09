@@ -1,0 +1,9 @@
+/ facility_checkbox パーシャル
+/ 使い方: = render 'home/facility_checkbox', field: :child_chair_eq, label: '🪑 子どもイス'
+
+label.flex.items-center.space-x-2.bg-white.rounded-xl.p-3.border-2.border-pink-100.hover:border-pink-300.hover:bg-pink-50.transition-all.cursor-pointer.shadow-sm
+  = f.check_box field, { class: "hidden peer" }, true, nil
+  .w-5.h-5.border-2.border-pink-300.rounded.flex.items-center.justify-center.peer-checked:bg-pink-400.peer-checked:border-pink-400.transition-all
+    svg.w-3.h-3.text-white.hidden.peer-checked:block(xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor")
+      path(stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7")
+  span.text-sm.text-gray-700.font-medium = label

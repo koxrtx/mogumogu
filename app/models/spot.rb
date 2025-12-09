@@ -118,6 +118,14 @@ class Spot < ApplicationRecord
     %w[
       name
       address
+      child_chair
+      tatami_seat
+      child_tableware
+      bring_baby_food
+      stroller_ok
+      child_menu
+      parking
+      other_facility
     ]
   end
 
