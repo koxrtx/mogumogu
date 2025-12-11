@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Spot, type: :model do
-  let(:user) { User.create!(name: "太郎", email: "a@example.com", password: "password") }
+  let(:user) { create(:user) }
 
   describe "バリデーション" do
     it "店舗名が必須" do
