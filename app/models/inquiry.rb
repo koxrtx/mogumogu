@@ -8,6 +8,7 @@ class Inquiry < ApplicationRecord
   # email_validator(メールアドレス形式チェック)
   validates :email, email: {
     message: "正しいメールアドレスの形式で入力してください（例：example@email.com）"
+    require_tld: true
   }
 
   # 保留・対応中・完了のステータス

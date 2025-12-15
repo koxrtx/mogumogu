@@ -17,7 +17,8 @@ class HomeController < ApplicationController
         @spots = base_spots.limit(10)
       end
     else
-      @spots = []
+      # 検索パラメータがない場合も@spotsを初期化
+      @spots = Spot.none
     end
   end
 

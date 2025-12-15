@@ -36,6 +36,12 @@ class SpotUpdateRequest < ApplicationRecord
     #validate :closure_excludes_all_fields, if: :closure?
   end
 
+  # 店舗情報修正依頼のときは必須
+  with_options if: :spot_update? do
+    validates :name, presence: true
+    validates :address, presence: true
+  end
+
   # 管理者編集時
   with_options if: :admin_editing? do
     validates :status, presence: true

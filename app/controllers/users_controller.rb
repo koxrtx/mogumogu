@@ -23,7 +23,8 @@ class UsersController < ApplicationController
     if @user.update(permitted_params)
       redirect_to mypage_path, notice: "プロフィールを更新しました"
     else
-      render :edit, alert: 'プロフィールの更新に失敗しました'
+      flash.now[:alert] = 'プロフィールの更新に失敗しました'
+      render :edit_mypage, status: :unprocessable_entity
     end
   end
 
