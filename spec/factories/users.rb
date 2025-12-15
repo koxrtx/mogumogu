@@ -5,8 +5,9 @@ FactoryBot.define do
     password { 'password123' }
     password_confirmation { 'password123' }
 
-    # ★ OmniAuthの項目がある場合は設定
-    provider { nil }
-    uid { nil }
+    trait :line_user do
+      provider { "line" }          # LINEログインなら provider=line
+      uid { SecureRandom.uuid }    # UID も必要
+    end
   end
 end
