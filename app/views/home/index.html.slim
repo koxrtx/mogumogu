@@ -54,21 +54,21 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
         - @spots.each do |spot|
           = link_to spot_path(spot), class: "block border-2 border-pink-200 rounded-lg p-4 bg-white hover:bg-pink-50 hover:shadow-md cursor-pointer transition-all duration-200 shadow-sm" do
             h2.text-sm.font-bold.mb-2.text-pink-800 = spot.name
-              p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
+            p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
 
-              子ども設備情報
-              .mt-2
-                = render 'spots/child_facilities_tags', spot: spot
+            子ども設備情報
+            .mt-2
+              = render 'spots/child_facilities_tags', spot: spot
 
-              - thumbnail_url = display_image_url(spot, size: :thumb, image_attribute: :images)
-              - if thumbnail_url.present?
-                .mt-3
-                  = image_tag thumbnail_url, class: "rounded-lg w-full h-32 object-cover border border-pink-200", alt: "#{spot.name}のサムネイル", loading: "lazy"
-              - else
-                .mt-3.bg-pink-50.rounded-lg.border.border-pink-200.h-32.flex.items-center.justify-center style="border-style: dashed;"
-                  .text-center
-                    / 画像準備中
-                    p.text-pink-400.text-xs = t('home.index.no_image')
+            - thumbnail_url = display_image_url(spot, size: :thumb, image_attribute: :images)
+            - if thumbnail_url.present?
+              .mt-3
+                = image_tag thumbnail_url, class: "rounded-lg w-full h-32 object-cover border border-pink-200", alt: "#{spot.name}のサムネイル", loading: "lazy"
+            - else
+              .mt-3.bg-pink-50.rounded-lg.border.border-pink-200.h-32.flex.items-center.justify-center style="border-style: dashed;"
+                .text-center
+                  / 画像準備中
+                  p.text-pink-400.text-xs = t('home.index.no_image')
 
     - elsif params[:q].present?
       .text-center.py-6.bg-white.shadow-sm.mt-4.rounded-lg.border.border-pink-200
