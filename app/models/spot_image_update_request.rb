@@ -7,6 +7,7 @@ class SpotImageUpdateRequest < ApplicationRecord
   # enum 定義
   # 写真の追加・削除・削除と追加
   enum :request_type, { add: 0, remove: 1 ,both: 2 }
+  validates :request_type, presence: true
   # 処理ステータス:保留・承認・却下
   enum :status, { pending: 0, approved: 1, rejected: 2 }
 
