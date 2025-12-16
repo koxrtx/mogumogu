@@ -29,11 +29,25 @@ div class=page_classes
       span.px-3.text-pink-500.text-xs = t("devise.registrations.or")
       .flex-1.border-t.border-pink-200
 
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full p-4 border-2 border-pink-300 bg-pink-50 rounded-lg space-y-3" }) do |f|
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full p-4 border-2 border-pink-300 bg-pink-50 rounded-lg space-y-3", data: { turbo: false }  }) do |f|
       = f.email_field :email, placeholder: t("devise.forms.placeholders.email"), autofocus: true, autocomplete: "email", class: "w-full px-3 py-2.5 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"
 
-      = f.password_field :password, placeholder: t("devise.forms.placeholders.password"), autocomplete: "current-password", class: "w-full px-3 py-2.5 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"
+      / パスワード入力 + 表示切替を包む箱
+      .relative
+        = f.password_field :password,
+          placeholder: t("devise.forms.placeholders.password"),
+          autocomplete: "current-password",
+          id: "login_password",
+          class: "w-full px-3 py-2.5 pr-10 border-2 border-pink-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-500 text-gray-700 text-sm"
 
+        / 👁 アイコン（表示切替用）
+        button.password-toggle-btn.absolute.inset-y-0.right-0.flex.items-center.pr-3.text-emerald-500.hover:text-emerald-600(
+          type="button"
+          data-target="login_password"
+          )
+          = eye_toggle_icons
+
+    
       - if devise_mapping.rememberable?
         .field.flex.items-center.space-x-2.mt-1
           = f.check_box :remember_me, class: "rounded border-pink-300 text-pink-500 focus:ring-pink-400 w-4"
