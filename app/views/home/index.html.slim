@@ -9,21 +9,31 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
     data-autocomplete-min-length-value="2"
   )
     = search_form_for @q, url: spots_path, method: :get do |f|
-      .flex.items-center.w-full.space-x-2
-        = f.search_field :name_or_address_cont,
-              placeholder: "店舗名、住所で検索",
-              class: "flex-1 px-4 py-3 border-2 border-pink-200 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 text-gray-700 shadow-sm",
-              data: { autocomplete_target: "input", action: "input->autocomplete#search"}
-        / 検索ボタン
-        = f.submit t('home.index.search_button'), class: "px-4 py-3 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 transition-all duration-200 shadow-sm text-sm whitespace-nowrap"
 
-      / --- 設備タグ（boolean検索） ---
+      / 検索入力エリア
+      .relative.w-full
+        .flex.items-center.w-full.space-x-2
+          = f.search_field :name_or_address_cont,
+                placeholder: "店舗名、住所で検索",
+                class: "flex-1 px-4 py-3 border-2 border-pink-200 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300 text-gray-700 shadow-sm",
+                data: {autocomplete_target: "input",action: "input->autocomplete#search"}
+
+          / 検索ボタン
+          = f.submit t('home.index.search_button'),
+                class: "px-4 py-3 bg-gradient-to-r from-pink-300 to-pink-400 text-white font-bold rounded-lg hover:from-pink-400 hover:to-pink-500 transition-all duration-200 shadow-sm text-sm whitespace-nowrap"
+
+        / オートコンプリート結果
+        ul.absolute.top-full.left-0.right-0.mt-1.bg-white.border.border-pink-200.rounded-lg.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
+          data-autocomplete-target="results"
+        )
+
+      / 設備タグ（boolean検索）
       .mt-4.bg-gradient-to-br.from-pink-50.to-pink-100.rounded-2xl.p-4.shadow-sm.border-2.border-pink-200
         h4.text-center.text-pink-700.font-bold.text-sm.mb-3.flex.items-center.justify-center
           span.mr-2 ✨
           | 設備で絞り込む
           span.ml-2 ✨
-        
+
         .grid.grid-cols-2.gap-3
           = render 'home/facility_checkbox', f: f, field: :child_chair_eq, label: '🪑 子どもイス'
           = render 'home/facility_checkbox', f: f, field: :tatami_seat_eq, label: '🏯 座敷あり'
@@ -33,11 +43,6 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
           = render 'home/facility_checkbox', f: f, field: :child_menu_eq, label: '🍝 子どもメニュー'
           = render 'home/facility_checkbox', f: f, field: :parking_eq, label: '🚗 駐車場'
           = render 'home/facility_checkbox', f: f, field: :other_facility_eq, label: '✨ その他設備'
-        
-      / オートコンプリート結果表示エリア
-      ul.absolute.top-full.left-0.right-0.bg-white.border.border-pink-200.rounded-lg.shadow-lg.z-50.max-h-60.overflow-y-auto.hidden(
-        data-autocomplete-target="results"
-        )
 
   / 検索結果表示エリア
   .w-full.max-w-sm.px-2
@@ -52,11 +57,12 @@ div.search-container.flex.flex-col.items-center.justify-start.space-y-4.pt-6.px-
 
       .space-y-3
         - @spots.each do |spot|
-          = link_to spot_path(spot), class: "block border-2 border-pink-200 rounded-lg p-4 bg-white hover:bg-pink-50 hover:shadow-md cursor-pointer transition-all duration-200 shadow-sm" do
+          = link_to spot_path(spot),
+              class: "block border-2 border-pink-200 rounded-lg p-4 bg-white hover:bg-pink-50 hover:shadow-md cursor-pointer transition-all duration-200 shadow-sm" do
             h2.text-sm.font-bold.mb-2.text-pink-800 = spot.name
             p.text-xs.text-pink-600.mb-3.leading-relaxed = spot.address
 
-            子ども設備情報
+            / 子ども設備情報
             .mt-2
               = render 'spots/child_facilities_tags', spot: spot
 

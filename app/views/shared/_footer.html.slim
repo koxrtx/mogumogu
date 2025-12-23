@@ -1,47 +1,47 @@
 footer.w-full.bg-gradient-to-r.from-pink-50.to-rose-50.border-t-2.border-pink-200.relative
-  .container.mx-auto.text-center.py-6
-    / ロゴエリア
-    .mb-3
-      h2.text-pink-600.font-bold.text-lg.mb-1
+  .container.mx-auto.text-center.py-6.px-4
+    / ロゴ
+    .mb-4
+      h2.text-pink-600.font-bold.text-lg
         | Mog&Map.
-      / コピーライト左端・テキスト中央
-    .flex.items-center.justify-between.relative
-      / 左端：コピーライト
-      p.text-pink-400.text-xs.font-medium.absolute.left-auto
-        | &copy; 2025 Mog&Map. All rights reserved.
 
-      / 中央：サブテキスト
-      p.text-pink-500.text-xs.font-medium.mx-auto
+    / コピーライト + サブテキスト
+    .flex.flex-col.sm:flex-row.items-center.justify-center.sm:justify-between.gap-2
+      p.text-pink-400.text-xs.font-medium
+        | © 2025 Mog&Map. All rights reserved.
+      p.text-pink-500.text-xs.font-medium
         | 子連れファミリーのための優しいお店探し
 
-
-
-  / 画面右端にシェアボタン
-  .absolute.top-1/2.right-0.-translate-y-1/2.flex.flex-row.space-x-3.pr-3
-    / LINE共有ボタン
+  / シェアボタン（SP: 下 / PC: 右）
+  .flex.justify-center.sm:absolute.sm:top-1/2.sm:right-3.sm:-translate-y-1/2.mt-4.sm:mt-0.space-x-4
+    / LINE共有
     = link_to "https://social-plugins.line.me/lineit/share?url=#{CGI.escape('https://mogumogumap.onrender.com/')}",
               title: "LINEでシェア",
               target: "_blank",
               rel: "noopener noreferrer",
               class: "relative group transition-transform duration-200 hover:scale-110 hover:-translate-y-1" do
-      = image_tag "LINE_Brand_icon.png", class: "w-8 h-8 drop-shadow-md hover:drop-shadow-lg", alt: "LINEロゴ"
-      / ツールチップ
-      .absolute.bottom-full.left-1/2.-translate-x-1/2.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
+      = image_tag "LINE_Brand_icon.png",
+        class: "w-8 h-8 drop-shadow-md hover:drop-shadow-lg",
+        alt: "LINEロゴ"
+
+      / ツールチップ（PCのみ）
+      .hidden.sm:block.absolute.bottom-full.left-1/2.-translate-x-1/2.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
         span.mr-1 💬
         | LINEでシェア
-        / 吹き出しの三角形
         .absolute.top-full.left-1/2.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-4.border-transparent.border-t-pink-400
 
-    / X（Twitter）共有ボタン
-    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape('https://mogumogumap.onrender.com/')}&text=#{CGI.escape('子連れで外食？Mog&Map.で子ども用設備・食器や座敷、ベビーカーOK情報をチェック 🍼')}&hashtags=#{CGI.escape('Mog&Map.')}",
+    / X（Twitter）共有
+    = link_to "https://twitter.com/intent/tweet?url=#{CGI.escape('https://mogumogumap.onrender.com/')}&text=#{CGI.escape('子連れで外食？Mog&Map.で子ども用設備・食器や座敷、ベビーカーOK情報をチェック 🍼')}&hashtags=#{CGI.escape('Mog&Map')}",
               title: "Xでシェア",
               target: "_blank",
               rel: "noopener noreferrer",
               class: "relative group transition-transform duration-200 hover:scale-110 hover:-translate-y-1" do
-      = image_tag "logo-black.png", class: "w-8 h-8 drop-shadow-md hover:drop-shadow-lg", alt: "Xロゴ"
-      / ツールチップ
-      .absolute.bottom-full.left-1/2.-translate-x-1/2.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
+      = image_tag "logo-black.png",
+        class: "w-8 h-8 drop-shadow-md hover:drop-shadow-lg",
+        alt: "Xロゴ"
+
+      / ツールチップ（PCのみ）
+      .hidden.sm:block.absolute.bottom-full.left-1/2.-translate-x-1/2.mb-2.px-3.py-1.text-xs.text-white.bg-gradient-to-r.from-pink-400.to-rose-400.rounded-full.opacity-0.group-hover:opacity-100.transition-opacity.duration-200.pointer-events-none.whitespace-nowrap.shadow-md
         span.mr-1 🐦
         | Xでシェア
-        / 吹き出しの三角形
         .absolute.top-full.left-1/2.-translate-x-1/2.w-0.h-0.border-l-2.border-r-2.border-t-4.border-transparent.border-t-pink-400
