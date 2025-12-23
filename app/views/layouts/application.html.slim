@@ -9,12 +9,11 @@ html lang="ja" data-theme="light"
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
-    - # Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!)
-    - #= tag.link rel: "manifest", href: pwa_manifest_path(format: :json)
     link[rel="icon" href="/favicon.ico" type="image/x-icon"]
     link[rel="apple-touch-icon" href="/apple-touch-icon.png"]
     = stylesheet_link_tag  "application", "hamburger",  "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    
     / OGP画像
     meta[property="og:title" content="Mog&Map."]
     meta[property="og:description" content="子どもと一緒に外食をもっと楽しく、安心に。子育て世代向けのお店情報共有アプリです。"]
@@ -22,7 +21,6 @@ html lang="ja" data-theme="light"
     meta[property="og:url" content=(content_for?(:og_url) ? yield(:og_url) : root_url)]
     meta[property="og:image" content="https://mogumogumap.onrender.com/mogmap_ogp.png"]
     meta[property="og:site_name" content="Mog&Map."]
-
     meta[name="twitter:card" content="summary_large_image"]
     meta[name="twitter:title" content="Mog&Map."]
     meta[name="twitter:description" content="子どもと一緒に外食をもっと楽しく、安心に。子育て世代向けのお店情報共有アプリです。"]
@@ -31,11 +29,36 @@ html lang="ja" data-theme="light"
   body.flex.flex-col.min-h-screen.bg-fuchsia-50
     = render "shared/header"
 
-    -# Devise のフラッシュメッセージ表示部分 notice は成功系、alert は失敗系のメッセージ
-    notice.text-rose-600.text-center
-      = notice
-    alert.text-sky-600.text-center
-      = alert
+    / 🎀 可愛い吹き出し風フラッシュメッセージ
+    .flash-container.fixed.top-20.left-1/2.transform.-translate-x-1/2.z-50.w-full.max-w-md.px-4
+      / 成功メッセージ(notice) - ピンク系の吹き出し
+      - if notice
+        .flash-message.bg-gradient-to-r.from-pink-100.to-yellow-100.border-2.border-pink-300.rounded-2xl.p-4.shadow-2xl.mb-3.animate-slide-down.relative
+          / 吹き出しの三角形(上向き)
+          .absolute.-top-3.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-8.border-r-8.border-b-8.border-l-transparent.border-r-transparent.border-b-pink-300
+          .absolute.-top-2.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-6.border-r-6.border-b-6.border-l-transparent.border-r-transparent.border-b-pink-100
+          
+          .flex.items-center
+            / 可愛いアイコン
+            .flex-1
+              p.text-pink-700.font-bold.text-base.leading-relaxed = notice
+            / 閉じるボタン
+            button.text-pink-400.hover:text-pink-600.text-2xl.transition-colors.duration-200 onclick="this.closest('.flash-message').remove()" ×
+
+      / エラーメッセージ(alert) - 赤×ピンク系の吹き出し
+      - if alert
+        .flash-message.bg-gradient-to-r.from-red-100.to-pink-100.border-2.border-red-300.rounded-2xl.p-4.shadow-2xl.mb-3.animate-slide-down.relative
+          / 吹き出しの三角形(上向き)
+          .absolute.-top-3.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-8.border-r-8.border-b-8.border-l-transparent.border-r-transparent.border-b-red-300
+          .absolute.-top-2.left-1/2.transform.-translate-x-1/2.w-0.h-0.border-l-6.border-r-6.border-b-6.border-l-transparent.border-r-transparent.border-b-red-100
+          
+          .flex.items-center
+            / 可愛いアイコン
+            .text-3xl.mr-3.animate-pulse 😢
+            .flex-1
+              p.text-red-700.font-bold.text-base.leading-relaxed = alert
+            / 閉じるボタン
+            button.text-red-400.hover:text-red-600.text-2xl.transition-colors.duration-200 onclick="this.closest('.flash-message').remove()" ×
 
     main.flex-1
       = yield
