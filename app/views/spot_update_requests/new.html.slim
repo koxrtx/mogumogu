@@ -1,170 +1,164 @@
 / 店舗情報修正依頼画面
-.spot-update-request.min-h-screen.bg-gradient-to-br.bg-fuchsia-50.py-8
-  .container.mx-auto.px-4.max-w-4xl
-    /  ヘッダー部分
-    .text-center.mb-8
-      / 店舗情報の修正依頼
-      h1.text-3xl.font-bold.text-gray-800.mb-2 = t('spot_update_requests.new.title')
-      p.text-gray-600
-        | 間違っている情報があれば、正しい情報を教えてください！
+.spot-update-request.min-h-screen.bg-gradient-to-br.bg-fuchsia-50.py-4.px-4
+  .container.mx-auto.max-w-2xl
+    / ヘッダー部分
+    .text-center.mb-6
+      h1.text-2xl.sm:text-3xl.font-bold.text-gray-800.mb-2
+        = t('spot_update_requests.new.title')
+      p.text-sm.sm:text-base.text-gray-600.px-2
+        | 間違っている情報があれば、正しい情報を教えてください!
 
-    / 🔙 戻るボタン
-    .flex.justify-center.mb-6
-      = link_to spot_path(@spot), class: "inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200" do
+    / 戻るボタン
+    .flex.justify-center.mb-4
+      = link_to spot_path(@spot), class: "inline-flex items-center px-5 py-3 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200 text-sm sm:text-base" do
         span.mr-2 ←
-        | #{@spot.name}に戻る
+        | おみせに戻る
 
-    /  エラーメッセージ
+    / エラーメッセージ
     - if @request.errors.any?
-      .error-section.mb-6
-        .bg-red-50.border-l-4.border-red-400.p-4.rounded-r-lg
+      .error-section.mb-4
+        .bg-red-50.border-l-4.border-red-400.p-3.sm:p-4.rounded-r-lg
           .flex.items-center.mb-2
             .text-red-400.mr-2 ⚠️
-            / 入力内容を確認してください
-            h3.text-lg.font-medium.text-red-800 = t('spot_update_requests.errors.header')
-          ul.list-disc.list-inside.text-red-700.text-sm
+            h3.text-base.sm:text-lg.font-medium.text-red-800 
+              = t('spot_update_requests.errors.header')
+          ul.list-disc.list-inside.text-red-700.text-xs.sm:text-sm
             - @request.errors.full_messages.each do |message|
               li = message
 
-    /  メインフォーム
-    .form-container.bg-white.max-w-sm.mx-auto.rounded-2xl.shadow-xl.overflow-hidden
+    / メインフォーム
+    .form-container.bg-white.rounded-2xl.shadow-xl.overflow-hidden
       = form_with model: [@spot, @request], local: true, class: "space-y-0" do |f|
 
-        /  基本情報セクション
+        / 基本情報セクション
         .section
-          .section-header.bg-gradient-to-r.from-blue-500.to-purple-600.text-white.p-6
-            h2.text-xl.font-semibold.flex.items-center
+          .section-header.bg-gradient-to-r.from-amber-300.to-amber-300.text-white.p-4.sm:p-6
+            h2.text-lg.sm:text-xl.font-semibold.flex.items-center
               span.mr-2 🏪
-              / 基本情報
               = t('spot_update_requests.form.basic.title')
-            / 間違っている項目を修正してください
-            p.text-blue-100.text-sm.mt-1 = t('spot_update_requests.form.basic.description')
+            p.text-blue-100.text-xs.sm:text-sm.mt-1
+              = t('spot_update_requests.form.basic.description')
 
-          .section-content.p-6.space-y-4
-            .grid.md:grid-cols-2.gap-4
-              .form-group
-                = f.label :name, class: "block text-sm font-medium text-gray-700 mb-1" do
-                  span.mr-1 🏷️
-                  / 店舗名
-                  = t('spot_update_requests.form.name.label')
-                = f.text_field :name,
-                  class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200",
-                  placeholder: "正しい店舗名を入力"
-
-              .form-group
-                = f.label :tel, class: "block text-sm font-medium text-gray-700 mb-1" do
-                  span.mr-1 📞
-                  / 電話番号
-                  = t('spot_update_requests.form.tel.label')
-                = f.text_field :tel,
-                  class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200",
-                  placeholder: t('spot_update_requests.form.tel.placeholder')
+          .section-content.p-4.sm:p-6.space-y-4
+            .form-group
+              = f.label :name, class: "block text-sm font-medium text-gray-700 mb-2" do
+                span.mr-1 🏷️
+                = t('spot_update_requests.form.name.label')
+              = f.text_field :name,
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-base",
+                placeholder: "正しい店舗名を入力"
 
             .form-group
-              = f.label :address, class: "block text-sm font-medium text-gray-700 mb-1" do
+              = f.label :tel, class: "block text-sm font-medium text-gray-700 mb-2" do
+                span.mr-1 📞
+                = t('spot_update_requests.form.tel.label')
+              = f.text_field :tel,
+                type: "tel",
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-base",
+                placeholder: t('spot_update_requests.form.tel.placeholder')
+
+            .form-group
+              = f.label :address, class: "block text-sm font-medium text-gray-700 mb-2" do
                 span.mr-1 📍
-                / 住所
                 = t('spot_update_requests.form.address.label')
-              = f.text_area :address, rows: 2,
-                class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200",
+              = f.text_area :address, rows: 3,
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-base",
                 placeholder: "正しい住所を入力"
 
             .form-group
-              = f.label :opening_hours, class: "block text-sm font-medium text-gray-700 mb-1" do
+              = f.label :opening_hours, class: "block text-sm font-medium text-gray-700 mb-2" do
                 span.mr-1 🕐
-                / 営業時間
                 = t('spot_update_requests.form.opening_hours.label')
-              = f.text_area :opening_hours, rows: 2,
-                class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200",
+              = f.text_area :opening_hours, rows: 3,
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-base",
                 placeholder: t('spot_update_requests.form.opening_hours.placeholder')
 
         / 子ども向け設備セクション
         .section
-          .section-header.bg-gradient-to-r.from-pink-500.to-red-500.text-white.p-6
-            h2.text-xl.font-semibold.flex.items-center
+          .section-header.bg-gradient-to-r.from-pink-400.to-red-400.text-white.p-4.sm:p-6
+            h2.text-lg.sm:text-xl.font-semibold.flex.items-center
               span.mr-2 🍼
-              / 子ども向け設備
               = t('spot_update_requests.form.facilities.title')
-            / 該当する設備にチェックを入れてください
-            p.text-pink-100.text-sm.mt-1 = t('spot_update_requests.form.facilities.description')
+            p.text-pink-100.text-xs.sm:text-sm.mt-1 
+              = t('spot_update_requests.form.facilities.description')
 
-          .section-content.p-6
-            .grid.md:grid-cols-2.gap-4
-              .facility-group
-                h3.text-md.font-semibold.text-gray-700.mb-3.flex.items-center
-                  span.mr-2 🪑
-                  / 子どもの設備情報
-                  = t('spot_update_requests.form.facilities.seating_title')
-                .space-y-3
-                  .flex.items-center
-                    = f.check_box :child_chair, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :child_chair,t('spots.forms.child_chair'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :tatami_seat, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :tatami_seat,t('spots.forms.tatami_seat'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :stroller_ok, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :stroller_ok, t('spots.forms.stroller_ok'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :parking, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :parking,t('spots.forms.parking'), class: "ml-2 text-sm text-gray-700"
-                  .facility-group
-                h3.text-md.font-semibold.text-gray-700.mb-3.flex.items-center
-                  span.mr-2 🍽️
-                  | 食事・サービス
-                .space-y-3
-                  .flex.items-center
-                    = f.check_box :child_tableware, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :child_tableware, t('spots.forms.child_tableware'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :child_menu, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"  
-                    = f.label :child_menu,t('spots.forms.child_menu'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :bring_baby_food, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :bring_baby_food, t('spots.forms.bring_baby_food'), class: "ml-2 text-sm text-gray-700"
-                  .flex.items-center
-                    = f.check_box :other_facility, class: "h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-                    = f.label :other_facility, t('spots.forms.other_facility'), class: "ml-2 text-sm text-gray-700"
+          / チェックボックス
+          .section-content.p-4.sm:p-6.space-y-6
+            .facility-group
+              h3.text-base.font-semibold.text-gray-700.mb-3.flex.items-center
+                span.mr-2 🪑
+                = t('spot_update_requests.form.facilities.seating_title')
+              .space-y-3
+                .flex.items-center.py-2
+                  = f.check_box :child_chair, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :child_chair, t('spots.forms.child_chair'), class: "ml-3 text-base text-gray-700"
+
+                .flex.items-center.py-2
+                  = f.check_box :tatami_seat, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :tatami_seat, t('spots.forms.tatami_seat'), class: "ml-3 text-base text-gray-700"
+                .flex.items-center.py-2
+                  = f.check_box :stroller_ok, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :stroller_ok, t('spots.forms.stroller_ok'), class: "ml-3 text-base text-gray-700"
+                .flex.items-center.py-2
+                  = f.check_box :parking, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :parking, t('spots.forms.parking'), class: "ml-3 text-base text-gray-700"
+
+            .facility-group
+              h3.text-base.font-semibold.text-gray-700.mb-3.flex.items-center
+                span.mr-2 🍽️
+                | 食事・サービス
+              .space-y-3
+                .flex.items-center.py-2
+                  = f.check_box :child_tableware, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :child_tableware, t('spots.forms.child_tableware'), class: "ml-3 text-base text-gray-700"
+                .flex.items-center.py-2
+                  = f.check_box :child_menu, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :child_menu, t('spots.forms.child_menu'), class: "ml-3 text-base text-gray-700"
+                .flex.items-center.py-2
+                  = f.check_box :bring_baby_food, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :bring_baby_food, t('spots.forms.bring_baby_food'), class: "ml-3 text-base text-gray-700"
+                .flex.items-center.py-2
+                  = f.check_box :other_facility, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  = f.label :other_facility, t('spots.forms.other_facility'), class: "ml-3 text-base text-gray-700"
+
         / 修正理由・コメントセクション
         .section
-          .section-header.bg-gradient-to-r.from-green-500.to-teal-500.text-white.p-6
-            h2.text-xl.font-semibold.flex.items-center
+          .section-header.bg-gradient-to-r.from-green-500.to-teal-500.text-white.p-4.sm:p-6
+            h2.text-lg.sm:text-xl.font-semibold.flex.items-center
               span.mr-2 📝
-              / 修正理由・詳細情報
               = t('spot_update_requests.form.comment.title')
-            / 修正する理由や詳細情報があれば教えてください
-            p.text-green-100.text-sm.mt-1 = t('spot_update_requests.form.comment.description')
+            p.text-green-100.text-xs.sm:text-sm.mt-1 
+              = t('spot_update_requests.form.comment.description')
 
-          .section-content.p-6
+          .section-content.p-4.sm:p-6
             .form-group
               = f.label :other_facility_comment, class: "block text-sm font-medium text-gray-700 mb-2" do
                 span.mr-1 💬
-                / コメント・修正理由
                 = t('spot_update_requests.form.comment.label')
-              = f.text_area :other_facility_comment, rows: 4,
-                class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200",
-                placeholder: "例：営業時間が変更になっていました。子ども用椅子も新しく設置されています。"
-        / 注意事項
+              = f.text_area :other_facility_comment, rows: 5,
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-base",
+                placeholder: "例:営業時間が変更になっていました。子ども用椅子も新しく設置されています。"
+
+        / 注意事項 - モバイル向けに調整
         .section
-          .section-content.bg-yellow-50.p-6.border-l-4.border-yellow-400
+          .section-content.bg-yellow-50.p-4.sm:p-6.border-l-4.border-yellow-400
             .flex.items-start
-              .text-yellow-400.mr-3.mt-1 ⚠️
-              .content
-                / 修正依頼について
-                h3.font-semibold.text-yellow-800.mb-2 = t('spot_update_requests.notice.title')
-                ul.text-sm.text-yellow-700.space-y-1
+              .text-yellow-400.mr-2.mt-1.text-xl ⚠️
+              .content.flex-1
+                h3.font-semibold.text-yellow-800.mb-2.text-sm.sm:text-base 
+                  = t('spot_update_requests.notice.title')
+                ul.text-xs.sm:text-sm.text-yellow-700.space-y-1.5
                   - t('spot_update_requests.notice.items').each do |item|
-                    li = item
+                    li.leading-relaxed = item
 
         / 送信ボタン
         .section
-          .section-content.p-6.bg-gray-50
-            .flex.justify-center.space-x-4
-              = link_to @spot, class: "px-6 py-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition-colors duration-200 font-medium" do
-                / キャンセル
+          .section-content.p-4.sm:p-6.bg-gray-50
+            / モバイルでは縦並び、タブレット以上で横並びに
+            .flex.flex-col.sm:flex-row.justify-center.gap-3.sm:gap-4
+              = link_to @spot, class: "w-full sm:w-auto px-6 py-3.5 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition-colors duration-200 font-medium text-center text-base" do
                 = t('spot_update_requests.form.cancel')
 
-              / 修正依頼を送信
               = f.submit t('spot_update_requests.form.submit'),
-                class: "px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
-                data: { confirm: "修正依頼を送信しますか？" }
+                class: "w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-base",
+                data: { confirm: "修正依頼を送信しますか?" }
